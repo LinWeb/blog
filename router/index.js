@@ -1,9 +1,11 @@
 const Router = require('koa-router')
 const router = new Router()
 const tagRouter = require('./tag')
-
+const categoryRouter = require('./category')
 const userRouter = require('./user')
-
+const articleRouter = require('./article')
 router.use('/tag', tagRouter.routes())
+router.use('/category', categoryRouter.routes())
 router.use('/user', userRouter.routes())
+router.use('/article', articleRouter.routes())
 module.exports = router
