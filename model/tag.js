@@ -1,15 +1,19 @@
 const sequelize = require('../config/db')
-const Tag = sequelize.import('../schemas/tag')
-Tag.sync({ force: false })
 
-class tagModel {
-    // 添加标签
-    static async add(data) {
-        return await Tag.create(data)
+const Sequelize = require('sequelize');
+const tagModel = sequelize.define('tag', {
+    id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        allowNull: false,
+        autoIncrement: true
+    },
+    name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true
     }
-    static async list() {
-        return await Tag.findAll()
-    }
-}
+})
+tagModel.sync({ force: false })
 
 module.exports = tagModel

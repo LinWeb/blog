@@ -5,8 +5,8 @@ class tagController {
     // 添加标签
     static async add(ctx) {
         try {
-            const params = ctx.request.body
-            const response = await tagModel.add(params)
+            let params = ctx.request.body
+            let response = await tagModel.create(params)
             ctx.body = {
                 status: 1,
                 message: '添加成功',
@@ -20,7 +20,7 @@ class tagController {
         }
     }
     static async list(ctx) {
-        const res = await tagModel.list()
+        let res = await tagModel.findAll()
         ctx.body = res
     }
 }
