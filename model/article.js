@@ -17,10 +17,10 @@ const articleModel = sequelize.define('article', {
         allowNull: false,
     },
     tagIds: {
-        type: Sequelize.ARRAY,
+        type: Sequelize.JSON,
     },
     categoryIds: {
-        type: Sequelize.ARRAY,
+        type: Sequelize.JSON,
     },
     readCount: {
         type: Sequelize.INTEGER,

@@ -1,18 +1,15 @@
-const userModel = require('../model/user')
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op
+const commentModel = require('../model/comment')
 
-class userController {
-    // 注册用户
-    static async register(ctx) {
+
+class commentController {
+    // 添加评论
+    static async add(ctx) {
         try {
             let params = ctx.request.body
-            let { username } = params
-            params.name = username
-            let response = await userModel.create(params)
+            let response = await commentModel.create(params)
             ctx.body = {
                 status: 1,
-                message: '注册成功',
+                message: '添加成功',
                 response
             }
         } catch (err) {
@@ -22,29 +19,24 @@ class userController {
             }
         }
     }
-    // 用户列表+搜索+分页
+    // 文章评论列表+分页
     static async list(ctx) {
         try {
-            let { currentPage, pageSize, keyword } = ctx.query
+            let { currentPage, pageSize, articleId } = ctx.query
             currentPage = currentPage === undefined || Number(currentPage) < 1 ? 1 : Number(currentPage)  // 当前页码
             pageSize = pageSize === undefined ? 20 : Number(pageSize)  // 每页条数
-            keyword = keyword === undefined || keyword === '' ? '%' : `%${keyword}%` // 关键词
-            let allResponse = await userModel.findAll({
+            let allResponse = await commentModel.findAll({
                 where: {
-                    name: {
-                        [Op.like]: keyword
-                    }
+                    articleId: Number(articleId)
                 }
             })
             let total = allResponse.length      // 全部条数
             let pageCount = Math.ceil(total / pageSize)   // 页数
-            let response = await userModel.findAll({
+            let response = await commentModel.findAll({
                 offset: (currentPage - 1) * pageSize,
                 limit: pageSize,
                 where: {
-                    name: {
-                        [Op.like]: keyword
-                    }
+                    articleId: Number(articleId)
                 }
             })
             ctx.body = {
@@ -65,13 +57,13 @@ class userController {
             }
         }
     }
-    // 删除用户
+    // 删除评论
     static async del(ctx) {
         try {
             let { id } = ctx.params;
-            let response = await userModel.destroy({
+            let response = await commentModel.destroy({
                 where: {
-                    id: Number(id)
+                    id: id
                 }
             })
             if (response === 1) {
@@ -95,4 +87,4 @@ class userController {
     }
 }
 
-module.exports = userController
+module.exports = commentController

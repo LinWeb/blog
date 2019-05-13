@@ -5,5 +5,5 @@ const userController = require('../controller/user')
 
 router.post('/register', userController.register)
 router.get('/list', userController.list)
-router.post('/del', userController.del)
+router.del('/del/:id', userController.del)
 module.exports = router
