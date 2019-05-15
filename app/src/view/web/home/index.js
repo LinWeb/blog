@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { Divider, Icon, Tag } from 'antd';
 import './index.scss'
-
+import API from '../../../services/index'
 class Home extends Component {
+    async getArticles() {
+        let res = await API.GET_ARTICLES({})
+    }
+    UNSAFE_componentWillMount() {
+        this.getArticles()
+    }
     render() {
         return (
             <div className='home-container'>
