@@ -1,0 +1,39 @@
+.sider-container {
+  text-align: center;
+  height: calc(100vh - 73px);
+  overflow-y: auto;
+  border-left: 1px solid #ddd;
+  .blogger-infor {
+    margin-top: 40px;
+    .name {
+      margin-top: 15px;
+      margin-bottom: 9px;
+      font-weight: bolder;
+    }
+    .introduction {
+      margin-bottom: 9px;
+    }
+  }
+  .new-articles {
+    .articles {
+      padding: 0px 28px;
+      .item {
+        cursor: pointer;
+        text-align: left;
+        padding: 8px 0;
+        &:hover {
+          color: #1890ff;
+        }
+      }
+    }
+  }
+  .tags-container {
+    margin-bottom: 18px;
+    .tags {
+      padding: 0px 28px;
+      .ant-tag {
+        margin-bottom: 8px;
+      }
+    }
+  }
+}

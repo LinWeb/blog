@@ -1,0 +1,21 @@
+.home-container {
+  .article-list {
+    margin-top: 23px;
+    .item {
+      margin: 0px 26px 16px;
+      padding: 12px 24px 22px;
+      border: 1px solid #ddd;
+      &:hover {
+        box-shadow: 1px 1px 20px #d0d0d0;
+        background: #ecf5fd;
+      }
+      .footer {
+        color: #999;
+        margin-top: 10px;
+        .icon {
+          margin-right: 7px;
+        }
+      }
+    }
+  }
+}

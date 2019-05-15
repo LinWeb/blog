@@ -1,0 +1,20 @@
+.header-container {
+  border-bottom: 1px solid #ddd;
+  .logo {
+    margin-left: 42px;
+    font-size: 18px;
+    padding-left: 45px;
+    background-image: url("../../../logo.svg");
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: auto 100%;
+  }
+  .nav {
+    .nav-ul {
+      border-bottom: 1px solid transparent;
+      .item {
+        padding: 12px 20px;
+      }
+    }
+  }
+}
