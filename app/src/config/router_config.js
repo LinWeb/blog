@@ -1,5 +1,5 @@
-import Home from '../view/web/home/index';
-import About from '../view/web/about/index';
+import Home from '@/view/web/home/index';
+import About from '@/view/web/about/index';
 
 export default [
     {

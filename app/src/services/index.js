@@ -4,7 +4,7 @@ import axios from 'axios'
 // import * as CATEGORY from './category'
 // import * as COMMENT from './comment'
 import * as ARTICLE from './article'
-import API from '../config/api'
+import API from '@/config/api'
 // import checkLogin from '../check/check_login'
 
 axios.defaults.baseURL = API.BASE_URL;

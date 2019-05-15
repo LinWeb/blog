@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Row, Col } from 'antd';
-import Header from '../component/web/header/index';
-import Sider from '../component/web/sider/index';
-import RouterConfig from './router_config';
+import Header from '@/component/web/header/index';
+import Sider from '@/component/web/sider/index';
+import RouterConfig from '@/config/router_config';
 
 function App() {
   return (
