@@ -1,19 +1,17 @@
-const sequelize = require('../config/db')
-
-const Sequelize = require('sequelize');
-const categoryModel = sequelize.define('category', {
-    id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        allowNull: false,
-        autoIncrement: true
-    },
-    name: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
+module.exports = (sequelize, DataTypes) => {
+    const categoryModel = sequelize.define('category', {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        }
+    })
+    categoryModel.associate = (models) => {
+        categoryModel.belongsTo(models.articleModel)
     }
-})
-categoryModel.sync({ force: false })
-
-module.exports = categoryModel
+    return categoryModel
+}

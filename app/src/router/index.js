@@ -15,8 +15,8 @@ function App() {
           <Col span={19}>
             <div style={{ height: 'calc(100vh - 73px)', overflowY: 'auto' }}>
               <Switch>
-                {RouterConfig.map((res) =>
-                  <Route {...res} />
+                {RouterConfig.map((res, key) =>
+                  <Route {...res} key={key} />
                 )}
               </Switch>
             </div>

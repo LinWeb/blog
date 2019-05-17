@@ -1,5 +1,4 @@
-const commentModel = require('../model/comment')
-
+const { commentModel } = require('../model')
 
 class commentController {
     // 添加评论

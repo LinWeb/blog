@@ -1,5 +1,4 @@
-const replyModel = require('../model/reply')
-
+const { replyModel } = require('../model')
 
 class replyController {
     // 添加回复

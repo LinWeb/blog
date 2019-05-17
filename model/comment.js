@@ -1,26 +1,25 @@
-const sequelize = require('../config/db')
-
-const Sequelize = require('sequelize');
-const commentModel = sequelize.define('comment', {
-    id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        allowNull: false,
-        autoIncrement: true
-    },
-    content: {
-        type: Sequelize.STRING,
-        allowNull: false,
-    },
-    userId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-    },
-    articleId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-    },
-})
-commentModel.sync({ force: false })
-
-module.exports = commentModel
+module.exports = (sequelize, DataTypes) => {
+    const commentModel = sequelize.define('comment', {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
+        content: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        userId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        articleId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+    })
+    commentModel.associate = (models) => {
+        commentModel.belongsTo(models.articleModel)
+    }
+    return commentModel
+}

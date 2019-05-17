@@ -8,6 +8,10 @@ const router = require('./router/index')
 app.use(logger())
 app.use(bodyparser())
 
+app.use(async (ctx, next) => {
+    ctx.set('Access-Control-Allow-Origin', ctx.headers.origin)
+    await next()
+})
 
 app.use(router.routes()).use(router.allowedMethods())
 

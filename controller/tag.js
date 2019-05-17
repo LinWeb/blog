@@ -1,5 +1,4 @@
-const tagModel = require('../model/tag')
-
+const { tagModel } = require('../model')
 
 class tagController {
     // 添加标签

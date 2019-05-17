@@ -1,5 +1,4 @@
-const categoryModel = require('../model/category')
-
+const { categoryModel } = require('../model')
 
 class categoryController {
     // 添加分类
