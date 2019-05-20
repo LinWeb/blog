@@ -16,10 +16,12 @@ module.exports = (sequelize, DataTypes) => {
         readCount: {
             type: DataTypes.INTEGER,
             defaultValue: 0
-        }
+        },
     })
     articleModel.associate = (models) => {
+        articleModel.hasMany(models.categoryModel);
         articleModel.hasMany(models.tagModel);
+        articleModel.hasMany(models.commentModel);
     }
     return articleModel
 }

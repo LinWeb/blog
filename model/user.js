@@ -23,8 +23,5 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: false
         }
     })
-    userModel.associate = (models) => {
-        userModel.belongsTo(models.articleModel)
-    }
     return userModel
 }

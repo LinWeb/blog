@@ -26,7 +26,7 @@ class commentController {
             pageSize = pageSize === undefined ? 20 : Number(pageSize)  // 每页条数
             let allResponse = await commentModel.findAll({
                 where: {
-                    articleId: Number(articleId)
+                    articleId
                 }
             })
             let total = allResponse.length      // 全部条数
@@ -35,7 +35,7 @@ class commentController {
                 offset: (currentPage - 1) * pageSize,
                 limit: pageSize,
                 where: {
-                    articleId: Number(articleId)
+                    articleId
                 }
             })
             ctx.body = {

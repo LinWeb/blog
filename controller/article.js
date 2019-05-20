@@ -1,4 +1,4 @@
-const { articleModel, tagModel } = require('../model')
+const { articleModel, tagModel, categoryModel, commentModel } = require('../model')
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op
 
@@ -7,9 +7,10 @@ class articleController {
     static async add(ctx) {
         try {
             let params = ctx.request.body
-            // params.tags = [{ name: 'react' }, { name: 'koa' }]
+            params.tags = params.tags.map(name => ({ name }))
+            params.categories = params.categories.map(name => ({ name }))
             let response = await articleModel.create(params, {
-                include: [tagModel]
+                include: [tagModel, categoryModel]
             })
             ctx.body = {
                 status: 1,
@@ -47,9 +48,7 @@ class articleController {
                     title: {
                         [Op.like]: keyword
                     }
-                }, include: [{
-                    model: tagModel
-                }]
+                }, include: [tagModel, categoryModel, commentModel]
             })
             ctx.body = {
                 status: 1,
@@ -73,11 +72,9 @@ class articleController {
     static async del(ctx) {
         try {
             let { id } = ctx.params;
-            let response = await articleModel.destroy({
-                where: {
-                    id: Number(id)
-                }
-            })
+            await tagModel.destroy({ where: { articleId: id } })  // 为啥只是置空articleId字段
+            await categoryModel.destroy({ where: { articleId: id } })
+            let response = await articleModel.destroy({ where: { id }, cascade: true })
             if (response === 1) {
                 ctx.body = {
                     status: 1,
@@ -100,12 +97,14 @@ class articleController {
     // 更新文章
     static async update(ctx) {
         try {
-            let { id, ...rest } = ctx.request.body
-            let response = await articleModel.update({ ...rest }, {
-                where: {
-                    id: Number(id)
-                }
-            })
+            let { id, tags, categories, ...rest } = ctx.request.body
+            tags = tags.map(name => ({ name, articleId: id }))
+            categories = categories.map(name => ({ name, articleId: id }))
+            let response = await articleModel.update({ ...rest }, { where: { id } })
+            await tagModel.destroy({ where: { articleId: id } })
+            await tagModel.bulkCreate(tags)
+            await categoryModel.destroy({ where: { articleId: id } })
+            await categoryModel.bulkCreate(categories)
             if (response[0] === 1) {
                 ctx.body = {
                     status: 1,
@@ -124,7 +123,68 @@ class articleController {
             }
         }
     }
-
+    // 文章详情
+    static async detail(ctx) {
+        try {
+            let { id } = ctx.query
+            let response = await articleModel.findOne({ where: { id }, include: [tagModel, categoryModel, commentModel] })
+            if (response) {
+                ctx.body = {
+                    status: 1,
+                    message: '请求成功',
+                    response
+                }
+            } else {
+                ctx.body = {
+                    status: 0,
+                    message: '请求失败'
+                }
+            }
+        } catch (err) {
+            ctx.body = {
+                status: 0,
+                message: err.errors
+            }
+        }
+    }
+    static async byTag(ctx) {
+        try {
+            let { name } = ctx.query
+            let response = await articleModel.findAll({
+                attributes: ['id', 'title', 'createdAt'],
+                include: [{ model: tagModel, where: { name }, attributes: [] }]
+            })
+            ctx.body = {
+                status: 1,
+                message: '请求成功',
+                response
+            }
+        } catch (err) {
+            ctx.body = {
+                status: 0,
+                message: err.errors
+            }
+        }
+    }
+    static async byCategory(ctx) {
+        try {
+            let { name } = ctx.query
+            let response = await articleModel.findAll({
+                attributes: ['id', 'title', 'createdAt'],
+                include: [{ model: categoryModel, where: { name }, attributes: [] }]
+            })
+            ctx.body = {
+                status: 1,
+                message: '请求成功',
+                response
+            }
+        } catch (err) {
+            ctx.body = {
+                status: 0,
+                message: err.errors
+            }
+        }
+    }
 }
 
 module.exports = articleController
