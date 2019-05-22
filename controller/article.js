@@ -19,32 +19,30 @@ class articleController {
     }
     // 文章列表+分页
     static async list(ctx) {
-        let { currentPage, pageSize, keyword } = ctx.query
+        let { currentPage, pageSize, keyword, tagName, categoryName } = ctx.query
         currentPage = currentPage === undefined || Number(currentPage) < 1 ? 1 : Number(currentPage)  // 当前页码
         pageSize = pageSize === undefined ? 20 : Number(pageSize)  // 每页条数
         keyword = keyword === undefined || keyword === '' ? '%' : `%${keyword}%` // 关键词
-
-        let allResponse = await articleModel.findAll({
-            where: {
-                title: {
-                    [Op.like]: keyword
-                }
+        let where = {
+            title: {
+                [Op.like]: keyword
             }
-        })
-        let total = allResponse.length      // 全部条数
+        }
+        let tagWhere = tagName ? { name: tagName } : {} // 标签名
+        let categoryWhere = categoryName ? { name: categoryName } : {} // 分类名
+        let include = [
+            { model: tagModel, where: tagWhere, attributes: ['name'] },
+            { model: categoryModel, where: categoryWhere, attributes: ['name'] },
+            { model: commentModel, attributes: ['id'] },  // 怎么计算评论数
+        ]
+        let allResponse = await articleModel.findAll({ where, include })
+        let total = allResponse.length // 全部条数
         let pageCount = Math.ceil(total / pageSize)   // 页数
         let response = await articleModel.findAll({
             offset: (currentPage - 1) * pageSize,
             limit: pageSize,
-            where: {
-                title: {
-                    [Op.like]: keyword
-                }
-            }, include: [
-                { model: tagModel, attributes: ['name'] },
-                { model: categoryModel, attributes: ['name'] },
-                { model: commentModel, attributes: ['id'] },  // 怎么计算评论数
-            ]
+            where,
+            include
         })
         ctx.body = {
             status: 1,

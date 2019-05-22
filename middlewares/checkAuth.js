@@ -1,6 +1,6 @@
 const { getUserInfo } = require('../lib/token')
 module.exports = async (ctx, next) => {
-    let user = getUserInfo(ctx);
+    let user = await getUserInfo(ctx);
     if (user) {
         let adminPathRegs = [/article\/(add|del|update)/, /\/del/, /user\/list/] // 需要管理员权限的url
         let isAdminPath = adminPathRegs.find(reg => reg.test(ctx.path))
