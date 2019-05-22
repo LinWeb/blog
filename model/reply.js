@@ -9,17 +9,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        userId: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
-        commentId: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
     })
     replyModel.associate = (models) => {
-        replyModel.belongsTo(models.articleModel)
+        replyModel.belongsTo(models.commentModel)
+        replyModel.belongsTo(models.userModel)
     }
     return replyModel
 }

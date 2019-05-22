@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     commentModel.associate = (models) => {
         commentModel.belongsTo(models.articleModel)
         commentModel.belongsTo(models.userModel)
+        commentModel.hasMany(models.replyModel)
     }
     return commentModel
 }

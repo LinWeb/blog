@@ -40,7 +40,11 @@ class articleController {
                 title: {
                     [Op.like]: keyword
                 }
-            }, include: [tagModel, categoryModel, commentModel]
+            }, include: [
+                { model: tagModel, attributes: ['name'] },
+                { model: categoryModel, attributes: ['name'] },
+                { model: commentModel, attributes: ['id'] },  // 怎么计算评论数
+            ]
         })
         ctx.body = {
             status: 1,

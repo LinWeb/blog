@@ -97,9 +97,27 @@ class userController {
         }
 
     }
+    // 修改用户昵称/密码
+    static async update(ctx) {
+        let { id, name, password } = ctx.request.body;
+        let bcryptPassword = await passwordHash(password)  // 密码加密
+        let response = await userModel.update({ name, password: bcryptPassword }, {
+            where: { id }
+        })
+        if (response[0] === 1) {
+            ctx.body = {
+                status: 1,
+                message: '修改成功'
+            }
+        } else {
+            ctx.body = {
+                status: 0,
+                message: '修改失败',
+            }
+        }
+    }
     // 删除用户
     static async del(ctx) {
-
         let { id } = ctx.params;
         let response = await userModel.destroy({
             where: {

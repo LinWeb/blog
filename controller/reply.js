@@ -1,16 +1,31 @@
-const { replyModel } = require('../model')
+const { replyModel, commentModel, userModel } = require('../model')
 
 class replyController {
-    // 添加回复
+    // 回复评论
     static async add(ctx) {
-        let params = ctx.request.body
-        let response = await replyModel.create(params)
+        let { content, commentId, userId } = ctx.request.body
+        let comment = await commentModel.findOne({ where: { id: commentId } })
+        if (!comment) {
+            ctx.body = {
+                status: 0,
+                message: '评论不存在'
+            }
+            return;
+        }
+        let user = await userModel.findOne({ where: { id: userId } })
+        if (!user) {
+            ctx.body = {
+                status: 0,
+                message: '用户不存在'
+            }
+            return;
+        }
+        let response = await replyModel.create({ content, commentId, userId })
         ctx.body = {
             status: 1,
-            message: '添加成功',
+            message: '回复成功',
             response
         }
-
     }
     // 删除评论
     static async del(ctx) {

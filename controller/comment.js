@@ -1,16 +1,31 @@
-const { commentModel } = require('../model')
+const { commentModel, articleModel, userModel, replyModel } = require('../model')
 
 class commentController {
     // 添加评论
     static async add(ctx) {
-        let params = ctx.request.body
-        let response = await commentModel.create(params)
+        let { content, articleId, userId } = ctx.request.body
+        let article = await articleModel.findOne({ where: { id: articleId } })
+        if (!article) {
+            ctx.body = {
+                status: 0,
+                message: '文章不存在'
+            }
+            return;
+        }
+        let user = await userModel.findOne({ where: { id: userId } })
+        if (!user) {
+            ctx.body = {
+                status: 0,
+                message: '用户不存在'
+            }
+            return;
+        }
+        let response = await commentModel.create({ content, articleId, userId })
         ctx.body = {
             status: 1,
-            message: '添加成功',
+            message: '评论成功',
             response
         }
-
     }
     // 文章评论列表+分页
     static async list(ctx) {
@@ -27,6 +42,14 @@ class commentController {
         let response = await commentModel.findAll({
             offset: (currentPage - 1) * pageSize,
             limit: pageSize,
+            include: [
+                { model: userModel, attributes: ['name'] },
+                {
+                    model: replyModel,
+                    attributes: ['content', 'createdAt'],
+                    include: [{ model: userModel, attributes: ['name'] }]
+                }
+            ],
             where: {
                 articleId
             }
