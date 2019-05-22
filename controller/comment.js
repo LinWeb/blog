@@ -1,22 +1,16 @@
 const { commentModel, articleModel, userModel, replyModel } = require('../model')
+const { getUserInfo } = require('../lib/token')
 
 class commentController {
     // 添加评论
     static async add(ctx) {
-        let { content, articleId, userId } = ctx.request.body
+        let { content, articleId } = ctx.request.body
+        let { id: userId } = await getUserInfo(ctx)
         let article = await articleModel.findOne({ where: { id: articleId } })
         if (!article) {
             ctx.body = {
                 status: 0,
                 message: '文章不存在'
-            }
-            return;
-        }
-        let user = await userModel.findOne({ where: { id: userId } })
-        if (!user) {
-            ctx.body = {
-                status: 0,
-                message: '用户不存在'
             }
             return;
         }

@@ -2,7 +2,7 @@ const { userModel } = require('../model')
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op
 const { passwordHash, passwordCompare } = require('../lib/bcrypt')
-const { createToken } = require('../lib/token')
+const { createToken, getUserInfo } = require('../lib/token')
 
 class userController {
     // 用户注册
@@ -99,7 +99,8 @@ class userController {
     }
     // 修改用户昵称/密码
     static async update(ctx) {
-        let { id, name, password } = ctx.request.body;
+        let { name, password } = ctx.request.body;
+        let { id } = await getUserInfo(ctx)
         let bcryptPassword = await passwordHash(password)  // 密码加密
         let response = await userModel.update({ name, password: bcryptPassword }, {
             where: { id }

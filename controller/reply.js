@@ -1,22 +1,16 @@
 const { replyModel, commentModel, userModel } = require('../model')
+const { getUserInfo } = require('../lib/token')
 
 class replyController {
     // 回复评论
     static async add(ctx) {
-        let { content, commentId, userId } = ctx.request.body
+        let { content, commentId } = ctx.request.body
+        let { id: userId } = await getUserInfo(ctx)
         let comment = await commentModel.findOne({ where: { id: commentId } })
         if (!comment) {
             ctx.body = {
                 status: 0,
                 message: '评论不存在'
-            }
-            return;
-        }
-        let user = await userModel.findOne({ where: { id: userId } })
-        if (!user) {
-            ctx.body = {
-                status: 0,
-                message: '用户不存在'
             }
             return;
         }
