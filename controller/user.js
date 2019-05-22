@@ -1,15 +1,18 @@
 const { userModel } = require('../model')
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op
+const { passwordHash, passwordCompare } = require('../lib/bcrypt')
+const { createToken } = require('../lib/token')
 
 class userController {
-    // 注册用户
+    // 用户注册
+    // 校验用户名是否已经注册，密码加密处理
     static async register(ctx) {
         try {
             let params = ctx.request.body
-            let { username } = params
-            params.name = username
-            let response = await userModel.create(params)
+            let { username, password } = params
+            let bcryptPassword = await passwordHash(password)
+            let response = await userModel.create({ username, name: username, password: bcryptPassword })
             ctx.body = {
                 status: 1,
                 message: '注册成功',
@@ -21,6 +24,34 @@ class userController {
                 message: err.errors
             }
         }
+    }
+    // 用户登录
+    static async login(ctx) {
+        let { username, password } = ctx.request.body
+        let response = await userModel.findOne({ where: { username } })
+        if (response) {
+            let isSame = await passwordCompare(password, response.password)
+            if (isSame) {
+                let { id, name } = response
+                let token = await createToken({ username, id })
+                ctx.body = {
+                    status: 1,
+                    message: '登录成功',
+                    response: { id, name, token }
+                }
+            } else {
+                ctx.body = {
+                    status: 0,
+                    message: '登录失败'
+                }
+            }
+        } else {
+            ctx.body = {
+                status: 0,
+                message: '登录失败'
+            }
+        }
+
     }
     // 用户列表+搜索+分页
     static async list(ctx) {
