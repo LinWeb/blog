@@ -18,9 +18,9 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        isAdmin: {
+        auth: {
             type: DataTypes.BOOLEAN,
-            defaultValue: false
+            defaultValue: 0
         }
     })
     return userModel
