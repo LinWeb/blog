@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Row, Col } from 'antd';
 import Header from '@/component/web/header/index';
 import Sider from '@/component/web/sider/index';
-import RouterConfig from '@/config/router_config';
+import RouterConfig from '@/config/routerConfig';
 
 function App() {
   return (

@@ -4,7 +4,7 @@ import { Row, Col } from 'antd';
 import Logo from './logo'
 import Search from './search'
 import Nav from './nav'
-import UserHead from './user_head'
+import UserHead from './userHead'
 class Header extends Component {
     render() {
         return (

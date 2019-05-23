@@ -1,59 +1,48 @@
 import React, { Component } from 'react';
-import { Divider, Icon, Tag } from 'antd';
 import './index.scss'
-import API from '@/services/index'
-class Home extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            articleListData: []
-        }
+import { connect } from 'react-redux'
+import ArticleList from '@/component/web/articleList'
+import { getArticleList } from '@/store/article/action'
+import { Pagination,Empty } from 'antd'
 
-    }
-    async getArticles() {
-        let res = await API.GET_ARTICLES({})
-        if (res) {
-            let { status, response } = res
-            if (status) {
-                this.setState(() => ({
-                    articleListData: response
-                }))
-            }
-        }
+class Home extends Component {
+    onChange = (currentPage) => {
+        let { history, dispatchGetArticleList } = this.props
+        dispatchGetArticleList({ currentPage })
+        history.push({
+            search: 'currentPage=' + currentPage
+        })
     }
     UNSAFE_componentWillMount() {
-        this.getArticles()
+        let { dispatchGetArticleList } = this.props
+        dispatchGetArticleList({})
     }
     render() {
-        let { articleListData } = this.state;
+        let { articleList, pager } = this.props;
+        let { currentPage, pageSize, total } = pager
         return (
             <div className='home-container'>
-                <ul className='article-list'>
-                    {articleListData.map((item, key) =>
-                        <li className='item' key={key} >
-                            <Divider orientation="left">{item.title}</Divider>
-                            <div className='content'>
-                                {item.content}
-                            </div>
-                            <div className='footer'>
-                                <Icon type="eye" className='icon' />{item.readCount}
-                                <Divider type="vertical" />
-                                <Icon type="message" className='icon' />{item.readCount}
-                                <Divider type="vertical" />
-                                <Icon type="tags" className='icon' />
-                                {item.tags.map(tag =>
-                                    <Tag color="magenta">{tag.name}</Tag>
-                                )}
-                                <Divider type="vertical" />
-                                <Icon type="bars" className='icon' />
-                                <Tag color="#f50">#f50</Tag>
-                                <Tag color="#2db7f5">#2db7f5</Tag>
-                            </div>
-                        </li>
-                    )} </ul>
+                {articleList.length ? 
+                <div>
+                    <ArticleList data={articleList}></ArticleList>
+                    <Pagination style={{textAlign:'right'}} current={currentPage} pageSize={pageSize} total={total} onChange={this.onChange} />
+                </div> 
+                : <Empty description='暂无数据' imageStyle={{marginTop:'145px'}}/>
+                }
             </div >
         )
     }
 }
 
-export default Home
+let mapStateToProps = state => {
+    let { articleList, pager } = state.article.articleListData
+    return {
+        articleList,
+        pager
+    }
+}
+let mapDispatchToProps = dispatch => ({
+    dispatchGetArticleList: params => dispatch(getArticleList(params))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

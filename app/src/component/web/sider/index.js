@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './index.scss'
-import BloggerInfor from './blogger_infor'
-import NewArticles from './new_articles'
+import BloggerInfor from './bloggerInfor'
+import NewArticles from './newArticles'
 import Tags from './tags'
 class Sider extends Component {
 

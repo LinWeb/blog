@@ -1,0 +1,3 @@
+export const GET_USER = 'GET_USER'
+export const GET_ARTICLE_LIST = 'GET_ARTICLE_LIST'
+export const GET_NEW_THREE_ARTICLES = 'GET_NEW_THREE_ARTICLES'

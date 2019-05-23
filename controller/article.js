@@ -102,7 +102,15 @@ class articleController {
     // 文章详情
     static async detail(ctx) {
         let { id } = ctx.query
-        let response = await articleModel.findOne({ where: { id }, include: [tagModel, categoryModel, commentModel] })
+        let response = await articleModel.findOne({
+            where: { id },
+            include: [
+                { model: tagModel, attributes: ['name'] },
+                { model: categoryModel, attributes: ['name'] },
+            ]
+        })
+        let count = response.readCount
+        await articleModel.update({ readCount: ++count }, { where: { id } })
         if (response) {
             ctx.body = {
                 status: 1,
