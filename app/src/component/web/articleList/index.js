@@ -4,15 +4,16 @@ import { connect } from 'react-redux'
 import { withRouter } from "react-router-dom";
 
 class ArticleList extends Component {
-    onChange = () => {
-
-    }
     render() {
         let { data, tagColors, categoryColors, history } = this.props
         return (<ul className='article-list'>
             {data.map((item, key) =>
-                // <Link to={'/article/id/' + item.id} key={key}>
-                <li className='item'  key={key}>
+                <li className='item' key={key} onClick={
+                    (e) => {
+                        e.stopPropagation()
+                        history.push('/article/id/' + item.id)
+                    }
+                }>
                     <Divider orientation="left">{item.title}</Divider>
                     <div className='content'>
                         {item.content}
@@ -24,7 +25,7 @@ class ArticleList extends Component {
                         <Divider type="vertical" />
                         <Icon type="tags" className='icon' />
                         {item.tags.map((tag, key) =>
-                            <Tag color={tagColors[key % 11]} key={key} onClick={
+                            <Tag className='tag' color={tagColors[key % 11]} key={key} onClick={
                                 (e) => {
                                     e.stopPropagation()
                                     history.push({ pathname: '/tag/' + tag.name, state: { type: 'Tag', tagName: tag.name } })
@@ -34,7 +35,7 @@ class ArticleList extends Component {
                         <Divider type="vertical" />
                         <Icon type="bars" className='icon' />
                         {item.categories.map((category, key) =>
-                            <Tag color={categoryColors[key % 11]} key={key} onClick={
+                            <Tag className='category' color={categoryColors[key % 11]} key={key} onClick={
                                 (e) => {
                                     e.stopPropagation()
                                     history.push({ pathname: '/category/' + category.name, state: { type: 'Category', categoryName: category.name } })
@@ -43,7 +44,6 @@ class ArticleList extends Component {
                         )}
                     </div>
                 </li>
-                // </Link>
             )}
         </ul>)
     }

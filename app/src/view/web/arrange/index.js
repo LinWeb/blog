@@ -28,7 +28,8 @@ class Arrange extends Component {
             this.getArticles({ tagName, categoryName });
         }
     }
-    componentWillUnmount() {
+    async componentWillUnmount() {
+        // 是否需要清除数据，然后不与首页的数据冲突，还是把首页和归档的数据分开
         let { dispatchEmptyArticleList } = this.props
         dispatchEmptyArticleList()
     }
