@@ -1,0 +1,18 @@
+.categories-container {
+  margin: 23px 126px 0;
+  text-align: center;
+  .title {
+    margin-bottom: 7px;
+  }
+  .total {
+    color: #777777;
+    margin-bottom: 22px;
+    span {
+      color: rgb(24, 144, 255);
+    }
+  }
+  .item {
+    display: inline-block;
+    margin: 16px 14px 0;
+  }
+}

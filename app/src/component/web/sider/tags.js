@@ -1,25 +1,36 @@
 import React, { Component } from 'react';
 import { Divider, Tag } from 'antd';
+import { connect } from 'react-redux'
+import { getTagList } from '@/store/tag/action'
+
 class Tags extends Component {
+    UNSAFE_componentWillMount() {
+        let { dispatchGetTagList } = this.props
+        dispatchGetTagList()
+    }
     render() {
+        let { tagList, tagColors } = this.props
         return (
             <div className='tags-container'>
                 <Divider orientation="left">标签</Divider>
                 <div className='tags'>
-                    <Tag color="magenta">magenta</Tag>
-                    <Tag color="red">red</Tag>
-                    <Tag color="volcano">volcano</Tag>
-                    <Tag color="orange">orange</Tag>
-                    <Tag color="gold">gold</Tag>
-                    <Tag color="lime">lime</Tag>
-                    <Tag color="green">green</Tag>
-                    <Tag color="cyan">cyan</Tag>
-                    <Tag color="blue">blue</Tag>
-                    <Tag color="geekblue">geekblue</Tag>
-                    <Tag color="purple">purple</Tag></div>
+                    {tagList.map((item, key) => (
+                        <Tag color={tagColors[key % 11]} key={key}>{item.name}</Tag>
+                    ))}
+                </div>
             </div>
         )
     }
 }
+let mapStateToProps = state => {
+    let { tagList, tagColors } = state.tag
+    return {
+        tagList,
+        tagColors
+    }
+}
+let mapDispatchToProps = dispatch => ({
+    dispatchGetTagList: () => dispatch(getTagList())
+})
 
-export default Tags
+export default connect(mapStateToProps, mapDispatchToProps)(Tags)

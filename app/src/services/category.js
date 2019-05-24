@@ -1,11 +1,11 @@
 
 import axios from 'axios'
-import { CATEGORY_URL } from '../../config/api'
+import API from '@/config/api'
 
-let CATEGORY = async () => {
-    return await axios.get(CATEGORY_URL)
+let GET_CATEGORIES = async () => {
+    return await axios.get(API.GET_CATEGORIES_URL)
 }
 
 export {
-    CATEGORY
+    GET_CATEGORIES
 }

@@ -3,7 +3,7 @@ import './index.scss'
 import { connect } from 'react-redux'
 import ArticleList from '@/component/web/articleList'
 import { getArticleList } from '@/store/article/action'
-import { Pagination,Empty } from 'antd'
+import { Pagination, Empty } from 'antd'
 
 class Home extends Component {
     onChange = (currentPage) => {
@@ -22,12 +22,12 @@ class Home extends Component {
         let { currentPage, pageSize, total } = pager
         return (
             <div className='home-container'>
-                {articleList.length ? 
-                <div>
-                    <ArticleList data={articleList}></ArticleList>
-                    <Pagination style={{textAlign:'right'}} current={currentPage} pageSize={pageSize} total={total} onChange={this.onChange} />
-                </div> 
-                : <Empty description='暂无数据' imageStyle={{marginTop:'145px'}}/>
+                {articleList.length ?
+                    <div>
+                        <ArticleList data={articleList}></ArticleList>
+                        <Pagination style={{ textAlign: 'right' }} current={currentPage} pageSize={pageSize} total={total} onChange={this.onChange} />
+                    </div>
+                    : <Empty description='暂无数据' imageStyle={{ marginTop: '145px' }} />
                 }
             </div >
         )

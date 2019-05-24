@@ -1,3 +1,6 @@
 export const GET_USER = 'GET_USER'
 export const GET_ARTICLE_LIST = 'GET_ARTICLE_LIST'
 export const GET_NEW_THREE_ARTICLES = 'GET_NEW_THREE_ARTICLES'
+
+export const GET_TAG_LIST = 'GET_TAG_LIST'
+export const GET_CATEGORY_LIST = 'GET_CATEGORY_LIST'

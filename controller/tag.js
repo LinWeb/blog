@@ -2,8 +2,12 @@ const { tagModel } = require('../model')
 
 class tagController {
     static async list(ctx) {
-        let res = await tagModel.findAll({ group: 'name' })
-        ctx.body = res
+        let response = await tagModel.findAll({ group: 'name' })
+        ctx.body = {
+            status: 1,
+            message: '请求成功',
+            response
+        }
     }
 }
 

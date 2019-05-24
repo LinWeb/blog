@@ -19,30 +19,45 @@ class articleController {
     }
     // 文章列表+分页
     static async list(ctx) {
-        let { currentPage, pageSize, keyword, tagName, categoryName } = ctx.query
+        let { currentPage, pageSize, keyword, tagName, categoryName, attributes } = ctx.query
         currentPage = currentPage === undefined || Number(currentPage) < 1 ? 1 : Number(currentPage)  // 当前页码
         pageSize = pageSize === undefined ? 20 : Number(pageSize)  // 每页条数
         keyword = keyword === undefined || keyword === '' ? '%' : `%${keyword}%` // 关键词
-        let where = {
-            title: {
-                [Op.like]: keyword
+        attributes = attributes === undefined ? undefined : attributes.split(',')
+        let where = {},
+            include = [],
+            tagWhere = tagName ? { name: tagName } : {}, // 标签名
+            categoryWhere = categoryName ? { name: categoryName } : {} // 分类名
+        if (attributes === undefined) {
+            // 没有指定返回字段的情况下返回全部字段
+            where = {
+                title: {
+                    [Op.like]: keyword
+                }
             }
+            include = [
+                { model: tagModel, where: tagWhere, attributes: ['name'] },
+                { model: categoryModel, where: categoryWhere, attributes: ['name'] },
+                { model: commentModel, attributes: ['id'] },  // 怎么计算评论数
+            ]
+        } else {
+            include = [
+                { model: tagModel, where: tagWhere, attributes: [] },
+                { model: categoryModel, where: categoryWhere, attributes: [] },
+            ]
         }
-        let tagWhere = tagName ? { name: tagName } : {} // 标签名
-        let categoryWhere = categoryName ? { name: categoryName } : {} // 分类名
-        let include = [
-            { model: tagModel, where: tagWhere, attributes: ['name'] },
-            { model: categoryModel, where: categoryWhere, attributes: ['name'] },
-            { model: commentModel, attributes: ['id'] },  // 怎么计算评论数
-        ]
         let allResponse = await articleModel.findAll({ where, include })
         let total = allResponse.length // 全部条数
         let pageCount = Math.ceil(total / pageSize)   // 页数
+
+
         let response = await articleModel.findAll({
             offset: (currentPage - 1) * pageSize,
             limit: pageSize,
             where,
-            include
+            include,
+            attributes,
+            order: [['createdAt', 'DESC']]
         })
         ctx.body = {
             status: 1,
@@ -55,6 +70,7 @@ class articleController {
                 pageCount,
             }
         }
+
     }
     // 删除文章
     static async del(ctx) {
@@ -125,6 +141,7 @@ class articleController {
         }
 
     }
+    // 通过标签查询
     static async byTag(ctx) {
         let { name } = ctx.query
         let response = await articleModel.findAll({
@@ -138,6 +155,7 @@ class articleController {
         }
 
     }
+    // 通过分类查询
     static async byCategory(ctx) {
         let { name } = ctx.query
         let response = await articleModel.findAll({
