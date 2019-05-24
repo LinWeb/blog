@@ -46,4 +46,11 @@ export default [
         component: Arrange,
         isPrivate: false,
     },
+    {
+        path: '/category/:name',
+        title: '分类归档',
+        exact: true,
+        component: Arrange,
+        isPrivate: false,
+    },
 ]

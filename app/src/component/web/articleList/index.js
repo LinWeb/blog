@@ -12,7 +12,7 @@ class ArticleList extends Component {
         return (<ul className='article-list'>
             {data.map((item, key) =>
                 // <Link to={'/article/id/' + item.id} key={key}>
-                <li className='item' >
+                <li className='item'  key={key}>
                     <Divider orientation="left">{item.title}</Divider>
                     <div className='content'>
                         {item.content}

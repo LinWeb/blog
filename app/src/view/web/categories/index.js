@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { getCategoryList } from '@/store/category/action'
 import { Tag, Badge } from 'antd';
 import './index.scss'
+import {Link} from 'react-router-dom'
 
 class Categories extends Component {
     UNSAFE_componentWillMount() {
@@ -14,14 +15,16 @@ class Categories extends Component {
         return (
             <div className='categories-container'>
                 <h1 className='title'>分类</h1>
-                <div className='total'>总共<sapn>1</sapn>个分类</div>
+                <div className='total'>总共<span>1</span>个分类</div>
                 <div className='categories'>
-                    {categoryList.map((item, key) => (
-                        <span className='item' key={key}>
-                            <Badge count={12} style={{ backgroundColor: '#fff', color: 'red', borderColor: 'red' }} >
-                                <Tag color={categoryColors[key % 11]}>{item.name}</Tag>
-                            </Badge>
-                        </span>
+                    {categoryList.map((category, key) => (
+                        <Link to={{ pathname: '/category/' + category.name, state: { type: 'Category', categoryName: category.name } }} key={key}>
+                            <span className='item'>
+                                <Badge count={12} style={{ backgroundColor: '#fff', color: 'red', borderColor: 'red' }} >
+                                    <Tag color={categoryColors[key % 11]}>{category.name}</Tag>
+                                </Badge>
+                            </span>
+                        </Link>
                     ))}
                 </div>
             </div>

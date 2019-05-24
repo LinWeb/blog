@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Timeline } from 'antd';
-import { withRouter } from "react-router";
+import { withRouter } from "react-router-dom";
 class TplOne extends Component {
     render() {
         let { data, location } = this.props;
