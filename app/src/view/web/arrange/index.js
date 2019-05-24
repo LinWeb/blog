@@ -1,65 +1,38 @@
 import React, { Component } from 'react';
-import { Timeline, Icon, Pagination, Empty } from 'antd';
+import { Pagination, Empty } from 'antd';
 import { connect } from 'react-redux'
-import { getArticleList } from '@/store/article/action'
+import { getArticleList, emptyArticleList } from '@/store/article/action'
 import './index.scss'
+import TplOne from './tplOne'
+import TplTwo from './tplTwo'
 
 class Arrange extends Component {
+    getArticles(params) {
+        let { location, dispatchGetArticleList } = this.props
+        let state = location.state || {}
+        let { tagName, categoryName } = state
+        dispatchGetArticleList({ ...params, tagName, categoryName, attributes: 'id,title,createdAt' })
+    }
     onChange = (currentPage) => {
-        let { history, dispatchGetArticleList } = this.props
-        dispatchGetArticleList({ currentPage })
-        history.push({
-            search: 'currentPage=' + currentPage
-        })
+        this.getArticles({ currentPage })
     }
     UNSAFE_componentWillMount() {
-        let { dispatchGetArticleList } = this.props
-        dispatchGetArticleList({})
+        this.getArticles()
+    }
+    componentWillUnmount() {
+        let { dispatchEmptyArticleList } = this.props
+        dispatchEmptyArticleList()
     }
     render() {
-        let { articleList, pager } = this.props;
+        let { articleList, pager, location } = this.props;
         let { currentPage, pageSize, total } = pager
-        let data = articleList.map(({ title, createdAt }) => {
-            let time = new Date(createdAt)
-            let day = time.getDate()
-            let month = time.getMonth() + 1
-            let year = time.getFullYear()
-            day = day < 10 ? '0' + day : day
-            month = month < 10 ? '0' + month : month
-            let date = month + '-' + day
-            return {
-                title, date, year
-            }
-        })
-        let res = []
-        let prevYear = 0
-        data.forEach((item, index) => {
-            let { year } = item
-            if (index === 0) {
-                res.push(year)
-                prevYear = year
-            } else {
-                if (year !== prevYear) {
-                    res.push(year)
-                    prevYear = year
-                }
-            }
-            res.push(item)
-        })
+        let { pathname } = location
+        let Tpl = () => (/arrange/.test(pathname) ? <TplOne data={articleList} /> : <TplTwo data={articleList} />)
         return (
             <div className='arrange-container'>
-                {res.length ?
+                {articleList.length ?
                     <div>
-                        <Timeline>
-                            <Timeline.Item>Nice! {total} posts in total. Keep on posting.</Timeline.Item>
-                            {res.map((item, key) =>
-                                Object.prototype.toString.call(item) === '[object Object]' ?
-                                    <Timeline.Item key={key}>{item.date} <span className='title'>{item.title}</span></Timeline.Item>
-                                    : <Timeline.Item key={key} dot={<Icon type="clock-circle-o" style={{ fontSize: '16px' }} />} color="red">
-                                        {item}
-                                    </Timeline.Item>
-                            )}
-                        </Timeline>
+                        <Tpl />
                         <Pagination style={{ textAlign: 'right' }} current={currentPage} pageSize={pageSize} total={total} onChange={this.onChange} />
                     </div>
                     : <Empty description='暂无数据' imageStyle={{ marginTop: '145px' }} />
@@ -77,7 +50,8 @@ let mapStateToProps = state => {
     }
 }
 let mapDispatchToProps = dispatch => ({
-    dispatchGetArticleList: params => dispatch(getArticleList(params))
+    dispatchGetArticleList: params => dispatch(getArticleList(params)),
+    dispatchEmptyArticleList: () => dispatch(emptyArticleList())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Arrange)

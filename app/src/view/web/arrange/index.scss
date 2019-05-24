@@ -1,5 +1,17 @@
 .arrange-container {
   margin: 45px 30px 50px;
+  .tplTwo {
+    .name {
+      color: #333333;
+      font-size: 27px;
+      font-weight: 600;
+    }
+    .type {
+      margin-left: 10px;
+      color: #bbb;
+      font-size: 24px;
+    }
+  }
   .title {
     margin-left: 10px;
     color: #1890ff;
