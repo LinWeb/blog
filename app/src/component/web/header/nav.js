@@ -35,26 +35,24 @@ class Nav extends Component {
             ]
         }
     }
-    onClick = ({ key }) => {
+    changeSelectNav = ({ key }) => {
         this.setState(() => ({
             currentKey: key
         }))
     }
-    // componentDidUpdate() {
-    //     // 怎么监听路由的变化
-    //     let { currentKey, navData } = this.state
-    //     let { pathname } = this.props.location
-    //     let include = navData.find((item) => item.pathname === pathname)
-    //     if (!include) {
-    //         console.log(11111111, pathname)
-    //         this.onClick({ key: '' })
-    //     }
-    // }
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        let { navData } = this.state
+        let { pathname } = nextProps.location
+        let include = navData.find((item) => item.pathname === pathname)
+        if (!include) {
+            this.changeSelectNav({ key: '' })
+        }
+    }
     render() {
         let { currentKey, navData } = this.state
         return (
             <div className='nav'>
-                <Menu mode="horizontal" className='nav-ul' selectedKeys={[currentKey]} onClick={this.onClick}>
+                <Menu mode="horizontal" className='nav-ul' selectedKeys={[currentKey]} onClick={this.changeSelectNav}>
                     {navData.map((nav, key) => (
                         <Menu.Item key={nav.key} className='item'>
                             <Link to={nav.pathname}>

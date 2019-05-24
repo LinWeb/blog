@@ -11,13 +11,22 @@ class Arrange extends Component {
         let { location, dispatchGetArticleList } = this.props
         let state = location.state || {}
         let { tagName, categoryName } = state
-        dispatchGetArticleList({ ...params, tagName, categoryName, attributes: 'id,title,createdAt' })
+        dispatchGetArticleList({ tagName, categoryName, attributes: 'id,title,createdAt', ...params, })
     }
     onChange = (currentPage) => {
         this.getArticles({ currentPage })
     }
     UNSAFE_componentWillMount() {
         this.getArticles()
+    }
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        let { pathname: nextPathname, state } = nextProps.location
+        let { pathname: currentPathname } = this.props.location
+        if (nextPathname !== currentPathname) {
+            state = state || {}
+            let { tagName, categoryName } = state
+            this.getArticles({ tagName, categoryName });
+        }
     }
     componentWillUnmount() {
         let { dispatchEmptyArticleList } = this.props
