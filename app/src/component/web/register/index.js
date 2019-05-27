@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Modal, Button, Form, Input, message } from 'antd';
-import { register } from '@/store/user/action'
+import { register, checkUsername } from '@/store/user/action'
 import { connect } from 'react-redux'
+
 class Register extends Component {
     handleSubmit = e => {
         e.preventDefault()
@@ -19,6 +20,19 @@ class Register extends Component {
                 })
             }
         })
+    }
+    checkUsername = () => {
+        let { dispatchCheckUsername } = this.props
+        const { getFieldValue, } = this.props.form;
+        let username = getFieldValue('username')
+        // dispatchCheckUsername({ username }).then(data => {
+        //     if (data) {
+        //         if (data.status) {
+        //             message.success('不可用');
+        //         }
+        //     }
+        // })
+
     }
     compareToNextPassword = (rule, value, callback) => {
         const { getFieldValue, validateFields } = this.props.form;
@@ -72,7 +86,7 @@ class Register extends Component {
                                     message: '请输入电子邮箱',
                                 },
                             ],
-                        })(<Input />)}
+                        })(<Input onBlur={this.checkUsername} />)}
                     </Form.Item>
                     <Form.Item label="新密码" hasFeedback>
                         {getFieldDecorator('password', {
@@ -103,7 +117,7 @@ class Register extends Component {
                                     validator: this.compareToFirstPassword,
                                 },
                             ],
-                        })(<Input.Password onBlur={this.handleConfirmBlur} />)}
+                        })(<Input.Password />)}
                     </Form.Item>
                     <Form.Item {...submitLayout}>
                         <Button type="primary" htmlType="submit" style={{ width: '100%', float: 'right' }}>
@@ -116,6 +130,7 @@ class Register extends Component {
     }
 }
 let mapDispatchToProps = dispatch => ({
-    dispatchRegister: params => dispatch(register(params))
+    dispatchRegister: params => dispatch(register(params)),
+    dispatchCheckUsername: params => dispatch(checkUsername(params))
 })
 export default connect(null, mapDispatchToProps)(Form.create({ name: 'register' })(Register))

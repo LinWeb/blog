@@ -1,6 +1,7 @@
 let state = {
+    userId: 0,
     username: '',
-    auth: 0
+    token: localStorage.getItem('token'),
 }
 
 export default state

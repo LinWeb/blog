@@ -32,6 +32,24 @@ class userController {
             }
         }
     }
+    // 检验用户名是否已经注册
+    static async checkUsername(ctx) {
+        let { username } = ctx.request.body
+        let response = await userModel.findOne({ where: { username } })
+        if (response) {
+            ctx.body = {
+                status: 1,
+                message: '此电子邮箱已经被注册',
+                response: { id, name, token }
+            }
+        } else {
+            ctx.body = {
+                status: 0,
+                message: '此电子邮箱可用'
+            }
+        }
+
+    }
     // 用户登录
     static async login(ctx) {
         let { username, password } = ctx.request.body

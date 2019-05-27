@@ -8,6 +8,7 @@ const GET_ARTICLES_URL = '/article/list';
 const GET_TAGS_URL = '/tag/list';
 const GET_CATEGORIES_URL = '/category/list';
 const REGISTER_URL = '/user/register';
+const CHECK_USERNAME_URL = '/user/checkUsername';
 const LOGIN_URL = '/user/login';
 export {
     BASE_URL,
@@ -15,5 +16,6 @@ export {
     GET_TAGS_URL,
     GET_CATEGORIES_URL,
     REGISTER_URL,
-    LOGIN_URL
+    LOGIN_URL,
+    CHECK_USERNAME_URL
 }

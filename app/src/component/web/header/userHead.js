@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Menu, Dropdown, Avatar, Modal, Button } from 'antd';
 import Register from '../register'
+import Login from '../login'
 class UserHead extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            loginShow: false, registerShow: true
+            loginShow: true,
+            registerShow: false
         }
     }
     changeLoginModalShow = () => {
@@ -47,15 +49,9 @@ class UserHead extends Component {
                 <Button type="danger" ghost onClick={this.changeRegisterModalShow} >
                     注册
                </Button>
-                <Modal
-                    title="Basic Modal"
-                    visible={loginShow}
-                >
-                    <p>Some contents...</p>
-                    <p>Some contents...</p>
-                    <p>Some contents...</p>
-                </Modal>
-                <Register isShow={registerShow} onCancel={this.changeRegisterModalShow} /> </div>
+                <Login isShow={loginShow} onCancel={this.changeLoginModalShow} />
+                <Register isShow={registerShow} onCancel={this.changeRegisterModalShow} />
+            </div >
         )
     }
 }
