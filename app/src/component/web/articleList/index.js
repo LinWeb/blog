@@ -21,10 +21,10 @@ class ArticleList extends Component {
                     <div className='footer'>
                         <Icon type="eye" className='icon' />{item.readCount}
                         <Divider type="vertical" />
-                        <Icon type="message" className='icon' />{item.comments.length}
+                        <Icon type="message" className='icon' />{item.comments ? item.comments.length : 0}
                         <Divider type="vertical" />
                         <Icon type="tags" className='icon' />
-                        {item.tags.map((tag, key) =>
+                        {item.tags && item.tags.map((tag, key) =>
                             <Tag className='tag' color={tagColors[key % 11]} key={key} onClick={
                                 (e) => {
                                     e.stopPropagation()
@@ -34,7 +34,7 @@ class ArticleList extends Component {
                         )}
                         <Divider type="vertical" />
                         <Icon type="bars" className='icon' />
-                        {item.categories.map((category, key) =>
+                        {item.categories && item.categories.map((category, key) =>
                             <Tag className='category' color={categoryColors[key % 11]} key={key} onClick={
                                 (e) => {
                                     e.stopPropagation()

@@ -3,6 +3,7 @@ import API from '@/services/index'
 
 export function getArticleList(params) {
     return async (dispatch) => {
+        dispatch(emptyArticleList())
         params.pageSize = 2
         let data = await API.GET_ARTICLES(params)
         if (data) {
@@ -19,7 +20,7 @@ export function getArticleList(params) {
     }
 }
 
-export function emptyArticleList() {
+function emptyArticleList() {
     return {
         type: EMPTY_ARTICLE_LIST
     }

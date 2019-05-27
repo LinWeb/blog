@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Pagination, Empty } from 'antd';
 import { connect } from 'react-redux'
-import { getArticleList, emptyArticleList } from '@/store/article/action'
+import { getArticleList, } from '@/store/article/action'
 import './index.scss'
 import TplOne from './tplOne'
 import TplTwo from './tplTwo'
@@ -27,11 +27,6 @@ class Arrange extends Component {
             let { tagName, categoryName } = state
             this.getArticles({ tagName, categoryName });
         }
-    }
-    async componentWillUnmount() {
-        // 是否需要清除数据，然后不与首页的数据冲突，还是把首页和归档的数据分开
-        let { dispatchEmptyArticleList } = this.props
-        dispatchEmptyArticleList()
     }
     render() {
         let { articleList, pager, location } = this.props;
@@ -61,7 +56,6 @@ let mapStateToProps = state => {
 }
 let mapDispatchToProps = dispatch => ({
     dispatchGetArticleList: params => dispatch(getArticleList(params)),
-    dispatchEmptyArticleList: () => dispatch(emptyArticleList())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Arrange)
