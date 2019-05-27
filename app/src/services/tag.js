@@ -1,9 +1,9 @@
 
-import axios from 'axios'
-import API from '@/config/api'
+import axios from '@/axios'
+import { GET_TAGS_URL } from '@/config/api'
 
 let GET_TAGS = async () => {
-    return await axios.get(API.GET_TAGS_URL)
+    return await axios.get(GET_TAGS_URL)
 }
 
 export {

@@ -9,7 +9,7 @@ class Header extends Component {
     render() {
         return (
             <Row type="flex" align='middle' justify="center" className='header-container'>
-                <Col span={6}>
+                <Col span={5}>
                     <Logo />
                 </Col>
                 <Col span={8}>
@@ -18,7 +18,7 @@ class Header extends Component {
                 <Col span={8}>
                     <Nav />
                 </Col>
-                <Col span={2}>
+                <Col span={3}>
                     <UserHead />
                 </Col>
             </Row>

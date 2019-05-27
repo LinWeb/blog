@@ -14,6 +14,8 @@ app.use(checkToken) // 校验登录中间件
 app.use(checkAuth) // 校验权限中间件
 app.use(async (ctx, next) => {
     ctx.set('Access-Control-Allow-Origin', ctx.headers.origin)  // 跨域访问
+    ctx.set('Access-control-Allow-Methods', '*')
+    ctx.set('Access-control-Allow-Headers', 'X-Requested-With,content-type')
     await next()
 })
 
