@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Menu, Dropdown, Avatar, Modal, Button } from 'antd';
+import { Menu, Dropdown, Avatar, Button } from 'antd';
 import Register from '../register'
 import Login from '../login'
 import UpdateUserInfo from '../updateUserInfo'

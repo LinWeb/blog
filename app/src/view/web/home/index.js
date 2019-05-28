@@ -4,18 +4,31 @@ import { connect } from 'react-redux'
 import ArticleList from '@/component/web/articleList'
 import { getArticleList } from '@/store/article/action'
 import { Pagination, Empty } from 'antd'
-
+import qs from 'querystring'
 class Home extends Component {
     onChange = (currentPage) => {
         let { history, dispatchGetArticleList } = this.props
-        dispatchGetArticleList({ currentPage })
+        let keyword = this.getKeyWord()
         history.push({
-            search: 'currentPage=' + currentPage
+            pathname: '/article',
+            search: (keyword ? 'keyword=' + keyword + '&' : '') + 'currentPage=' + currentPage
         })
+        dispatchGetArticleList({ keyword, currentPage })
+    }
+    getKeyWord() {
+        let { search } = this.props.location
+        let keyword = ''
+        if (search) {
+            let obj = qs.parse(search.substring(1))
+            keyword = obj['keyword']
+        }
+        return keyword
     }
     UNSAFE_componentWillMount() {
         let { dispatchGetArticleList } = this.props
-        dispatchGetArticleList({})
+        let { search } = this.props.location
+        let params = qs.parse(search.substring(1))
+        dispatchGetArticleList(params)
     }
     render() {
         let { articleList, pager } = this.props;

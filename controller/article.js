@@ -22,7 +22,7 @@ class articleController {
         let { currentPage, pageSize, keyword, tagName, categoryName, attributes } = ctx.query
         currentPage = currentPage === undefined || Number(currentPage) < 1 ? 1 : Number(currentPage)  // 当前页码
         pageSize = pageSize === undefined ? 20 : Number(pageSize)  // 每页条数
-        keyword = keyword === undefined || keyword === '' ? '%' : `%${keyword}%` // 关键词
+        keyword = keyword === undefined || keyword === '' ? '%' : `%${decodeURIComponent(keyword)}%` // 关键词
         attributes = attributes === undefined ? undefined : attributes.split(',')
         let where = {},
             include = [],

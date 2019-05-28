@@ -1,4 +1,4 @@
-import { GET_USER_INFO, LOGOUT, UPDATE_USER } from '../actionTypes'
+import { GET_USER_INFO, LOGOUT, } from '../actionTypes'
 import { message } from 'antd';
 import API from '@/services/index'
 

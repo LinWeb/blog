@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, Button, Form, Input, message } from 'antd';
+import { Modal, Button, Form, Input } from 'antd';
 import { login } from '@/store/user/action'
 import { connect } from 'react-redux'
 class Login extends Component {

@@ -10,7 +10,7 @@ export function getArticleList(params) {
             let { status, response, pager } = data
             if (status) {
                 dispatch({ type: GET_ARTICLE_LIST, data: { articleList: response, pager } })
-                if (pager.currentPage === 1 && !params.keyword) {
+                if (pager.currentPage === 1 && !params.keyword && !params.tagName && !params.categoryName) {
                     // 加载第一页的时候就执行
                     let newThreeArticles = response.slice(0, 3).map(({ id, title }) => ({ id, title }))
                     dispatch(getNewThreeArticles(newThreeArticles))

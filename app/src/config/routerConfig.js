@@ -33,6 +33,13 @@ export default [
         isPrivate: false,
     },
     {
+        path: '/article',
+        title: '文章列表',
+        exact: true,
+        component: Home,
+        isPrivate: false,
+    },
+     {
         path: '/article/id/:id',
         title: '文章详情',
         exact: true,
