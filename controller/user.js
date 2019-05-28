@@ -116,14 +116,20 @@ class userController {
     }
     // 修改用户昵称/密码
     static async update(ctx) {
-        let { name, password, oldPassword } = ctx.request.body;
+        let { name, newPassword, password } = ctx.request.body;
         let { id } = await getUserInfo(ctx)  // 用户id
         let user = await userModel.findOne({ where: { id } })
         if (user) {
-            let isSame = await passwordCompare(oldPassword, user.password)  // 校验密码是否正确
+            let isSame = await passwordCompare(password, user.password)  // 校验密码是否正确
             if (isSame) {
-                let bcryptPassword = await passwordHash(password)  // 新密码加密
-                let response = await userModel.update({ name, password: bcryptPassword }, {
+                let atrr = {}
+                if (name) {
+                    atrr = { name }
+                } else {
+                    let bcryptPassword = await passwordHash(newPassword)  // 新密码加密
+                    atrr = { password: bcryptPassword }
+                }
+                let response = await userModel.update(atrr, {
                     where: { id }
                 })
                 if (response[0] === 1) {
