@@ -7,7 +7,8 @@ class UpdateUserInfo extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            type: 1
+            type: 1,
+            loading: false,
         }
     }
     handleSubmit = e => {
@@ -16,6 +17,9 @@ class UpdateUserInfo extends Component {
         const { validateFields } = this.props.form;
         validateFields((err, values) => {
             if (!err) {
+                this.setState(() => ({
+                    loading: true
+                }))
                 dispatchUpdateUser(values).then(data => {
                     if (data) {
                         if (data.status) {
@@ -23,6 +27,9 @@ class UpdateUserInfo extends Component {
                             message.success('修改成功');
                         }
                     }
+                    this.setState(() => ({
+                        loading: false
+                    }))
                 })
             }
         })
@@ -65,7 +72,7 @@ class UpdateUserInfo extends Component {
         };
         let { isShow, onCancel, username, name } = this.props
         const { getFieldDecorator } = this.props.form;
-        let { type } = this.state
+        let { type, loading } = this.state
         return (
             <Modal
                 title="修改用户信息"
@@ -94,7 +101,7 @@ class UpdateUserInfo extends Component {
                                     ],
                                 })(<Input />)}
                             </Form.Item>
-                            <Form.Item label="密码" hasFeedback>
+                            <Form.Item label="密码">
                                 {getFieldDecorator('password', {
                                     validateFirst: true,
                                     rules: [
@@ -107,7 +114,7 @@ class UpdateUserInfo extends Component {
                             </Form.Item>
                         </div>
                         : <div>
-                            <Form.Item label="原密码" hasFeedback>
+                            <Form.Item label="原密码">
                                 {getFieldDecorator('password', {
                                     validateFirst: true,
                                     rules: [
@@ -152,7 +159,7 @@ class UpdateUserInfo extends Component {
                         </div>
                     }
                     <Form.Item {...submitLayout}>
-                        <Button type="primary" htmlType="submit" style={{ width: '100%', float: 'right' }}>
+                        <Button type="primary" loading={loading} htmlType="submit" style={{ width: '100%', float: 'right' }}>
                             确认修改
                        </Button>
                     </Form.Item>

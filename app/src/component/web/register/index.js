@@ -4,12 +4,21 @@ import { register, checkUsername } from '@/store/user/action'
 import { connect } from 'react-redux'
 
 class Register extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            loading: false,
+        }
+    }
     handleSubmit = e => {
         e.preventDefault()
         let { dispatchRegister, onCancel } = this.props
         const { validateFields } = this.props.form;
         validateFields((err, values) => {
             if (!err) {
+                this.setState(() => ({
+                    loading: true
+                }))
                 dispatchRegister(values).then(data => {
                     if (data) {
                         if (data.status) {
@@ -17,6 +26,9 @@ class Register extends Component {
                             message.success('注册成功');
                         }
                     }
+                    this.setState(() => ({
+                        loading: false
+                    }))
                 })
             }
         })
@@ -58,8 +70,10 @@ class Register extends Component {
         };
         const submitLayout = {
             wrapperCol: { span: 23, offset: 0 },
-        }; let { isShow, onCancel } = this.props
+        };
+        let { isShow, onCancel } = this.props
         const { getFieldDecorator } = this.props.form;
+        let { loading } = this.state
         return (
             <Modal
                 title="注册"
@@ -118,7 +132,7 @@ class Register extends Component {
                         })(<Input.Password />)}
                     </Form.Item>
                     <Form.Item {...submitLayout}>
-                        <Button type="primary" htmlType="submit" style={{ width: '100%', float: 'right' }}>
+                        <Button type="primary" loading={loading} htmlType="submit" style={{ width: '100%', float: 'right' }}>
                             注册
                        </Button>
                     </Form.Item>
