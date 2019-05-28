@@ -38,13 +38,12 @@ class userController {
         let response = await userModel.findOne({ where: { username } })
         if (response) {
             ctx.body = {
-                status: 1,
+                status: 0,
                 message: '此电子邮箱已经被注册',
-                response: { id, name, token }
             }
         } else {
             ctx.body = {
-                status: 0,
+                status: 1,
                 message: '此电子邮箱可用'
             }
         }
@@ -57,12 +56,12 @@ class userController {
         if (response) {
             let isSame = await passwordCompare(password, response.password)  // 校验密码是否正确
             if (isSame) {
-                let { id, name, auth } = response
+                let { id, username, name, auth } = response
                 let token = await createToken({ id, username, auth })
                 ctx.body = {
                     status: 1,
                     message: '登录成功',
-                    response: { id, name, token }
+                    response: { id, username, name, token }
                 }
             } else {
                 ctx.body = {
@@ -117,21 +116,37 @@ class userController {
     }
     // 修改用户昵称/密码
     static async update(ctx) {
-        let { name, password } = ctx.request.body;
-        let { id } = await getUserInfo(ctx)
-        let bcryptPassword = await passwordHash(password)  // 密码加密
-        let response = await userModel.update({ name, password: bcryptPassword }, {
-            where: { id }
-        })
-        if (response[0] === 1) {
-            ctx.body = {
-                status: 1,
-                message: '修改成功'
+        let { name, password, oldPassword } = ctx.request.body;
+        let { id } = await getUserInfo(ctx)  // 用户id
+        let user = await userModel.findOne({ where: { id } })
+        if (user) {
+            let isSame = await passwordCompare(oldPassword, user.password)  // 校验密码是否正确
+            if (isSame) {
+                let bcryptPassword = await passwordHash(password)  // 新密码加密
+                let response = await userModel.update({ name, password: bcryptPassword }, {
+                    where: { id }
+                })
+                if (response[0] === 1) {
+                    ctx.body = {
+                        status: 1,
+                        message: '修改成功'
+                    }
+                } else {
+                    ctx.body = {
+                        status: 0,
+                        message: '修改失败',
+                    }
+                }
+            } else {
+                ctx.body = {
+                    status: 0,
+                    message: '密码不正确'
+                }
             }
         } else {
             ctx.body = {
                 status: 0,
-                message: '修改失败',
+                message: '用户不存在'
             }
         }
     }

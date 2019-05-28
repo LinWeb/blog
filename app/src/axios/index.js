@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { BASE_URL } from '@/config/api'
+import { message } from 'antd'
 
 axios.defaults.baseURL = BASE_URL;
 axios.interceptors.request.use((config) => {
@@ -14,6 +15,10 @@ axios.interceptors.request.use((config) => {
     //     }
     // }
     // config.withCredentials = true  // 设置浏览器自动存储服务器cookie
+    let token = localStorage.getItem('token')
+    if (token) {
+        config.headers.Authorization = 'Bearer ' + token
+    }
     return config
 }, (error) => {
     return Promise.reject(error)
@@ -21,12 +26,9 @@ axios.interceptors.request.use((config) => {
 // 添加响应拦截器
 axios.interceptors.response.use(function (response) {
     if (response.data.status !== 1) {
-        // Toast.fail(response.data.msg, 1);
-        return null
-    } else {
-        // Toast.success(response.data.msg, 1);
-        return response.data
+        message.error(response.data.message);
     }
+    return response.data
 }, function (error) {
     console.log(error)
     // Toast.fail(error.message, 1);

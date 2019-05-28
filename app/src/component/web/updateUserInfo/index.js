@@ -1,42 +1,32 @@
 import React, { Component } from 'react';
 import { Modal, Button, Form, Input, message } from 'antd';
-import { register, checkUsername } from '@/store/user/action'
+import { updateUser } from '@/store/user/action'
 import { connect } from 'react-redux'
 
-class Register extends Component {
+class UpdateUserInfo extends Component {
     handleSubmit = e => {
         e.preventDefault()
-        let { dispatchRegister, onCancel } = this.props
+        let { dispatchUpdateUser, onCancel } = this.props
         const { validateFields } = this.props.form;
         validateFields((err, values) => {
             if (!err) {
-                dispatchRegister(values).then(data => {
+                dispatchUpdateUser(values).then(data => {
                     if (data) {
                         if (data.status) {
                             onCancel()
-                            message.success('注册成功');
+                            message.success('修改成功');
                         }
                     }
                 })
             }
         })
     }
-    checkUsername = (rule, value, callback) => {
-        let { dispatchCheckUsername } = this.props
-        dispatchCheckUsername({ username: value }).then(data => {
-            if (data) {
-                if (data.status) {
-                    callback();
-                } else {
-                    callback(data.message);
-                }
-            }
-        })
-    }
     compareToNextPassword = (rule, value, callback) => {
         const { getFieldValue, validateFields } = this.props.form;
         let confirmPassword = getFieldValue('confirmPassword')
-        if (confirmPassword && value) {
+        if (!confirmPassword || !value) {
+            callback()
+        } else {
             validateFields(['confirmPassword'], (errors, values) => { });
         }
         callback()
@@ -45,9 +35,12 @@ class Register extends Component {
     compareToFirstPassword = (rule, value, callback) => {
         const { getFieldValue } = this.props.form;
         let password = getFieldValue('password')
-        if (password && value && value !== password) {
-            callback('两次密码输入不一致')
+        if (!password || !value) {
+            callback()
         } else {
+            if (value !== password) {
+                callback('两次密码输入不一致')
+            }
             callback()
         }
     }
@@ -58,33 +51,41 @@ class Register extends Component {
         };
         const submitLayout = {
             wrapperCol: { span: 23, offset: 0 },
-        }; let { isShow, onCancel } = this.props
+        };
+        let { isShow, onCancel, username, name } = this.props
         const { getFieldDecorator } = this.props.form;
         return (
             <Modal
-                title="注册"
+                title="修改用户信息"
                 visible={isShow}
                 onCancel={onCancel}
                 width={434}
                 footer={null} >
                 <Form onSubmit={this.handleSubmit}  {...formItemLayout} className="login-form">
                     <Form.Item label="用户邮箱">
-                        {getFieldDecorator('username', {
-                            validateTrigger: 'onBlur',
+                        <Input disabled value={username} />
+                    </Form.Item>
+                    <Form.Item label="用户昵称">
+                        {getFieldDecorator('name', {
+                            initialValue: name,
                             rules: [
                                 {
-                                    type: 'email',
-                                    message: '请注意正确的电子邮箱格式',
-                                },
-                                {
                                     required: true,
-                                    message: '请输入电子邮箱',
-                                },
-                                {
-                                    validator: this.checkUsername,
+                                    message: '用户昵称',
                                 },
                             ],
                         })(<Input />)}
+                    </Form.Item>
+                    <Form.Item label="原密码" hasFeedback>
+                        {getFieldDecorator('oldPassword', {
+                            validateFirst: true,
+                            rules: [
+                                {
+                                    required: true,
+                                    message: '请输入原密码',
+                                },
+                            ],
+                        })(<Input.Password />)}
                     </Form.Item>
                     <Form.Item label="新密码" hasFeedback>
                         {getFieldDecorator('password', {
@@ -119,7 +120,7 @@ class Register extends Component {
                     </Form.Item>
                     <Form.Item {...submitLayout}>
                         <Button type="primary" htmlType="submit" style={{ width: '100%', float: 'right' }}>
-                            注册
+                            确认修改
                        </Button>
                     </Form.Item>
                 </Form>
@@ -127,8 +128,14 @@ class Register extends Component {
         )
     }
 }
+let mapStateToProps = state => {
+    let { username, name } = state.user
+    return {
+        username,
+        name
+    }
+}
 let mapDispatchToProps = dispatch => ({
-    dispatchRegister: params => dispatch(register(params)),
-    dispatchCheckUsername: params => dispatch(checkUsername(params))
+    dispatchUpdateUser: params => dispatch(updateUser(params)),
 })
-export default connect(null, mapDispatchToProps)(Form.create({ name: 'register' })(Register))
+export default connect(mapStateToProps, mapDispatchToProps)(Form.create({ name: 'updateUserInfo' })(UpdateUserInfo))

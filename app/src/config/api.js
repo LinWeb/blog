@@ -10,6 +10,8 @@ const GET_CATEGORIES_URL = '/category/list';
 const REGISTER_URL = '/user/register';
 const CHECK_USERNAME_URL = '/user/checkUsername';
 const LOGIN_URL = '/user/login';
+const UPDATE_USER_URL = '/user/update';
+
 export {
     BASE_URL,
     GET_ARTICLES_URL,
@@ -17,5 +19,6 @@ export {
     GET_CATEGORIES_URL,
     REGISTER_URL,
     LOGIN_URL,
-    CHECK_USERNAME_URL
+    CHECK_USERNAME_URL,
+    UPDATE_USER_URL
 }
