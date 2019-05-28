@@ -3,11 +3,12 @@ import user from './user/reducer'
 import article from './article/reducer'
 import tag from './tag/reducer'
 import category from './category/reducer'
+import common from './common/reducer'
 import thunkMiddleware from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 const loggerMiddleware = createLogger()
 const reducers = combineReducers({
-  user, article, tag, category
+  user, article, tag, category, common
 })
 const store = createStore(
   reducers,

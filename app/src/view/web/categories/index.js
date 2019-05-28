@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { getCategoryList } from '@/store/category/action'
 import { Tag, Badge } from 'antd';
 import './index.scss'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 class Categories extends Component {
     UNSAFE_componentWillMount() {
@@ -15,7 +15,7 @@ class Categories extends Component {
         return (
             <div className='categories-container'>
                 <h1 className='title'>分类</h1>
-                <div className='total'>总共<span>1</span>个分类</div>
+                <div className='total'>总共<span>{categoryList.length}</span>个分类</div>
                 <div className='categories'>
                     {categoryList.map((category, key) => (
                         <Link to={{ pathname: '/category/' + category.name, state: { type: 'Category', categoryName: category.name } }} key={key}>

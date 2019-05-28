@@ -6,28 +6,28 @@ class Nav extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            currentKey: 'home',
+            currentKey: '/',
             navData: [
                 {
-                    key: 'home',
+                    key: '/',
                     pathname: '/',
                     name: '首页',
                     icon: 'home'
                 },
                 {
-                    key: 'arrange',
+                    key: '/arrange',
                     pathname: '/arrange',
                     name: '归档',
                     icon: 'edit'
                 },
                 {
-                    key: 'categories',
+                    key: '/categories',
                     pathname: '/categories',
                     name: '分类',
                     icon: 'bars'
                 },
                 {
-                    key: 'about',
+                    key: '/about',
                     pathname: '/about',
                     name: '关于',
                     icon: 'user'
@@ -40,13 +40,22 @@ class Nav extends Component {
             currentKey: key
         }))
     }
-    UNSAFE_componentWillReceiveProps(nextProps) {
+    changeSelectNavHandle(pathname) {
         let { navData } = this.state
-        let { pathname } = nextProps.location
         let include = navData.find((item) => item.pathname === pathname)
         if (!include) {
             this.changeSelectNav({ key: '' })
+        } else {
+            this.changeSelectNav({ key: pathname })
         }
+    }
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        let { pathname } = nextProps.location
+        this.changeSelectNavHandle(pathname)
+    }
+    UNSAFE_componentWillMount() {
+        let { pathname } = this.props.location
+        this.changeSelectNavHandle(pathname)
     }
     render() {
         let { currentKey, navData } = this.state

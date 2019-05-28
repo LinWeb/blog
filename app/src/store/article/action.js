@@ -1,11 +1,13 @@
-import { GET_ARTICLE_LIST, GET_NEW_THREE_ARTICLES, EMPTY_ARTICLE_LIST } from '../actionTypes'
+import { GET_ARTICLE_LIST, GET_NEW_THREE_ARTICLES, EMPTY_ARTICLE_LIST, UPDATE_LOADING } from '../actionTypes'
 import API from '@/services/index'
 
 export function getArticleList(params) {
     return async (dispatch) => {
         dispatch(emptyArticleList())
         params.pageSize = 2
+        dispatch({ type: UPDATE_LOADING, data: { loading: true } })
         let data = await API.GET_ARTICLES(params)
+        dispatch({ type: UPDATE_LOADING, data: { loading: false } })
         if (data) {
             let { status, response, pager } = data
             if (status) {

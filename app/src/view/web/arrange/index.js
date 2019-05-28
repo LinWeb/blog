@@ -29,18 +29,19 @@ class Arrange extends Component {
         }
     }
     render() {
-        let { articleList, pager, location } = this.props;
+        let { articleList, pager, location, loading } = this.props;
         let { currentPage, pageSize, total } = pager
         let { pathname } = location
-        let Tpl = () => (/arrange/.test(pathname) ? <TplOne data={articleList} /> : <TplTwo data={articleList} />)
+        let Tpl = () => (/arrange/.test(pathname) ? <TplOne total={total} data={articleList} /> : <TplTwo data={articleList} />)
         return (
             <div className='arrange-container'>
-                {articleList.length ?
-                    <div>
-                        <Tpl />
-                        <Pagination style={{ textAlign: 'right' }} current={currentPage} pageSize={pageSize} total={total} onChange={this.onChange} />
-                    </div>
-                    : <Empty description='暂无数据' imageStyle={{ marginTop: '145px' }} />
+                {loading ? null
+                    : articleList.length ?
+                        <div>
+                            <Tpl />
+                            <Pagination style={{ textAlign: 'right' }} current={currentPage} pageSize={pageSize} total={total} onChange={this.onChange} />
+                        </div>
+                        : <Empty description='暂无数据' imageStyle={{ marginTop: '145px' }} />
                 }
             </div>
         )
@@ -49,9 +50,11 @@ class Arrange extends Component {
 
 let mapStateToProps = state => {
     let { articleList, pager } = state.article.articleListData
+    let { loading } = state.common
     return {
         articleList,
-        pager
+        pager,
+        loading
     }
 }
 let mapDispatchToProps = dispatch => ({

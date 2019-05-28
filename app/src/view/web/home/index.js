@@ -31,16 +31,17 @@ class Home extends Component {
         dispatchGetArticleList(params)
     }
     render() {
-        let { articleList, pager } = this.props;
+        let { articleList, pager, loading } = this.props;
         let { currentPage, pageSize, total } = pager
         return (
             <div className='home-container'>
-                {articleList.length ?
-                    <div>
-                        <ArticleList data={articleList}></ArticleList>
-                        <Pagination style={{ textAlign: 'right' }} current={currentPage} pageSize={pageSize} total={total} onChange={this.onChange} />
-                    </div>
-                    : <Empty description='暂无数据' imageStyle={{ marginTop: '145px' }} />
+                {loading ? null
+                    : articleList.length ?
+                        <div>
+                            <ArticleList data={articleList}></ArticleList>
+                            <Pagination style={{ textAlign: 'right' }} current={currentPage} pageSize={pageSize} total={total} onChange={this.onChange} />
+                        </div>
+                        : <Empty description='暂无数据' imageStyle={{ marginTop: '145px' }} />
                 }
             </div >
         )
@@ -49,9 +50,11 @@ class Home extends Component {
 
 let mapStateToProps = state => {
     let { articleList, pager } = state.article.articleListData
+    let { loading } = state.common
     return {
         articleList,
-        pager
+        pager,
+        loading
     }
 }
 let mapDispatchToProps = dispatch => ({
