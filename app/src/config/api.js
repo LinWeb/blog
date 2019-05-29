@@ -5,6 +5,7 @@ const hostname = window.location.hostname;
 const protocol = window.location.protocol;
 const BASE_URL = `${protocol}//${hostname}:3000`;
 const GET_ARTICLES_URL = '/article/list';
+const GET_ARTICLE_DETAIL_URL = '/article/detail';
 const GET_TAGS_URL = '/tag/list';
 const GET_CATEGORIES_URL = '/category/list';
 const REGISTER_URL = '/user/register';
@@ -15,6 +16,7 @@ const UPDATE_USER_URL = '/user/update';
 export {
     BASE_URL,
     GET_ARTICLES_URL,
+    GET_ARTICLE_DETAIL_URL,
     GET_TAGS_URL,
     GET_CATEGORIES_URL,
     REGISTER_URL,

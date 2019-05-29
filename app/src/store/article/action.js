@@ -21,7 +21,12 @@ export function getArticleList(params) {
         }
     }
 }
-
+export function getArticleDetail(params) {
+    return async () => {
+        let res = await API.GET_ARTICLE_DETAIL(params)
+        return res
+    }
+}
 function emptyArticleList() {
     return {
         type: EMPTY_ARTICLE_LIST

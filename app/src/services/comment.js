@@ -1,5 +1,5 @@
 import { GET_COMMENT_URL, ADD_COMMENT_URL, COMMENT_UPDATE_LIKE_URL } from '../../config/api'
-import axios from '@/axios'
+import axios from '@/lib/axios'
 
 let GET_COMMENT = async (data) => {
     return await axios.get(GET_COMMENT_URL, { params: data })

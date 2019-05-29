@@ -1,0 +1,17 @@
+.article-detail-container {
+  padding: 34px 24px 0px;
+  .title {
+    text-align: center;
+  }
+  .info {
+    text-align: center;
+    color: #999;
+    .icon {
+      margin-right: 7px;
+    }
+    .category,
+    .tag {
+      cursor: pointer;
+    }
+  }
+}

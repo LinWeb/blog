@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Divider, Icon, Tag } from 'antd';
 import { connect } from 'react-redux'
 import { withRouter } from "react-router-dom";
+import marked from '@/lib/marked'
 
 class ArticleList extends Component {
     render() {
@@ -14,10 +15,8 @@ class ArticleList extends Component {
                         history.push('/article/id/' + item.id)
                     }
                 }>
-                    <Divider orientation="left">{item.title}</Divider>
-                    <div className='content'>
-                        {item.content}
-                    </div>
+                    <Divider orientation="left"><span className='title'>{item.title}</span> <span className='createdAt'>{item.createdAt}</span></Divider>
+                    <div className='content article-content' dangerouslySetInnerHTML={{ __html: marked(item.content || '') }}></div>
                     <div className='footer'>
                         <Icon type="eye" className='icon' />{item.readCount}
                         <Divider type="vertical" />

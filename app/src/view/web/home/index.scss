@@ -11,6 +11,19 @@
         box-shadow: 1px 1px 20px #d0d0d0;
         background: #ecf5fd;
       }
+      .title {
+        font-size: 18px;
+        font-weight: 600;
+      }
+      .createdAt {
+        font-size: 12px;
+        margin-left: 10px;
+        font-weight: normal;
+      }
+      .content {
+        max-height: 220px;
+        overflow: hidden;
+      }
       .footer {
         color: #999;
         margin-top: 10px;

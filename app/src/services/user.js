@@ -1,5 +1,5 @@
 
-import axios from '@/axios'
+import axios from '@/lib/axios'
 import { REGISTER_URL, LOGIN_URL, CHECK_USERNAME_URL, UPDATE_USER_URL } from '@/config/api'
 
 let REGISTER = async (data) => {

@@ -1,5 +1,5 @@
 
-import axios from '@/axios'
+import axios from '@/lib/axios'
 import { GET_TAGS_URL } from '@/config/api'
 
 let GET_TAGS = async () => {
