@@ -23,10 +23,10 @@ export function getComments(params) {
     return async (dispatch) => {
         let res = await API.GET_COMMENTS(params)
         if (res) {
-            let { status, response } = res
+            let { status, response, pager } = res
             if (status) {
                 dispatch({
-                    type: GET_COMMENTS, data: response
+                    type: GET_COMMENTS, data: { commentList: response, pager }
                 })
             }
         }

@@ -34,23 +34,23 @@ class CommentArea extends Component {
         })
     }
     render() {
-        let { userId, name, categoryColors } = this.props
+        let { userId, name, categoryColors, total } = this.props
         let avatarBgColor = categoryColors[(userId - 1) % 11]
         const { getFieldDecorator } = this.props.form;
         let { loading } = this.state
         return (
-            <div className='comment'>
-                <div className='title'><span>0</span>条评论</div>
-                <Divider style={{ margin: '8px 0px 22px' }} />
+            <div className='comment-area'>
+                <div className='title'><span>{total}</span>条评论</div>
+                <Divider style={{ margin: '8px 0px 14px' }} />
                 <Comment
                     avatar={
                         <Avatar size={43} style={{ backgroundColor: avatarBgColor, }} >
-                            {name}
+                            {name.substring(0, 1) || <Icon type="user" />}
                         </Avatar>
                     }
                     content={
                         <Form onSubmit={this.handleSubmit} className="comment-form">
-                            <Form.Item>
+                            <Form.Item style={{ marginBottom: '0px' }}>
                                 {getFieldDecorator('content', {
                                     rules: [
                                         {
@@ -74,8 +74,9 @@ class CommentArea extends Component {
 let mapStateToProps = state => {
     let { userId, name } = state.user
     let { categoryColors } = state.category
+    let { total } = state.comment.commentListData.pager
     return {
-        userId, name, categoryColors
+        userId, name, categoryColors, total
     }
 }
 let mapDispatchToProps = dispatch => ({

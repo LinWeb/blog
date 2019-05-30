@@ -53,7 +53,7 @@ class UserHead extends Component {
                     <div>
                         <Dropdown overlay={this.menu}>
                             <Avatar size={43} style={{ backgroundColor: avatarBgColor, marginLeft: '60px' }} >
-                                {name}
+                                {name.substring(0, 1)}
                             </Avatar>
                         </Dropdown>
                         <UpdateUserInfo isShow={updateUserInfoShow} onCancel={this.changeUpdateUserInfoModalShow} />

@@ -16,24 +16,25 @@
     }
   }
   .comment-container {
-    margin-top: 20px;
-    .title {
-      font-size: 14px;
-      text-align: left;
-      span {
-        font-size: 18px;
-        margin-right: 2px;
+    margin-top: 30px;
+    .comment-area {
+      .title {
+        font-size: 14px;
+        text-align: left;
+        span {
+          font-size: 18px;
+          margin-right: 2px;
+          color: rgb(24, 144, 255);
+        }
+      }
+      .remark {
         color: rgb(24, 144, 255);
+        margin-right: 22px;
+        .icon {
+          margin-right: 7px;
+        }
       }
     }
-    .remark {
-      color: rgb(24, 144, 255);
-      margin-right: 22px;
-      .icon {
-        margin-right: 7px;
-      }
-    }
-
     .comment-list {
       .ant-comment-actions > li {
         display: block;

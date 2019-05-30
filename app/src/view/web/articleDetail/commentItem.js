@@ -1,9 +1,10 @@
 import React, { Component, useState } from 'react';
-import { Comment, Avatar } from 'antd';
+import { Comment, Avatar, Tooltip } from 'antd';
 import { connect } from 'react-redux'
 import ReplyArea from './replyArea'
 import marked from '@/lib/marked'
-
+import moment from 'moment'
+import 'moment/locale/zh-cn'
 const Actions = function ({ username, commentId }) {
     let [show, setShow] = useState(false)
     return (
@@ -15,17 +16,24 @@ const Actions = function ({ username, commentId }) {
 }
 class CommentItem extends Component {
     render() {
-        let { children, data, categoryColors } = this.props
+        let { children, data, categoryColors, currentUseId, currentName } = this.props
         let { id, userId, user, createdAt, content, replies } = data
         let avatarBgColor = categoryColors[(userId - 1) % 11]
+        if (currentUseId === userId) {
+            user['name'] = currentName
+        }
         return (
             <Comment
                 actions={[replies ? <Actions commentId={id} username={user.name} /> : null]}
                 author={<a>{user.name}</a>}
-                datetime={createdAt}
+                datetime={
+                    <Tooltip title={moment(createdAt).format('YYYY-MM-DD HH:mm:ss')}>
+                        <span>{moment(createdAt).fromNow()}</span>
+                    </Tooltip>
+                }
                 avatar={
                     <Avatar size={36} style={{ backgroundColor: avatarBgColor, }} >
-                        {user.name}
+                        {user.name.substring(0, 1)}
                     </Avatar>
                 }
                 content={
@@ -40,8 +48,9 @@ class CommentItem extends Component {
 
 let mapStateToProps = state => {
     let { categoryColors } = state.category
+    let { userId: currentUseId, name: currentName } = state.user
     return {
-        categoryColors
+        currentUseId, currentName, categoryColors
     }
 }
 export default connect(mapStateToProps)(CommentItem)

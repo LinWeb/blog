@@ -9,10 +9,10 @@ class CommentList extends Component {
         dispatchGetComments({ articleId })
     }
     render() {
-        let { commentListData, } = this.props
+        let { commentList } = this.props
         return (
             <div className='comment-list'>
-                {commentListData.map((comment, key) => (
+                {commentList.map((comment, key) => (
                     <CommentItem key={key} data={comment}>
                         {comment.replies.map((reply, key) => (
                             <CommentItem key={key} data={reply} />
@@ -24,9 +24,9 @@ class CommentList extends Component {
     }
 }
 let mapStateToProps = state => {
-    let { commentListData } = state.comment
+    let { commentList, pager } = state.comment.commentListData
     return {
-        commentListData,
+        commentList,
     }
 }
 let mapDispatchToProps = dispatch => ({
