@@ -12,6 +12,47 @@
     .category,
     .tag {
       cursor: pointer;
+      margin-bottom: 10px;
+    }
+  }
+  .comment-container {
+    margin-top: 20px;
+    .title {
+      font-size: 14px;
+      text-align: left;
+      span {
+        font-size: 18px;
+        margin-right: 2px;
+        color: rgb(24, 144, 255);
+      }
+    }
+    .remark {
+      color: rgb(24, 144, 255);
+      margin-right: 22px;
+      .icon {
+        margin-right: 7px;
+      }
+    }
+
+    .comment-list {
+      .ant-comment-actions > li {
+        display: block;
+      }
+      .reply {
+        cursor: pointer;
+      }
+      .reply-area {
+        width: 100%;
+        margin-top: 8px;
+        .reply-submit {
+          margin-top: 12px;
+          float: right;
+          height: 25px;
+          line-height: 25px;
+          font-size: 13px;
+          padding: 0px 14px;
+        }
+      }
     }
   }
 }

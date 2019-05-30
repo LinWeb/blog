@@ -36,17 +36,20 @@ class commentController {
         let response = await commentModel.findAll({
             offset: (currentPage - 1) * pageSize,
             limit: pageSize,
+            attributes: ['id', 'content', 'createdAt', 'userId'],
             include: [
                 { model: userModel, attributes: ['name'] },
                 {
                     model: replyModel,
-                    attributes: ['content', 'createdAt'],
-                    include: [{ model: userModel, attributes: ['name'] }]
+                    attributes: ['content', 'createdAt', 'userId'],
+                    include: [{ model: userModel, attributes: ['name'] }],
+                    order: [['createdAt', 'DESC']]
                 }
             ],
             where: {
                 articleId
-            }
+            },
+            order: [['createdAt', 'DESC']]
         })
         ctx.body = {
             status: 1,

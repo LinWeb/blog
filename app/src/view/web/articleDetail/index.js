@@ -4,18 +4,24 @@ import { connect } from 'react-redux'
 import { Divider, Icon, Tag } from 'antd';
 import './index.scss'
 import marked from '@/lib/marked'
+import CommentArea from './commentArea'
+import CommentList from './commentList'
 
 class ArticleDetail extends Component {
     constructor(props) {
         super(props)
         this.state = {
             articleDetailData: {},
+            articleId: 0
         }
     }
     UNSAFE_componentWillMount() {
         let { pathname } = this.props.location
         let arr = pathname.split('/')
         let id = arr[arr.length - 1]
+        this.setState(() => ({
+            articleId: id
+        }))
         id && this.props.dispatchGetArticleDetail({ id }).then(data => {
             if (data) {
                 if (data.status) {
@@ -31,11 +37,11 @@ class ArticleDetail extends Component {
     }
     render() {
         let { tagColors, categoryColors, history } = this.props
-        let { articleDetailData } = this.state
+        let { articleDetailData, articleId } = this.state
         let { title, createdAt, readCount, tags, categories, content } = articleDetailData
         return (
             <div className='article-detail-container'>
-                <h1 className='title'>标题</h1>
+                <h1 className='title'>{title}</h1>
                 <div className='info'>
                     <Icon type="contacts" className='icon' />
                     {createdAt}
@@ -65,7 +71,11 @@ class ArticleDetail extends Component {
                     )}
                 </div>
                 <Divider />
-                <div className='content article-content' dangerouslySetInnerHTML={{ __html: marked(content || '') }}></div>
+                <div className='content markdown-content' dangerouslySetInnerHTML={{ __html: marked(content || '') }}></div>
+                <div className='comment-container'>
+                    <CommentArea articleId={articleId}></CommentArea>
+                    <CommentList articleId={articleId}></CommentList>
+                </div>
             </div>
         )
     }

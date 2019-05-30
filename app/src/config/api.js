@@ -12,6 +12,9 @@ const REGISTER_URL = '/user/register';
 const CHECK_USERNAME_URL = '/user/checkUsername';
 const LOGIN_URL = '/user/login';
 const UPDATE_USER_URL = '/user/update';
+const COMMENT_ADD_URL = '/comment/add';
+const GET_COMMENTS_URL = '/comment/list';
+const REPLY_ADD_URL = '/reply/add';
 
 export {
     BASE_URL,
@@ -22,5 +25,8 @@ export {
     REGISTER_URL,
     LOGIN_URL,
     CHECK_USERNAME_URL,
-    UPDATE_USER_URL
+    UPDATE_USER_URL,
+    COMMENT_ADD_URL,
+    GET_COMMENTS_URL,
+    REPLY_ADD_URL,
 }

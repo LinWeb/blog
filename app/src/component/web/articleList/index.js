@@ -16,7 +16,7 @@ class ArticleList extends Component {
                     }
                 }>
                     <Divider orientation="left"><span className='title'>{item.title}</span> <span className='createdAt'>{item.createdAt}</span></Divider>
-                    <div className='content article-content' dangerouslySetInnerHTML={{ __html: marked(item.content || '') }}></div>
+                    <div className='content markdown-content' dangerouslySetInnerHTML={{ __html: marked(item.content || '') }}></div>
                     <div className='footer'>
                         <Icon type="eye" className='icon' />{item.readCount}
                         <Divider type="vertical" />
