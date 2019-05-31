@@ -15,8 +15,8 @@ class NewArticles extends Component {
                 <Divider orientation="left">最近文章</Divider>
                 <ul className='articles'>
                     {newThreeArticles.map((item, key) => (
-                        <Link to={'/article/' + item.id}>
-                            <li className='item' key={key}>{item.title}</li>
+                        <Link to={'/article/' + item.id} key={key}>
+                            <li className='item' >{item.title}</li>
                         </Link>
                     ))}
                 </ul>

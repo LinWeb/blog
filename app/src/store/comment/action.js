@@ -21,6 +21,7 @@ export function commentAdd(params) {
 
 export function getComments(params) {
     return async (dispatch) => {
+        params.pageSize = 3;
         let res = await API.GET_COMMENTS(params)
         if (res) {
             let { status, response, pager } = res
