@@ -1,36 +1,21 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { Row, Col, Spin, BackTop } from 'antd';
-import Header from '@/component/web/header/index';
-import Sider from '@/component/web/sider/index';
-import RouterConfig from '@/config/routerConfig';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
+import Web from './web'
+import Admin from './admin'
 
 class App extends Component {
   render() {
-    let { loading } = this.props
+    let { pathname } = window.location
+    let isAdminPath = false
+    if (pathname.indexOf('/admin')) {
+      isAdminPath = true
+    }
     return (
       <Router>
-        <div>
-          <Header>header</Header>
-          <Row >
-            <Col span={5} > <Sider></Sider></Col>
-            <Col span={19}>
-              <Spin tip="Loading..." spinning={loading}>
-                <div id='main-body' style={{ height: 'calc(100vh - 73px)', overflowY: 'auto' }}>
-                  <Switch>
-                    {RouterConfig.map((res, key) =>
-                      <Route {...res} key={key} />
-                    )}
-                  </Switch>
-                  <BackTop target={() => document.getElementById('main-body')} className='BackTop' />
-                </div>
-              </Spin>
-            </Col>
-          </Row>
-        </div>
-        {/* <Route exact path='/' component={App}></Route> */}
-        {/* <Route path='/admin' component={Admin}></Route> */}
+        {isAdminPath ?
+          <Web></Web>
+          : <Admin></Admin>}
       </Router>
     );
   }

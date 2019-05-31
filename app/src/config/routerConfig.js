@@ -3,61 +3,73 @@ import Arrange from '@/view/web/arrange/index';
 import Categories from '@/view/web/categories/index';
 import About from '@/view/web/about/index';
 import ArticleDetail from '@/view/web/articleDetail/index';
-export default [
-    {
-        path: '/',
-        title: '首页',
-        exact: true,
-        component: Home,
-        isPrivate: false,
-    },
-    {
-        path: '/arrange',
-        title: '归档',
-        exact: true,
-        component: Arrange,
-        isPrivate: false,
-    },
-    {
-        path: '/categories',
-        title: '分类',
-        exact: true,
-        component: Categories,
-        isPrivate: false,
-    },
-    {
-        path: '/about',
-        title: '关于',
-        exact: true,
-        component: About,
-        isPrivate: false,
-    },
-    {
-        path: '/article',
-        title: '文章列表',
-        exact: true,
-        component: Home,
-        isPrivate: false,
-    },
-    {
-        path: '/article/:id',
-        title: '文章详情',
-        exact: true,
-        component: ArticleDetail,
-        isPrivate: false,
-    },
-    {
-        path: '/tag/:name',
-        title: '标签归档',
-        exact: true,
-        component: Arrange,
-        isPrivate: false,
-    },
-    {
-        path: '/category/:name',
-        title: '分类归档',
-        exact: true,
-        component: Arrange,
-        isPrivate: false,
-    },
-]
+import AdminHome from '@/view/admin/home/index';
+export default {
+    web: [
+        {
+            path: '/',
+            title: '首页',
+            exact: true,
+            component: Home,
+            isPrivate: false,
+        },
+        {
+            path: '/arrange',
+            title: '归档',
+            exact: true,
+            component: Arrange,
+            isPrivate: false,
+        },
+        {
+            path: '/categories',
+            title: '分类',
+            exact: true,
+            component: Categories,
+            isPrivate: false,
+        },
+        {
+            path: '/about',
+            title: '关于',
+            exact: true,
+            component: About,
+            isPrivate: false,
+        },
+        {
+            path: '/article',
+            title: '文章列表',
+            exact: true,
+            component: Home,
+            isPrivate: false,
+        },
+        {
+            path: '/article/:id',
+            title: '文章详情',
+            exact: true,
+            component: ArticleDetail,
+            isPrivate: false,
+        },
+        {
+            path: '/tag/:name',
+            title: '标签归档',
+            exact: true,
+            component: Arrange,
+            isPrivate: false,
+        },
+        {
+            path: '/category/:name',
+            title: '分类归档',
+            exact: true,
+            component: Arrange,
+            isPrivate: false,
+        },
+    ],
+    admin: [
+        {
+            path: '/admin',
+            title: '首页',
+            exact: true,
+            component: AdminHome,
+            isPrivate: false,
+        },
+    ]
+}

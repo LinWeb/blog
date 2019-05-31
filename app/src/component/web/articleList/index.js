@@ -3,6 +3,7 @@ import { Divider } from 'antd';
 import marked from '@/lib/marked'
 import { withRouter } from "react-router-dom";
 import ArticleInfo from '../articleInfo'
+import moment from 'moment'
 import './index.scss'
 class ArticleList extends Component {
     render() {
@@ -15,7 +16,7 @@ class ArticleList extends Component {
                         history.push('/article/' + item.id)
                     }
                 }>
-                    <Divider orientation="left"><span className='title'>{item.title}</span> <span className='createdAt'>{item.createdAt}</span></Divider>
+                    <Divider orientation="left"><span className='title'>{item.title}</span> <span className='createdAt'>{moment(item.createdAt).format('LL')}</span></Divider>
                     <div className='content markdown-content' dangerouslySetInnerHTML={{ __html: marked(item.content || '') }}></div>
                     <ArticleInfo data={{ ...item, commentsTotal: item.comments ? item.comments.length : 0 }} />
                 </li>
