@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { Row, Col, Spin } from 'antd';
+import { Row, Col, Spin, BackTop } from 'antd';
 import Header from '@/component/web/header/index';
 import Sider from '@/component/web/sider/index';
 import RouterConfig from '@/config/routerConfig';
 import { connect } from 'react-redux'
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+  }
   render() {
     let { loading } = this.props
     return (
@@ -17,12 +20,13 @@ class App extends Component {
             <Col span={5} > <Sider></Sider></Col>
             <Col span={19}>
               <Spin tip="Loading..." spinning={loading}>
-                <div style={{ height: 'calc(100vh - 73px)', overflowY: 'auto' }}>
+                <div id='main-body' style={{ height: 'calc(100vh - 73px)', overflowY: 'auto' }}>
                   <Switch>
                     {RouterConfig.map((res, key) =>
                       <Route {...res} key={key} />
                     )}
                   </Switch>
+                  <BackTop target={() => document.getElementById('main-body')} className='BackTop' />
                 </div>
               </Spin>
             </Col>

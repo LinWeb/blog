@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Timeline } from 'antd';
 import { withRouter } from "react-router-dom";
+import { Link } from 'react-router-dom'
 class TplOne extends Component {
     render() {
         let { data, location } = this.props;
@@ -13,7 +14,7 @@ class TplOne extends Component {
                     <span className='type'>{type}</span>
                 </Timeline.Item>
                 {data.map((item, key) =>
-                    <Timeline.Item key={key}>{item.date} <span className='title'>{item.title}</span></Timeline.Item>
+                    <Timeline.Item key={key}>{item.date} <Link className='title' to={'/article/' + item.id}>{item.title}</Link></Timeline.Item>
                 )}
             </Timeline>
         )

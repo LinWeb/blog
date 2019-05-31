@@ -12,18 +12,15 @@ export function getArticleList(params) {
             let { status, response, pager } = data
             if (status) {
                 dispatch({ type: GET_ARTICLE_LIST, data: { articleList: response, pager } })
-                if (pager.currentPage === 1 && !params.keyword && !params.tagName && !params.categoryName) {
-                    // 加载第一页的时候就执行
-                    let newThreeArticles = response.slice(0, 3).map(({ id, title }) => ({ id, title }))
-                    dispatch(getNewThreeArticles(newThreeArticles))
-                }
             }
         }
     }
 }
 export function getArticleDetail(params) {
-    return async () => {
+    return async (dispatch) => {
+        dispatch({ type: UPDATE_LOADING, data: { loading: true } })
         let res = await API.GET_ARTICLE_DETAIL(params)
+        dispatch({ type: UPDATE_LOADING, data: { loading: false } })
         return res
     }
 }
@@ -32,9 +29,14 @@ function emptyArticleList() {
         type: EMPTY_ARTICLE_LIST
     }
 }
-function getNewThreeArticles(data) {
-    return {
-        type: GET_NEW_THREE_ARTICLES,
-        data
+export function getNewThreeArticles() {
+    return async (dispatch) => {
+        let data = await API.GET_ARTICLES({ pageSize: 3 })
+        if (data) {
+            let { status, response, } = data
+            if (status) {
+                dispatch({ type: GET_NEW_THREE_ARTICLES, data: response })
+            }
+        }
     }
 }

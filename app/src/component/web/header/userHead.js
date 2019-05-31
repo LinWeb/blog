@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Menu, Dropdown, Avatar, Button } from 'antd';
 import Register from '../register'
 import Login from '../login'
@@ -50,16 +50,16 @@ class UserHead extends Component {
         return (
             <div className='userHead'>
                 {token ?
-                    <div>
+                    <Fragment>
                         <Dropdown overlay={this.menu}>
                             <Avatar size={43} style={{ backgroundColor: avatarBgColor, marginLeft: '60px' }} >
                                 {name.substring(0, 1)}
                             </Avatar>
                         </Dropdown>
                         <UpdateUserInfo isShow={updateUserInfoShow} onCancel={this.changeUpdateUserInfoModalShow} />
-                    </div>
+                    </Fragment>
                     :
-                    <div>
+                    <Fragment>
                         <Button type="primary" ghost onClick={this.changeLoginModalShow} style={{ marginRight: '15px' }}>
                             登录
                         </Button>
@@ -68,7 +68,7 @@ class UserHead extends Component {
                         </Button>
                         <Login isShow={loginShow} onCancel={this.changeLoginModalShow} />
                         <Register isShow={registerShow} onCancel={this.changeRegisterModalShow} />
-                    </div>
+                    </Fragment>
                 }
             </div >
         )

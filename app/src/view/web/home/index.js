@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './index.scss'
 import { connect } from 'react-redux'
 import ArticleList from '@/component/web/articleList'
@@ -37,10 +37,10 @@ class Home extends Component {
             <div className='home-container'>
                 {loading ? null
                     : articleList.length ?
-                        <div>
+                        <Fragment>
                             <ArticleList data={articleList}></ArticleList>
                             <Pagination style={{ textAlign: 'right' }} current={currentPage} pageSize={pageSize} total={total} onChange={this.onChange} />
-                        </div>
+                        </Fragment>
                         : <Empty description='暂无数据' imageStyle={{ marginTop: '145px' }} />
                 }
             </div >

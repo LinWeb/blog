@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Pagination, Empty } from 'antd';
 import { connect } from 'react-redux'
 import { getArticleList, } from '@/store/article/action'
@@ -37,10 +37,10 @@ class Arrange extends Component {
             <div className='arrange-container'>
                 {loading ? null
                     : articleList.length ?
-                        <div>
+                        <Fragment>
                             <Tpl />
                             <Pagination style={{ textAlign: 'right' }} current={currentPage} pageSize={pageSize} total={total} onChange={this.onChange} />
-                        </div>
+                        </Fragment>
                         : <Empty description='暂无数据' imageStyle={{ marginTop: '145px' }} />
                 }
             </div>

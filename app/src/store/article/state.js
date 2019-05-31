@@ -7,7 +7,7 @@ let state = {
             pageSize: 0,
             total: 0
         }
-    },  
+    },
     newThreeArticles: [],  // 最新的三篇文章数据
 }
 

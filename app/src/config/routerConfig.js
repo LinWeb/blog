@@ -39,8 +39,8 @@ export default [
         component: Home,
         isPrivate: false,
     },
-     {
-        path: '/article/id/:id',
+    {
+        path: '/article/:id',
         title: '文章详情',
         exact: true,
         component: ArticleDetail,

@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, Fragment, useState } from 'react';
 import { Comment, Avatar, Tooltip } from 'antd';
 import { connect } from 'react-redux'
 import ReplyArea from './replyArea'
@@ -8,10 +8,10 @@ import 'moment/locale/zh-cn'
 const Actions = function ({ username, commentId }) {
     let [show, setShow] = useState(false)
     return (
-        <div>
+        <Fragment>
             <span onClick={() => { setShow(!show) }} className='reply' >{show ? '收起' : '回复'}</span>
             {show && <ReplyArea username={username} hideReply={() => { setShow(false) }} commentId={commentId} />}
-        </div>
+        </Fragment>
     )
 }
 class CommentItem extends Component {

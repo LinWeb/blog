@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Timeline, Icon } from 'antd';
+import { Link } from 'react-router-dom'
 
 class TplOne extends Component {
     render() {
@@ -36,7 +37,7 @@ class TplOne extends Component {
                 <Timeline.Item>Nice! {total} posts in total. Keep on posting.</Timeline.Item>
                 {res.map((item, key) =>
                     Object.prototype.toString.call(item) === '[object Object]' ?
-                        <Timeline.Item key={key}>{item.date} <span className='title'>{item.title}</span></Timeline.Item>
+                        <Timeline.Item key={key}>{item.date} <Link className='title' to={'/article/' + item.id}>{item.title}</Link></Timeline.Item>
                         : <Timeline.Item key={key} dot={<Icon type="clock-circle-o" style={{ fontSize: '16px' }} />} color="red">
                             {item}
                         </Timeline.Item>

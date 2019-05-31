@@ -12,7 +12,7 @@ class ArticleList extends Component {
                 <li className='item' key={key} onClick={
                     (e) => {
                         e.stopPropagation()
-                        history.push('/article/id/' + item.id)
+                        history.push('/article/' + item.id)
                     }
                 }>
                     <Divider orientation="left"><span className='title'>{item.title}</span> <span className='createdAt'>{item.createdAt}</span></Divider>

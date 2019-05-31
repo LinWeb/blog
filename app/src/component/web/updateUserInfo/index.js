@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Modal, Button, Form, Input, message, Radio } from 'antd';
 import { updateUser } from '@/store/user/action'
 import { connect } from 'react-redux'
@@ -89,7 +89,7 @@ class UpdateUserInfo extends Component {
                         <Input disabled value={username} />
                     </Form.Item>
                     {type === 1 ?
-                        <div>
+                        <Fragment>
                             <Form.Item label="用户昵称">
                                 {getFieldDecorator('name', {
                                     initialValue: name,
@@ -112,8 +112,8 @@ class UpdateUserInfo extends Component {
                                     ],
                                 })(<Input.Password />)}
                             </Form.Item>
-                        </div>
-                        : <div>
+                        </Fragment>
+                        : <Fragment>
                             <Form.Item label="原密码">
                                 {getFieldDecorator('password', {
                                     validateFirst: true,
@@ -156,7 +156,7 @@ class UpdateUserInfo extends Component {
                                     ],
                                 })(<Input.Password />)}
                             </Form.Item>
-                        </div>
+                        </Fragment>
                     }
                     <Form.Item {...submitLayout}>
                         <Button type="primary" loading={loading} htmlType="submit" style={{ width: '100%', float: 'right' }}>
