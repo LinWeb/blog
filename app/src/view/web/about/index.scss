@@ -1,0 +1,24 @@
+.about-container {
+  padding: 12px 25px;
+  .about-list {
+    &,
+    ul {
+      margin-left: 20px;
+      margin-top: 10px;
+      li {
+        list-style: circle;
+        margin-bottom: 10px;
+      }
+      &.ant-rate {
+        margin-top: 0px;
+        li {
+          margin-bottom: 0px;
+        }
+      }
+    }
+  }
+  .icon-email {
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+}
