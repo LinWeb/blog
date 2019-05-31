@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import './index.scss'
 import { connect } from 'react-redux'
 import ArticleList from '@/component/web/articleList'
 import { getArticleList } from '@/store/article/action'
@@ -34,7 +33,7 @@ class Home extends Component {
         let { articleList, pager, loading } = this.props;
         let { currentPage, pageSize, total } = pager
         return (
-            <div className='home-container'>
+            <div className='home-container' style={{ margin: '0px 26px' }}>
                 {loading ? null
                     : articleList.length ?
                         <Fragment>

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { getArticleDetail } from '@/store/article/action'
 import { connect } from 'react-redux'
-import { Divider, Icon, Tag } from 'antd';
+import { Divider, Icon } from 'antd';
 import './index.scss'
 import marked from '@/lib/marked'
 import CommentArea from './commentArea'
 import CommentList from './commentList'
+import moment from 'moment'
+import ArticleInfo from '@/component/web/articleInfo'
 
 class ArticleDetail extends Component {
     constructor(props) {
@@ -30,46 +32,20 @@ class ArticleDetail extends Component {
                     }))
                 }
             }
-            // this.setState(() => ({
-            //     loading: false
-            // }))
         })
     }
     render() {
-        let { tagColors, categoryColors, history } = this.props
+        let { commentsTotal } = this.props
         let { articleDetailData, articleId } = this.state
         let { title, createdAt, readCount, tags, categories, content } = articleDetailData
         return (
             <div className='article-detail-container'>
                 <h1 className='title'>{title}</h1>
-                <div className='info'>
+                <ArticleInfo data={{ readCount, commentsTotal, tags, categories }}>
                     <Icon type="contacts" className='icon' />
-                    {createdAt}
+                    {moment(createdAt).format('LL')}
                     <Divider type="vertical" />
-                    <Icon type="eye" className='icon' />{readCount}
-                    {/* <Divider type="vertical" />
-                    <Icon type="message" className='icon' />{comments ? comments.length : 0} */}
-                    <Divider type="vertical" />
-                    <Icon type="tags" className='icon' />
-                    {tags && tags.map((tag, key) =>
-                        <Tag className='tag' color={tagColors[key % 11]} key={key} onClick={
-                            (e) => {
-                                e.stopPropagation()
-                                history.push({ pathname: '/tag/' + tag.name, state: { type: 'Tag', tagName: tag.name } })
-                            }
-                        }>{tag.name}</Tag>
-                    )}
-                    <Divider type="vertical" />
-                    <Icon type="bars" className='icon' />
-                    {categories && categories.map((category, key) =>
-                        <Tag className='category' color={categoryColors[key % 11]} key={key} onClick={
-                            (e) => {
-                                e.stopPropagation()
-                                history.push({ pathname: '/category/' + category.name, state: { type: 'Category', categoryName: category.name } })
-                            }
-                        }>{category.name}</Tag>
-                    )}
-                </div>
+                </ArticleInfo>
                 <Divider />
                 <div className='content markdown-content' dangerouslySetInnerHTML={{ __html: marked(content || '') }}></div>
                 <div className='comment-container'>
@@ -81,11 +57,9 @@ class ArticleDetail extends Component {
     }
 }
 let mapStateToProps = state => {
-    let { tagColors } = state.tag
-    let { categoryColors } = state.category
-
+    let { total } = state.comment.commentListData.pager
     return {
-        tagColors, categoryColors
+        commentsTotal: total
     }
 }
 let mapDispatchToProps = dispatch => ({

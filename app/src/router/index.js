@@ -7,9 +7,6 @@ import RouterConfig from '@/config/routerConfig';
 import { connect } from 'react-redux'
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-  }
   render() {
     let { loading } = this.props
     return (

@@ -25,7 +25,7 @@ class CommentItem extends Component {
         return (
             <Comment
                 actions={[replies ? <Actions commentId={id} username={user.name} /> : null]}
-                author={<a>{user.name}</a>}
+                author={user.name}
                 datetime={
                     <Tooltip title={moment(createdAt).format('YYYY-MM-DD HH:mm:ss')}>
                         <span>{moment(createdAt).fromNow()}</span>

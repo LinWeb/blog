@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Icon, Comment, Avatar, Form, Button, Divider, List, Input } from 'antd';
+import { Form, Button, Input } from 'antd';
 import { replyAdd } from '@/store/reply/action'
 import { connect } from 'react-redux'
 const { TextArea } = Input;

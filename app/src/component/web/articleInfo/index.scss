@@ -1,0 +1,12 @@
+.article-info {
+  color: #999;
+  margin-top: 10px;
+  .icon {
+    margin-right: 7px;
+  }
+  .category,
+  .tag {
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+}

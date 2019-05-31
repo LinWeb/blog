@@ -1,5 +1,4 @@
 import { REPLY_ADD } from '../actionTypes'
-import { message } from 'antd';
 import API from '@/services'
 
 export function replyAdd(params) {
