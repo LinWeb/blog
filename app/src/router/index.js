@@ -1,21 +1,13 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
-import Web from './web'
-import Admin from './admin'
+import Main from './main'
 
 class App extends Component {
   render() {
-    let { pathname } = window.location
-    let isAdminPath = false
-    if (pathname.indexOf('/admin')) {
-      isAdminPath = true
-    }
     return (
       <Router>
-        {isAdminPath ?
-          <Web></Web>
-          : <Admin></Admin>}
+        <Main />
       </Router>
     );
   }

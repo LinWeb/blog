@@ -16,18 +16,12 @@ class Home extends Component {
         let { params } = this.state
         dispatchGetArticleList(params)
     }
-    changeFilter = (params) => {
-        this.setState(() => {
-            return {
-                params
-            }
-        })
-    }
     render() {
+        let { articleList } = this.props
         return (
             <div className='home-container'>
-                <ArticleFilter changeFilter={this.changeFilter}></ArticleFilter>
-                <ArticleList></ArticleList>
+                <ArticleFilter></ArticleFilter>
+                <ArticleList data={articleList}></ArticleList>
             </div >
         )
     }

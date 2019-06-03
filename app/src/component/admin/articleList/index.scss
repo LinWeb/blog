@@ -1,26 +1,9 @@
-.article-list {
-  margin-top: 23px;
-  .item {
-    cursor: pointer;
-    margin: 0px 0px 16px;
-    padding: 12px 24px 22px;
-    border: 1px solid #ddd;
-    &:hover {
-      box-shadow: 1px 1px 20px #d0d0d0;
-      background: #ecf5fd;
-    }
-    .title {
-      font-size: 18px;
-      font-weight: 600;
-    }
-    .createdAt {
-      font-size: 12px;
-      margin-left: 10px;
-      font-weight: normal;
-    }
-    .content {
-      max-height: 220px;
-      overflow: hidden;
+.admin-root {
+  .article-list {
+    margin-top: 23px;
+    .tag,
+    .category {
+      margin-bottom: 10px;
     }
   }
 }

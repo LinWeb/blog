@@ -1,7 +1,9 @@
-.sider-container {
-  height: 100vh;
-  overflow-y: auto;
-  width: auto !important;
-  min-width: auto !important;
-  max-width: none !important;
+.admin-root {
+  .sider-container {
+    height: 100vh;
+    overflow-y: auto;
+    width: auto !important;
+    min-width: auto !important;
+    max-width: none !important;
+  }
 }

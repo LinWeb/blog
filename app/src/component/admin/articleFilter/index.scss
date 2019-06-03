@@ -1,10 +1,12 @@
-.article-filter {
-  padding: 24px 34px;
-  .item {
-    display: inline-block;
-    margin: 0px 20px;
-    .keyword {
-      width: auto;
+.admin-root {
+  .article-filter {
+    padding: 24px 34px;
+    .item {
+      display: inline-block;
+      margin: 0px 20px;
+      .keyword {
+        width: auto;
+      }
     }
   }
 }

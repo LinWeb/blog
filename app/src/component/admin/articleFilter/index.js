@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import './index.scss'
 import { Input, Select, Button } from 'antd';
+import { connect } from 'react-redux'
+import { getTagList } from '@/store/tag/action'
+import { getCategoryList } from '@/store/category/action'
+import { getArticleList, } from '@/store/article/action'
 const { Option } = Select;
 
 class ArticleFilter extends Component {
@@ -8,8 +12,8 @@ class ArticleFilter extends Component {
         super(props)
         this.state = {
             keyword: '',
-            tagName: ''
-            // 文章筛选器的开发
+            tagName: '',
+            categoryName: ''
         }
     }
     changeKeyword = (e) => {
@@ -18,8 +22,29 @@ class ArticleFilter extends Component {
             keyword
         }))
     }
+    changeTag = (tagName) => {
+        this.setState(() => ({
+            tagName
+        }))
+    }
+    changeCategory = (categoryName) => {
+        this.setState(() => ({
+            categoryName
+        }))
+    }
+    submit = () => {
+        let { dispatchGetArticleList } = this.props
+        let { keyword, tagName, categoryName } = this.state
+        dispatchGetArticleList({ keyword, tagName, categoryName, })
+    }
+    UNSAFE_componentWillMount() {
+        let { dispatchGetTagList, dispatchGetCategoryList } = this.props
+        dispatchGetTagList()
+        dispatchGetCategoryList()
+    }
     render() {
-        let { keyword } = this.state
+        let { keyword, tagName, categoryName } = this.state
+        let { tagList, categoryList } = this.props
         return (
             <div className='article-filter'>
                 <div className='item'>
@@ -27,31 +52,39 @@ class ArticleFilter extends Component {
                     <Input value={keyword} onChange={this.changeKeyword} placeholder="请输入文章的标题关键字" className='keyword' />
                 </div>
                 <div className='item'>
-                    标签：<Select defaultValue="lucy" style={{ width: 120 }} >
-                        <Option value="jack">Jack</Option>
-                        <Option value="lucy">Lucy</Option>
-                        <Option value="disabled" disabled>
-                            Disabled
-                    </Option>
-                        <Option value="Yiminghe">yiminghe</Option>
+                    标签：
+                    <Select value={tagName} style={{ width: 120 }} onChange={this.changeTag}>
+                        {tagList.map((tag, key) => (
+                            <Option value={tag.name} key={key}>{tag.name}</Option>
+                        ))}
                     </Select>
                 </div>
                 <div className='item'>
-                    分类：<Select defaultValue="lucy" style={{ width: 120 }} >
-                        <Option value="jack">Jack</Option>
-                        <Option value="lucy">Lucy</Option>
-                        <Option value="disabled" disabled>
-                            Disabled
-                    </Option>
-                        <Option value="Yiminghe">yiminghe</Option>
+                    分类：
+                    <Select value={categoryName} style={{ width: 120 }} onChange={this.changeCategory}>
+                        {categoryList.map((category, key) => (
+                            <Option value={category.name} key={key}>{category.name}</Option>
+                        ))}
                     </Select>
                 </div>
                 <div className='item'>
-                    <Button type="primary">查找</Button>
+                    <Button type="primary" onClick={this.submit}>查找</Button>
                 </div>
             </div>
         )
     }
 }
+let mapStateToProps = state => {
+    let { tagList } = state.tag
+    let { categoryList } = state.category
+    return {
+        tagList, categoryList
+    }
+}
+let mapDispatchToProps = dispatch => ({
+    dispatchGetTagList: () => dispatch(getTagList()),
+    dispatchGetCategoryList: () => dispatch(getCategoryList()),
+    dispatchGetArticleList: params => dispatch(getArticleList(params)),
+})
 
-export default ArticleFilter
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleFilter)

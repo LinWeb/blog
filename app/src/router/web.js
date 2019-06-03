@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Route, Switch, } from 'react-router-dom'
+import { Route, Switch, } from 'react-router-dom'
 import { Row, Col, Spin, BackTop } from 'antd';
 import Header from '@/component/web/header/index';
 import Sider from '@/component/web/sider/index';
@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 
 class Web extends Component {
     render() {
-        let { loading } = this.props
+        let { loading, } = this.props
         return (
             <Fragment>
                 <Header>header</Header>
@@ -37,4 +37,4 @@ let mapStateToProps = state => {
         loading
     }
 }
-export default connect(mapStateToProps)(Web);
+export default connect(mapStateToProps)(Web)

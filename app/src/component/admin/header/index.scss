@@ -1,7 +1,9 @@
-.header-container {
-  width: auto !important;
-  min-width: auto !important;
-  max-width: none !important;
-  background-color: #fff;
-  padding: 12px 24px;
+.admin-root {
+  .header-container {
+    width: auto !important;
+    min-width: auto !important;
+    max-width: none !important;
+    background-color: #fff;
+    padding: 12px 24px;
+  }
 }

@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, } from 'react'
 import { Layout, Row, Col, } from 'antd';
 import Header from '@/component/admin/header/index';
 import Sider from '@/component/admin/sider/index';
-import { BrowserRouter as Router, Route, Switch, } from 'react-router-dom'
+import { Route, Switch, } from 'react-router-dom'
 import RouterConfig from '@/config/routerConfig';
 
 const { Content } = Layout;
@@ -20,7 +20,7 @@ class Admin extends Component {
 
     render() {
         return (
-            <Row >
+            <Row className='admin-root'>
                 <Col span={4}><Sider></Sider></Col>
                 <Col span={20}>
                     <Header></Header>
