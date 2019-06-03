@@ -74,6 +74,13 @@ export default {
             isPrivate: false,
         },
         {
+            path: '/admin/article/add',
+            title: '创建文章页',
+            exact: true,
+            component: ArticleEdit,
+            isPrivate: false,
+        },
+        {
             path: '/admin/article/edit/:id',
             title: '文章编辑页',
             exact: true,

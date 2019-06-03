@@ -15,6 +15,8 @@ const UPDATE_USER_URL = '/user/update';
 const COMMENT_ADD_URL = '/comment/add';
 const GET_COMMENTS_URL = '/comment/list';
 const REPLY_ADD_URL = '/reply/add';
+const ARTICLE_ADD_URL = '/article/add';
+const ARTICLE_UPDATE_URL = '/article/update';
 
 export {
     BASE_URL,
@@ -29,4 +31,6 @@ export {
     COMMENT_ADD_URL,
     GET_COMMENTS_URL,
     REPLY_ADD_URL,
+    ARTICLE_ADD_URL,
+    ARTICLE_UPDATE_URL,
 }

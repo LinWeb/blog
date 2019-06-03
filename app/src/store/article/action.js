@@ -40,3 +40,15 @@ export function getNewThreeArticles() {
         }
     }
 }
+export function addArticle(params) {
+    return async () => {
+        let res = await API.ARTICLE_ADD(params)
+        return res
+    }
+}
+export function updateArticle(params) {
+    return async () => {
+        let res = await API.ARTICLE_UPDATE(params)
+        return res
+    }
+}

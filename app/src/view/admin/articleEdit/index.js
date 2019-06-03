@@ -1,18 +1,29 @@
 
 import React, { Component } from 'react';
-import { Form, Input, Button, Tag } from 'antd';
+import { Form, Input, Button, Tag, message } from 'antd';
 import { connect } from 'react-redux'
 import { getTagList } from '@/store/tag/action'
 import { getCategoryList } from '@/store/category/action'
+import { addArticle, updateArticle, getArticleDetail } from '@/store/article/action'
 import Categories from './categories'
 import Tags from './tags'
+import MdEditor from 'react-markdown-editor-lite'
 class ArticleEdit extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            id: 0,
+            title: '',
             categories: [],
-            tags: []
+            tags: [],
+            content: ''
         }
+    }
+    changeTitle = (e) => {
+        let title = e.target.value
+        this.setState(() => ({
+            title
+        }))
     }
     changeCategories = (name) => {
         this.setState((prevState) => {
@@ -42,24 +53,67 @@ class ArticleEdit extends Component {
             }
         })
     }
+    handleEditorChange = ({ text, html }) => {
+        this.setState(() => ({
+            content: text
+        }))
+    }
     UNSAFE_componentWillMount() {
         let { dispatchGetTagList, dispatchGetCategoryList } = this.props
         dispatchGetTagList()
         dispatchGetCategoryList()
+
+        let { pathname } = this.props.location
+        if (pathname !== '/admin/article/add') {
+            let arr = pathname.split('/')
+            let id = arr[arr.length - 1]
+            this.setState(() => ({
+                id: id
+            }))
+            id && this.props.dispatchGetArticleDetail({ id }).then(data => {
+                if (data) {
+                    if (data.status) {
+                        let { title, categories, tags, content } = data.response
+                        categories = categories.map(item => item.name)
+                        tags = tags.map(item => item.name)
+                        this.setState(() => ({
+                            title, categories, tags, content
+                        }))
+                    }
+                }
+            })
+        }
+
+    }
+    handleSubmit = async (e) => {
+        e.preventDefault()
+        let { id, title, categories, tags, content } = this.state
+        let { dispatchAddArticle, dispatchUpdateArticle, history } = this.props
+        if (title === '') {
+            message.error('请输入标题')
+            return;
+        }
+        if (content === '') {
+            message.error('请输入内容')
+            return;
+        }
+        let res = null
+        if (id) {
+            res = await dispatchUpdateArticle({ id, title, categories, tags, content })
+        } else {
+            res = await dispatchAddArticle({ title, categories, tags, content })
+        }
+        if (res.status) {
+            message.success(res.message)
+            history.push('/admin')
+        }
     }
     render() {
-        const { getFieldDecorator } = this.props.form;
-        let { categories, tags } = this.state
-        // console.log(1111111, tags)
+        let { title, categories, tags, content } = this.state
         return (
-            <Form labelCol={{ span: 3 }} wrapperCol={{ span: 20 }} onSubmit={this.handleSubmit}>
+            <Form labelCol={{ span: 2 }} wrapperCol={{ span: 20 }} onSubmit={this.handleSubmit} style={{ padding: '22px 0 45px' }}>
                 <Form.Item label="标题">
-                    {getFieldDecorator('title', {
-                        rules: [{
-                            required: true,
-                            message: '请输入标题'
-                        }],
-                    })(<Input />)}
+                    <Input value={title} onChange={this.changeTitle} />
                 </Form.Item>
                 <Form.Item label="分类">
                     <Categories categories={categories} onChange={this.changeCategories} />
@@ -67,7 +121,14 @@ class ArticleEdit extends Component {
                 <Form.Item label="标签">
                     <Tags tags={tags} onChange={this.changeTags} />
                 </Form.Item>
-                <Form.Item>
+                <Form.Item wrapperCol={{ span: 22, offset: 1 }}>
+                    <MdEditor
+                        value={content}
+                        onChange={this.handleEditorChange}
+                        style={{ width: '100%', height: '600px' }}
+                    />
+                </Form.Item>
+                <Form.Item wrapperCol={{ span: 2, offset: 1 }}>
                     <Button type="primary" htmlType="submit">
                         提交
                     </Button>
@@ -84,6 +145,9 @@ let mapStateToProps = state => {
 let mapDispatchToProps = dispatch => ({
     dispatchGetTagList: () => dispatch(getTagList()),
     dispatchGetCategoryList: () => dispatch(getCategoryList()),
+    dispatchAddArticle: (params) => dispatch(addArticle(params)),
+    dispatchUpdateArticle: (params) => dispatch(updateArticle(params)),
+    dispatchGetArticleDetail: params => dispatch(getArticleDetail(params))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form.create({ name: 'article-edit' })(ArticleEdit))

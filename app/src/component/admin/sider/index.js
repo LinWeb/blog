@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Layout, Menu, Icon } from 'antd';
 import './index.scss'
+import { withRouter } from 'react-router-dom'
 const { Sider: AntdSlider } = Layout;
 const { SubMenu } = Menu;
 class Sider extends Component {
@@ -13,7 +14,10 @@ class Sider extends Component {
             collapsed: !this.state.collapsed,
         });
     };
-
+    onClick = ({ key }) => {
+        let { history } = this.props
+        history.push(key)
+    }
     render() {
         return (
             <AntdSlider trigger={null} collapsible collapsed={this.state.collapsed}
@@ -21,7 +25,8 @@ class Sider extends Component {
                 <div className="logo" />
                 <Menu theme="dark" mode="inline"
                     defaultSelectedKeys={['article']}
-                    defaultOpenKeys={['articleList']}
+                    defaultOpenKeys={['/admin']}
+                    onClick={this.onClick}
                 >
                     <SubMenu
                         key="article"
@@ -32,8 +37,8 @@ class Sider extends Component {
                             </span>
                         }
                     >
-                        <Menu.Item key="articleAdd">新增文章</Menu.Item>
-                        <Menu.Item key="articleList">文章列表</Menu.Item>
+                        <Menu.Item key="/admin/article/add">新增文章</Menu.Item>
+                        <Menu.Item key="/admin"> 文章列表</Menu.Item>
                     </SubMenu>
                     <Menu.Item key="user">
                         <Icon type="user" />
@@ -44,4 +49,4 @@ class Sider extends Component {
         );
     }
 }
-export default Sider;
+export default withRouter(Sider);
