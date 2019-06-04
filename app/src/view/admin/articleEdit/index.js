@@ -93,6 +93,14 @@ class ArticleEdit extends Component {
             message.error('请输入标题')
             return;
         }
+        if (!categories.length) {
+            message.error('至少选择一个分类')
+            return;
+        }
+        if (!tags.length) {
+            message.error('至少选择一个标签')
+            return;
+        }
         if (content === '') {
             message.error('请输入内容')
             return;

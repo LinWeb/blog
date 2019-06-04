@@ -1,9 +1,10 @@
 import React, { Component, } from 'react'
-import { Layout, Row, Col, } from 'antd';
+import { Spin, Layout, Row, Col, } from 'antd';
 import Header from '@/component/admin/header/index';
 import Sider from '@/component/admin/sider/index';
 import { Route, Switch, } from 'react-router-dom'
 import RouterConfig from '@/config/routerConfig';
+import { connect } from 'react-redux'
 
 const { Content } = Layout;
 
@@ -19,12 +20,13 @@ class Admin extends Component {
     };
 
     render() {
+        let { loading, } = this.props
         return (
             <Row className='admin-root'>
                 <Col span={4}><Sider></Sider></Col>
                 <Col span={20}>
                     <Header></Header>
-                    <Content
+                    <Spin tip="Loading..." spinning={loading}>  <Content
                         style={{ background: '#eee', height: 'calc(100vh - 73px)', overflowY: 'auto' }}>
                         <div style={{ background: '#fff', margin: '12px' }}>
                             <Switch>
@@ -34,9 +36,16 @@ class Admin extends Component {
                             </Switch>
                         </div>
                     </Content>
+                    </Spin>
                 </Col>
             </Row>
         );
     }
 }
-export default Admin;
+let mapStateToProps = state => {
+    let { loading } = state.common
+    return {
+        loading
+    }
+}
+export default connect(mapStateToProps)(Admin)

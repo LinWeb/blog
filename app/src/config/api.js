@@ -17,6 +17,7 @@ const GET_COMMENTS_URL = '/comment/list';
 const REPLY_ADD_URL = '/reply/add';
 const ARTICLE_ADD_URL = '/article/add';
 const ARTICLE_UPDATE_URL = '/article/update';
+const ARTICLE_DEL_URL = '/article/del';
 
 export {
     BASE_URL,
@@ -33,4 +34,5 @@ export {
     REPLY_ADD_URL,
     ARTICLE_ADD_URL,
     ARTICLE_UPDATE_URL,
+    ARTICLE_DEL_URL,
 }

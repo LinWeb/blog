@@ -8,6 +8,6 @@ router.get('/detail', articleController.detail)
 router.get('/byTag', articleController.byTag)
 router.get('/byCategory', articleController.byCategory)
 router.post('/add', articleController.add)
-router.del('/del/:id', articleController.del)
+router.post('/del', articleController.del)
 router.post('/update', articleController.update)
 module.exports = router

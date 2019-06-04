@@ -33,9 +33,9 @@ class ArticleFilter extends Component {
         }))
     }
     submit = () => {
-        let { dispatchGetArticleList } = this.props
+        let { getArticles } = this.props
         let { keyword, tagName, categoryName } = this.state
-        dispatchGetArticleList({ keyword, tagName, categoryName, })
+        getArticles({ keyword, tagName, categoryName, })
     }
     UNSAFE_componentWillMount() {
         let { dispatchGetTagList, dispatchGetCategoryList } = this.props

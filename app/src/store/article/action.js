@@ -1,4 +1,4 @@
-import { GET_ARTICLE_LIST, GET_NEW_THREE_ARTICLES, EMPTY_ARTICLE_LIST, UPDATE_LOADING } from '../actionTypes'
+import { GET_ARTICLE_LIST, GET_NEW_THREE_ARTICLES, EMPTY_ARTICLE_LIST, UPDATE_LOADING, DEL_ARTICLE } from '../actionTypes'
 import API from '@/services/index'
 
 export function getArticleList(params) {
@@ -50,5 +50,15 @@ export function updateArticle(params) {
     return async () => {
         let res = await API.ARTICLE_UPDATE(params)
         return res
+    }
+}
+export function delArticle(params) {
+    return async (dispatch) => {
+        let res = await API.ARTICLE_DEL(params)
+        if (res) {
+            if (res.status) {
+                dispatch({ type: DEL_ARTICLE, data: params })
+            }
+        }
     }
 }

@@ -12,16 +12,22 @@ class Home extends Component {
         }
     }
     UNSAFE_componentWillMount() {
+        this.getArticles({})
+    }
+    getArticles = (newParams) => {
         let { dispatchGetArticleList } = this.props
-        let { params } = this.state
+        let params = { ...this.state.params, ...newParams }
+        this.setState(() => ({
+            params
+        }))
         dispatchGetArticleList(params)
     }
     render() {
-        let { articleList } = this.props
+        let { articleList, pager } = this.props
         return (
-            <div className='home-container'>
-                <ArticleFilter></ArticleFilter>
-                <ArticleList data={articleList}></ArticleList>
+            <div className='home-container' style={{ padding: '12px 33px 45px' }}>
+                <ArticleFilter getArticles={this.getArticles}></ArticleFilter>
+                <ArticleList getArticles={this.getArticles} data={articleList} pager={pager}></ArticleList>
             </div >
         )
     }
