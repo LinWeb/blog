@@ -18,6 +18,8 @@ const REPLY_ADD_URL = '/reply/add';
 const ARTICLE_ADD_URL = '/article/add';
 const ARTICLE_UPDATE_URL = '/article/update';
 const ARTICLE_DEL_URL = '/article/del';
+const GET_USERS_URL = '/user/list';
+const USER_DEL_URL = '/user/del';
 
 export {
     BASE_URL,
@@ -35,4 +37,6 @@ export {
     ARTICLE_ADD_URL,
     ARTICLE_UPDATE_URL,
     ARTICLE_DEL_URL,
+    GET_USERS_URL,
+    USER_DEL_URL,
 }

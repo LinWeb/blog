@@ -5,6 +5,7 @@ import About from '@/view/web/about/index';
 import ArticleDetail from '@/view/web/articleDetail/index';
 import AdminHome from '@/view/admin/home/index';
 import ArticleEdit from '@/view/admin/articleEdit';
+import UserList from '@/view/admin/userList';
 
 export default {
     web: [
@@ -85,6 +86,13 @@ export default {
             title: '文章编辑页',
             exact: true,
             component: ArticleEdit,
+            isPrivate: false,
+        },
+        {
+            path: '/admin/user/list',
+            title: '用户管理',
+            exact: true,
+            component: UserList,
             isPrivate: false,
         },
     ]

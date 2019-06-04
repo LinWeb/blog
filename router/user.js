@@ -8,5 +8,5 @@ router.post('/checkUsername', userController.checkUsername)
 router.post('/login', userController.login)
 router.get('/list', userController.list)
 router.post('/update', userController.update)
-router.del('/del/:id', userController.del)
+router.post('/del', userController.del)
 module.exports = router

@@ -74,7 +74,6 @@ class articleController {
     }
     // 删除文章
     static async del(ctx) {
-        // let { id } = ctx.params;
         let { id } = ctx.request.body
         await tagModel.destroy({ where: { articleId: id } })  // 为啥只是置空articleId字段
         await categoryModel.destroy({ where: { articleId: id } })

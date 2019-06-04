@@ -85,7 +85,7 @@ class userController {
         keyword = keyword === undefined || keyword === '' ? '%' : `%${keyword}%` // 关键词
         let allResponse = await userModel.findAll({
             where: {
-                name: {
+                username: {
                     [Op.like]: keyword
                 }
             }
@@ -95,8 +95,9 @@ class userController {
         let response = await userModel.findAll({
             offset: (currentPage - 1) * pageSize,
             limit: pageSize,
+            attributes: ['id', 'createdAt', 'username'],
             where: {
-                name: {
+                username: {
                     [Op.like]: keyword
                 }
             }
@@ -158,7 +159,7 @@ class userController {
     }
     // 删除用户
     static async del(ctx) {
-        let { id } = ctx.params;
+        let { id } = ctx.request.body
         let response = await userModel.destroy({
             where: {
                 id: Number(id)

@@ -1,5 +1,5 @@
 import state from './state'
-import { GET_USER_INFO, LOGOUT } from '../actionTypes'
+import { GET_USER_INFO, LOGOUT, GET_USER_LIST, DEL_USER } from '../actionTypes'
 let initState = state
 const user = (state = initState, { type, data }) => {
     switch (type) {
@@ -21,6 +21,13 @@ const user = (state = initState, { type, data }) => {
                 name: '',
                 token: null
             })
+        case GET_USER_LIST:
+            return Object.assign({}, state, { userListData: data })
+        case DEL_USER:
+            var { id } = data
+            var { pager, userList } = state.userListData
+            var newUserList = userList.filter(item => item.id !== id)
+            return Object.assign({}, state, { userListData: { pager, userList: newUserList } })
         default:
             return state
     }

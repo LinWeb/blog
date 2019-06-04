@@ -1,4 +1,4 @@
-import { GET_USER_INFO, LOGOUT, } from '../actionTypes'
+import { GET_USER_INFO, LOGOUT, GET_USER_LIST, UPDATE_LOADING, DEL_USER } from '../actionTypes'
 import { message } from 'antd';
 import API from '@/services/index'
 
@@ -48,5 +48,32 @@ export function updateUser(params) {
 export function logout(params) {
     return {
         type: LOGOUT
+    }
+}
+
+
+export function getUserList(params) {
+    return async (dispatch) => {
+        // dispatch(emptyUserList())
+        params.pageSize = 2
+        dispatch({ type: UPDATE_LOADING, data: { loading: true } })
+        let data = await API.GET_USERS(params)
+        dispatch({ type: UPDATE_LOADING, data: { loading: false } })
+        if (data) {
+            let { status, response, pager } = data
+            if (status) {
+                dispatch({ type: GET_USER_LIST, data: { userList: response, pager } })
+            }
+        }
+    }
+}
+export function delUser(params) {
+    return async (dispatch) => {
+        let res = await API.USER_DEL(params)
+        if (res) {
+            if (res.status) {
+                dispatch({ type: DEL_USER, data: params })
+            }
+        }
     }
 }

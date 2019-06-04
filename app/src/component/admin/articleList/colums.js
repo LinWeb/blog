@@ -38,7 +38,8 @@ const columns = [
         defaultSortOrder: 'descend',
         sorter: (a, b) => a.readCount - b.readCount,
         render: text => <Badge count={text} />,
-    }, {
+    },
+    {
         key: 'createdAt',
         title: '创建时间',
         dataIndex: 'createdAt',

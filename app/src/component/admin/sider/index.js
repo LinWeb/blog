@@ -40,7 +40,7 @@ class Sider extends Component {
                         <Menu.Item key="/admin/article/add">新增文章</Menu.Item>
                         <Menu.Item key="/admin"> 文章列表</Menu.Item>
                     </SubMenu>
-                    <Menu.Item key="user">
+                    <Menu.Item key="/admin/user/list">
                         <Icon type="user" />
                         <span>用户管理</span>
                     </Menu.Item>
