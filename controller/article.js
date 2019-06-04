@@ -1,4 +1,4 @@
-const { articleModel, tagModel, categoryModel, commentModel } = require('../model')
+const { articleModel, tagModel, categoryModel, commentModel, replyModel } = require('../model')
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op
 
@@ -75,10 +75,15 @@ class articleController {
     // 删除文章
     static async del(ctx) {
         let { id } = ctx.request.body
-        await tagModel.destroy({ where: { articleId: id } })  // 为啥只是置空articleId字段
-        await categoryModel.destroy({ where: { articleId: id } })
-        let response = await articleModel.destroy({ where: { id }, cascade: true })
+        let response = await articleModel.destroy({
+            where: { id },
+            cascade: true,
+        })
         if (response === 1) {
+            await tagModel.destroy({ where: { articleId: null } })  // 删除标签
+            await categoryModel.destroy({ where: { articleId: null } }) // 删除分类
+            await commentModel.destroy({ where: { articleId: null } }) // 删除评论
+            await replyModel.destroy({ where: { commentId: null } }) // 删除回复
             ctx.body = {
                 status: 1,
                 message: '删除成功'

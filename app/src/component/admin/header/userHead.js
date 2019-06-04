@@ -3,10 +3,12 @@ import { Menu, Dropdown, Avatar, Button } from 'antd';
 import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logout } from '@/store/user/action'
+import headImg from '@/assets/images/bloger-head.jpg'
 class UserHead extends Component {
-    logout = () => {
-        let { dispatchLogout } = this.props
-        dispatchLogout()
+    logout = async () => {
+        let { dispatchLogout, history } = this.props
+        await dispatchLogout()
+        history.push('/admin/login')
     }
     menu = () => (
         <Menu>
@@ -21,25 +23,14 @@ class UserHead extends Component {
         </Menu>
     )
     render() {
-        let { userId, name, categoryColors } = this.props
-        let avatarBgColor = categoryColors[(userId - 1) % 11]
         return (
-            <Dropdown overlay={this.menu} style={{}}>
-                <Avatar size={43} style={{ backgroundColor: avatarBgColor, float: 'right' }} >
-                    {name.substring(0, 1)}
-                </Avatar>
+            <Dropdown overlay={this.menu}>
+                <Avatar size={43} src={headImg} style={{ float: 'right' }} />
             </Dropdown>
         )
-    }
-}
-let mapStateToProps = state => {
-    let { userId, token, name } = state.user
-    let { categoryColors } = state.category
-    return {
-        userId, token, name, categoryColors
     }
 }
 let mapDispatchToProps = dispatch => ({
     dispatchLogout: () => dispatch(logout())
 })
-export default connect(mapStateToProps, mapDispatchToProps)(UserHead)
+export default withRouter(connect(null, mapDispatchToProps)(UserHead))

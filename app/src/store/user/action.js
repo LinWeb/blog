@@ -45,9 +45,9 @@ export function updateUser(params) {
         return res
     }
 }
-export function logout(params) {
-    return {
-        type: LOGOUT
+export function logout() {
+    return async (dispatch) => {
+        dispatch({ type: LOGOUT })
     }
 }
 

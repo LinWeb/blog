@@ -1,5 +1,6 @@
 
-let userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}')
+let userInfo = localStorage.getItem('userInfo')
+userInfo = userInfo ? JSON.parse(userInfo) : null
 let state = {
     userId: userInfo ? userInfo.userId : '',
     username: userInfo ? userInfo.username : '',

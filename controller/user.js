@@ -1,4 +1,4 @@
-const { userModel } = require('../model')
+const { userModel, commentModel, replyModel } = require('../model')
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op
 const { passwordHash, passwordCompare } = require('../lib/bcrypt')
@@ -9,7 +9,7 @@ class userController {
     // 校验用户名是否已经注册，密码加密处理
     static async register(ctx) {
         let params = ctx.request.body
-        let { username, password, auth } = params
+        let { username, password } = params
         let user = await userModel.findOne({ where: { username } }) // 校验是否用户名是否已经注册
         if (user) {
             ctx.body = {
@@ -18,7 +18,7 @@ class userController {
             }
         } else {
             let bcryptPassword = await passwordHash(password)  // 密码加密
-            let response = await userModel.create({ username, name: username, password: bcryptPassword, auth })
+            let response = await userModel.create({ username, name: username, password: bcryptPassword })
             if (response) {
                 ctx.body = {
                     status: 1,
@@ -86,6 +86,7 @@ class userController {
         let allResponse = await userModel.findAll({
             where: {
                 username: {
+                    [Op.not]: 'admin',
                     [Op.like]: keyword
                 }
             }
@@ -98,6 +99,7 @@ class userController {
             attributes: ['id', 'createdAt', 'username'],
             where: {
                 username: {
+                    [Op.not]: 'admin',
                     [Op.like]: keyword
                 }
             }
@@ -161,11 +163,11 @@ class userController {
     static async del(ctx) {
         let { id } = ctx.request.body
         let response = await userModel.destroy({
-            where: {
-                id: Number(id)
-            }
+            where: { id }
         })
         if (response === 1) {
+            await commentModel.destroy({ where: { userId: null } }) // 删除评论
+            await replyModel.destroy({ where: { commentId: null } }) // 删除回复
             ctx.body = {
                 status: 1,
                 message: '删除成功'
@@ -176,8 +178,6 @@ class userController {
                 message: '删除失败'
             }
         }
-
-
     }
 }
 

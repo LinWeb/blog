@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import { Menu, Dropdown, Avatar, Button } from 'antd';
+import {Modal, Menu, Dropdown, Avatar, Button } from 'antd';
 import Register from '../register'
-import Login from '../login'
+import LoginForm from '@/component/common/loginForm'
 import UpdateUserInfo from '../updateUserInfo'
 import { connect } from 'react-redux'
 import { logout } from '@/store/user/action'
@@ -66,7 +66,15 @@ class UserHead extends Component {
                         <Button type="danger" ghost onClick={this.changeRegisterModalShow} >
                             注册
                         </Button>
-                        <Login isShow={loginShow} onCancel={this.changeLoginModalShow} />
+                        <Modal
+                            title="登录"
+                            visible={loginShow}
+                            onCancel={this.changeLoginModalShow}
+                            width={334}
+                            footer={null} 
+                        > 
+                            <LoginForm succeedCallback={this.changeLoginModalShow} />
+                        </Modal>
                         <Register isShow={registerShow} onCancel={this.changeRegisterModalShow} />
                     </Fragment>
                 }

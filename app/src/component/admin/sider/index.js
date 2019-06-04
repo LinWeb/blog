@@ -24,8 +24,8 @@ class Sider extends Component {
                 className='sider-container'>
                 <div className="logo" />
                 <Menu theme="dark" mode="inline"
-                    defaultSelectedKeys={['article']}
-                    defaultOpenKeys={['/admin']}
+                    defaultSelectedKeys={['/admin']}
+                    defaultOpenKeys={['article']}
                     onClick={this.onClick}
                 >
                     <SubMenu
