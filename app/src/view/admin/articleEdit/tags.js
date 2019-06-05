@@ -76,7 +76,7 @@ class Tags extends Component {
                 )}
                 {!show && (
                     <Tag onClick={this.showInput} style={{ background: '#fff', borderStyle: 'dashed' }}>
-                        <Icon type="plus" /> 添加分类
+                        <Icon type="plus" /> 添加标签
                         </Tag>
                 )}
             </Fragment>

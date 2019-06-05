@@ -9,6 +9,14 @@ class CommentList extends Component {
         let { dispatchGetComments, articleId } = this.props
         dispatchGetComments({ articleId })
     }
+
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        let { articleId: nextArticleId } = nextProps
+        let { articleId: currentArticleId, dispatchGetComments } = this.props
+        if (nextArticleId !== currentArticleId) {
+            dispatchGetComments({ articleId: nextArticleId })
+        }
+    }
     componentDidMount() {
         document.getElementById('main-body').addEventListener('scroll', (e) => {
             let clientHeight = e.target.clientHeight

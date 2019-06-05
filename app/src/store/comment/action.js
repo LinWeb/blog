@@ -9,9 +9,9 @@ export function commentAdd(params) {
             let { status, response } = res
             if (status) {
                 message.success('评论成功');
-                let { name } = getState().user
+                let { name, auth } = getState().user
                 dispatch({
-                    type: COMMENT_ADD, data: { ...response, replies: [], user: { name } }
+                    type: COMMENT_ADD, data: { ...response, replies: [], user: { name, auth } }
                 })
             }
         }

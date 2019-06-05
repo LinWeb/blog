@@ -5,15 +5,16 @@ const user = (state = initState, { type, data }) => {
     switch (type) {
         case GET_COMMENTS:
             var { commentList } = state.commentListData
+            var { currentPage } = data.pager
             var newCommentListData = {
                 pager: { ...data.pager },
-                commentList: [...commentList, ...data.commentList]
+                commentList: [...(currentPage === 1 ? [] : commentList), ...data.commentList]
             }
             return Object.assign({}, state, { commentListData: newCommentListData })
         case COMMENT_ADD:
-            var { id, content, createdAt, userId, replies, user } = data
+            var { id, content, createdAt, userId, replies, user, auth } = data
             var { pager, commentList } = state.commentListData
-            var newCommentItem = { id, content, createdAt, userId, replies, user }
+            var newCommentItem = { id, content, createdAt, userId, replies, user, auth }
             var newCommentListData = {
                 pager: { ...pager, total: pager.total + 1 },
                 commentList: [newCommentItem, ...commentList]

@@ -20,8 +20,8 @@ class Categories extends Component {
                     {categoryList.map((category, key) => (
                         <Link to={{ pathname: '/category/' + category.name, state: { type: 'Category', categoryName: category.name } }} key={key}>
                             <span className='item'>
-                                <Badge count={12} style={{ backgroundColor: '#fff', color: 'red', borderColor: 'red' }} >
-                                    <Tag color={categoryColors[key % 11]}>{category.name}</Tag>
+                                <Badge count={category.articleCount} style={{ backgroundColor: '#fff', color: 'red', borderColor: 'red' }} >
+                                    <Tag color={categoryColors[key % 11]} style={{ cursor: 'pointer' }}>{category.name}</Tag>
                                 </Badge>
                             </span>
                         </Link>

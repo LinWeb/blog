@@ -16,17 +16,20 @@
   }
   .new-articles {
     .articles {
-      padding: 0px 28px;
       .item {
         cursor: pointer;
         text-align: left;
-        padding: 8px 0;
+        display: block;
+        padding: 8px 28px;
+        color: #999999;
         &:hover {
           color: #1890ff;
+          background-color: #eeeeee;
         }
       }
     }
   }
+
   .tags-container {
     margin-bottom: 18px;
     .tags {

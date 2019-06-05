@@ -12,13 +12,13 @@ class Header extends Component {
                 <Col span={5}>
                     <Logo />
                 </Col>
-                <Col span={8}>
+                <Col span={7}>
                     <Search />
                 </Col>
                 <Col span={8}>
                     <Nav />
                 </Col>
-                <Col span={3}>
+                <Col span={4}>
                     <UserHead />
                 </Col>
             </Row>

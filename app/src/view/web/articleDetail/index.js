@@ -17,8 +17,8 @@ class ArticleDetail extends Component {
             articleId: 0
         }
     }
-    UNSAFE_componentWillMount() {
-        let { pathname } = this.props.location
+
+    getArticleDetail(pathname) {
         let arr = pathname.split('/')
         let id = arr[arr.length - 1]
         this.setState(() => ({
@@ -33,6 +33,17 @@ class ArticleDetail extends Component {
                 }
             }
         })
+    }
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        let { pathname: nextPathname } = nextProps.location
+        let { pathname: currentPathname } = this.props.location
+        if (nextPathname !== currentPathname) {
+            this.getArticleDetail(nextPathname);
+        }
+    }
+    UNSAFE_componentWillMount() {
+        let { pathname } = this.props.location
+        this.getArticleDetail(pathname);
     }
     render() {
         let { commentsTotal } = this.props
