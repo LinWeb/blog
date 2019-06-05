@@ -44,6 +44,15 @@ class Sider extends Component {
             selectedKeys: [pathname]
         }))
     }
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        let { pathname: nextPathname } = nextProps.location
+        let { pathname: currentPathname } = this.props.location
+        if (nextPathname !== currentPathname) {
+            this.setState(() => ({
+                selectedKeys: [nextPathname]
+            }))
+        }
+    }
     render() {
         let { menuData, selectedKeys } = this.state
         return (
