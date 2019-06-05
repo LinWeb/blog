@@ -4,7 +4,6 @@ import API from '@/services/index'
 export function getArticleList(params) {
     return async (dispatch) => {
         dispatch(emptyArticleList())
-        params.pageSize = 2
         dispatch({ type: UPDATE_LOADING, data: { loading: true } })
         let data = await API.GET_ARTICLES(params)
         dispatch({ type: UPDATE_LOADING, data: { loading: false } })

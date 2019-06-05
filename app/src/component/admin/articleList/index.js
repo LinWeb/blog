@@ -13,6 +13,7 @@ class ArticleList extends Component {
         let { currentPage, pageSize, total } = pager
         return (
             <Table rowKey="id"
+                bordered={true}
                 className='article-list'
                 columns={columns}
                 dataSource={data}

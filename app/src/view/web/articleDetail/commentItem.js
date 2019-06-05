@@ -5,6 +5,8 @@ import ReplyArea from './replyArea'
 import marked from '@/lib/marked'
 import moment from 'moment'
 import 'moment/locale/zh-cn'
+import headImg from '@/assets/images/bloger-head.jpg'
+
 const Actions = function ({ username, commentId }) {
     let [show, setShow] = useState(false)
     return (
@@ -25,16 +27,18 @@ class CommentItem extends Component {
         return (
             <Comment
                 actions={[replies ? <Actions commentId={id} username={user.name} /> : null]}
-                author={user.name}
+                author={user.auth ? '作者' : user.name}
                 datetime={
                     <Tooltip title={moment(createdAt).format('YYYY-MM-DD HH:mm:ss')}>
                         <span>{moment(createdAt).fromNow()}</span>
                     </Tooltip>
                 }
                 avatar={
-                    <Avatar size={36} style={{ backgroundColor: avatarBgColor, }} >
-                        {user.name.substring(0, 1)}
-                    </Avatar>
+                    user.auth ?
+                        <Avatar size={36} src={headImg} />
+                        : <Avatar size={36} style={{ backgroundColor: avatarBgColor, }} >
+                            {user.name.substring(0, 1)}
+                        </Avatar>
                 }
                 content={
                     <div className='markdown-content' dangerouslySetInnerHTML={{ __html: marked(content || '') }}></div>

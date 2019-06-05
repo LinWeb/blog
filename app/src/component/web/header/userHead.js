@@ -1,10 +1,12 @@
 import React, { Component, Fragment } from 'react';
-import {Modal, Menu, Dropdown, Avatar, Button } from 'antd';
+import { Modal, Menu, Dropdown, Avatar, Button } from 'antd';
 import Register from '../register'
 import LoginForm from '@/component/common/loginForm'
 import UpdateUserInfo from '../updateUserInfo'
 import { connect } from 'react-redux'
 import { logout } from '@/store/user/action'
+import headImg from '@/assets/images/bloger-head.jpg'
+
 class UserHead extends Component {
     constructor(props) {
         super(props)
@@ -45,16 +47,19 @@ class UserHead extends Component {
     )
     render() {
         let { loginShow, registerShow, updateUserInfoShow } = this.state
-        let { userId, token, name, categoryColors } = this.props
+        let { userId, token, name, auth, categoryColors } = this.props
         let avatarBgColor = categoryColors[(userId - 1) % 11]
         return (
             <div className='userHead'>
                 {token ?
                     <Fragment>
                         <Dropdown overlay={this.menu}>
-                            <Avatar size={43} style={{ backgroundColor: avatarBgColor, marginLeft: '60px' }} >
-                                {name.substring(0, 1)}
-                            </Avatar>
+                            {auth ?
+                                <Avatar size={43} src={headImg} />
+                                : <Avatar size={43} style={{ backgroundColor: avatarBgColor, marginLeft: '60px' }} >
+                                    {name.substring(0, 1)}
+                                </Avatar>
+                            }
                         </Dropdown>
                         <UpdateUserInfo isShow={updateUserInfoShow} onCancel={this.changeUpdateUserInfoModalShow} />
                     </Fragment>
@@ -71,8 +76,8 @@ class UserHead extends Component {
                             visible={loginShow}
                             onCancel={this.changeLoginModalShow}
                             width={334}
-                            footer={null} 
-                        > 
+                            footer={null}
+                        >
                             <LoginForm succeedCallback={this.changeLoginModalShow} />
                         </Modal>
                         <Register isShow={registerShow} onCancel={this.changeRegisterModalShow} />
@@ -83,10 +88,10 @@ class UserHead extends Component {
     }
 }
 let mapStateToProps = state => {
-    let { userId, token, name } = state.user
+    let { userId, token, name, auth } = state.user
     let { categoryColors } = state.category
     return {
-        userId, token, name, categoryColors
+        userId, token, name, auth, categoryColors
     }
 }
 let mapDispatchToProps = dispatch => ({

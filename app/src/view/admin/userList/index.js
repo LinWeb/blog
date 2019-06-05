@@ -29,9 +29,10 @@ class UserList extends Component {
         let { userList, pager } = this.props
         let { currentPage, pageSize, total } = pager
         return (
-            <Fragment>
+            <div className='user-list-container' style={{ padding: '12px 33px 45px' }}>
                 <Filter getUsers={this.getUsers} />
                 <Table rowKey="id"
+                    bordered={true}
                     className='user-list'
                     columns={columns}
                     dataSource={userList}
@@ -45,7 +46,7 @@ class UserList extends Component {
                         emptyText: '暂无数据'
                     }}
                 />
-            </Fragment>
+            </div>
         )
     }
 }

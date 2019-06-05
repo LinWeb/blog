@@ -5,20 +5,11 @@ import Sider from '@/component/admin/sider/index';
 import { Route, Switch, } from 'react-router-dom'
 import RouterConfig from '@/config/routerConfig';
 import { connect } from 'react-redux'
+import NotFound from '@/view/common/404';
 
 const { Content } = Layout;
 
 class Admin extends Component {
-    state = {
-        collapsed: false,
-    };
-
-    toggle = () => {
-        this.setState({
-            collapsed: !this.state.collapsed,
-        });
-    };
-
     render() {
         let { loading, } = this.props
         return (
@@ -26,16 +17,19 @@ class Admin extends Component {
                 <Col span={4}><Sider></Sider></Col>
                 <Col span={20}>
                     <Header></Header>
-                    <Spin tip="Loading..." spinning={loading}>  <Content
-                        style={{ background: '#eee', height: 'calc(100vh - 73px)', overflowY: 'auto' }}>
-                        <div style={{ background: '#fff', margin: '12px' }}>
-                            <Switch>
-                                {RouterConfig.admin.map((res, key) =>
-                                    <Route {...res} key={key} />
-                                )}
-                            </Switch>
-                        </div>
-                    </Content>
+                    <Spin tip="Loading..." spinning={loading}>
+                        <Content
+                            style={{ background: '#eee', height: 'calc(100vh - 64px)', overflowY: 'auto' }}
+                        >
+                            <div style={{ background: '#fff', margin: '12px' }}>
+                                <Switch>
+                                    {RouterConfig.admin.map((res, key) =>
+                                        <Route {...res} key={key} />
+                                    )}
+                                </Switch>
+                            </div>
+                            <Route component={NotFound} />
+                        </Content>
                     </Spin>
                 </Col>
             </Row>

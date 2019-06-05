@@ -5,6 +5,7 @@ import Header from '@/component/web/header/index';
 import Sider from '@/component/web/sider/index';
 import RouterConfig from '@/config/routerConfig';
 import { connect } from 'react-redux'
+import NotFound from '@/view/common/404';
 
 class Web extends Component {
     render() {
@@ -21,10 +22,11 @@ class Web extends Component {
                                     {RouterConfig.web.map((res, key) =>
                                         <Route {...res} key={key} />
                                     )}
+                                    <Route component={NotFound} />
                                 </Switch>
-                                <BackTop target={() => document.getElementById('main-body')} className='BackTop' />
                             </div>
                         </Spin>
+                        <Route component={NotFound} />
                     </Col>
                 </Row>
             </Fragment>

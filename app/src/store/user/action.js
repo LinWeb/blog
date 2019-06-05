@@ -54,8 +54,6 @@ export function logout() {
 
 export function getUserList(params) {
     return async (dispatch) => {
-        // dispatch(emptyUserList())
-        params.pageSize = 2
         dispatch({ type: UPDATE_LOADING, data: { loading: true } })
         let data = await API.GET_USERS(params)
         dispatch({ type: UPDATE_LOADING, data: { loading: false } })

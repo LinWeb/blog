@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Icon, Comment, Avatar, Form, Button, Divider, Input } from 'antd';
 import { commentAdd } from '@/store/comment/action'
 import { connect } from 'react-redux'
+import headImg from '@//assets/images/bloger-head.jpg'
+
 const { TextArea } = Input;
 class CommentArea extends Component {
     constructor(props) {
@@ -34,7 +36,7 @@ class CommentArea extends Component {
         })
     }
     render() {
-        let { userId, name, categoryColors, total } = this.props
+        let { userId, name, auth, categoryColors, total } = this.props
         let avatarBgColor = categoryColors[(userId - 1) % 11]
         const { getFieldDecorator } = this.props.form;
         let { loading } = this.state
@@ -44,9 +46,11 @@ class CommentArea extends Component {
                 <Divider style={{ margin: '8px 0px 14px' }} />
                 <Comment
                     avatar={
-                        <Avatar size={43} style={{ backgroundColor: avatarBgColor, }} >
-                            {name.substring(0, 1) || <Icon type="user" />}
-                        </Avatar>
+                        auth ?
+                            <Avatar size={43} src={headImg} />
+                            : <Avatar size={43} style={{ backgroundColor: avatarBgColor, }} >
+                                {name.substring(0, 1) || <Icon type="user" />}
+                            </Avatar>
                     }
                     content={
                         <Form onSubmit={this.handleSubmit} className="comment-form">
@@ -72,11 +76,11 @@ class CommentArea extends Component {
     }
 }
 let mapStateToProps = state => {
-    let { userId, name } = state.user
+    let { userId, name, auth } = state.user
     let { categoryColors } = state.category
     let { total } = state.comment.commentListData.pager
     return {
-        userId, name, categoryColors, total
+        userId, name, auth, categoryColors, total
     }
 }
 let mapDispatchToProps = dispatch => ({

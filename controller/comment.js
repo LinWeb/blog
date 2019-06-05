@@ -38,11 +38,11 @@ class commentController {
             limit: pageSize,
             attributes: ['id', 'content', 'createdAt', 'userId'],
             include: [
-                { model: userModel, attributes: ['name'] },
+                { model: userModel, attributes: ['name', 'auth'] },
                 {
                     model: replyModel,
                     attributes: ['content', 'createdAt', 'userId'],
-                    include: [{ model: userModel, attributes: ['name'] }],
+                    include: [{ model: userModel, attributes: ['name', 'auth'] }],
                     order: [['createdAt', 'DESC']]
                 }
             ],
