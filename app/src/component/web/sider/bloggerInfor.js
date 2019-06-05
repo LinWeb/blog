@@ -10,7 +10,9 @@ class BloggerInfor extends Component {
                 <p className='introduction' >前端打杂人员</p>
                 <Row>
                     <Col span={24}>
-                        <Icon type="github" /> github
+                        <a href='https://github.com/LinWeb' target='_blank' style={{ color: 'rgba(0, 0, 0, 0.65)' }}>
+                            <Icon type="github" /> github
+                        </a>
                     </Col>
                 </Row>
             </div>

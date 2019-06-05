@@ -19,16 +19,16 @@ class Admin extends Component {
                     <Header></Header>
                     <Spin tip="Loading..." spinning={loading}>
                         <Content
-                            style={{ background: '#eee', height: 'calc(100vh - 64px)', overflowY: 'auto' }}
+                            style={{ height: 'calc(100vh - 64px)', overflowY: 'auto' }}
                         >
                             <div style={{ background: '#fff', margin: '12px' }}>
                                 <Switch>
                                     {RouterConfig.admin.map((res, key) =>
                                         <Route {...res} key={key} />
                                     )}
+                                    <Route component={NotFound} />
                                 </Switch>
                             </div>
-                            <Route component={NotFound} />
                         </Content>
                     </Spin>
                 </Col>

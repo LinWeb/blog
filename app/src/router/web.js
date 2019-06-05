@@ -26,7 +26,6 @@ class Web extends Component {
                                 </Switch>
                             </div>
                         </Spin>
-                        <Route component={NotFound} />
                     </Col>
                 </Row>
             </Fragment>
