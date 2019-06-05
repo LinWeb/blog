@@ -11,14 +11,14 @@ class LoginForm extends Component {
     }
     handleSubmit = e => {
         e.preventDefault()
-        let { dispatchLogin, succeedCallback } = this.props
+        let { dispatchLogin, succeedCallback, type } = this.props
         const { validateFields } = this.props.form;
         validateFields((err, values) => {
             if (!err) {
                 this.setState(() => ({
                     loading: true
                 }))
-                dispatchLogin(values).then(data => {
+                dispatchLogin({ ...values, type }).then(data => {
                     if (data) {
                         if (data.status) {
                             succeedCallback()

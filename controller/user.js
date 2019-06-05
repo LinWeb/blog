@@ -51,8 +51,14 @@ class userController {
     }
     // 用户登录
     static async login(ctx) {
-        let { username, password } = ctx.request.body
-        let response = await userModel.findOne({ where: { username } })
+        let { username, password, type } = ctx.request.body
+        let where = {}
+        if (type === 'admin') {
+            where = { username, auth: 1 }
+        } else {
+            where = { username }
+        }
+        let response = await userModel.findOne({ where })
         if (response) {
             let isSame = await passwordCompare(password, response.password)  // 校验密码是否正确
             if (isSame) {
@@ -70,12 +76,18 @@ class userController {
                 }
             }
         } else {
-            ctx.body = {
-                status: 0,
-                message: '用户不存在'
+            if (type === 'admin') {
+                ctx.body = {
+                    status: 0,
+                    message: '管理员账号不存在'
+                }
+            } else {
+                ctx.body = {
+                    status: 0,
+                    message: '用户不存在'
+                }
             }
         }
-
     }
     // 用户列表+搜索+分页
     static async list(ctx) {

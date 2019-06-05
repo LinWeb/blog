@@ -3,8 +3,25 @@ import { withRouter, Route } from 'react-router-dom'
 import Web from './web'
 import Admin from './admin'
 import AdminLogin from '@/view/admin/login';
-
+import { connect } from 'react-redux'
 class Main extends Component {
+    checkAuth() {
+        let { history, auth } = this.props
+        let { pathname } = this.props.location
+        if (
+            !auth
+            && pathname !== '/admin/login'
+            && pathname.indexOf('/admin') !== -1
+        ) {
+            history.push('/admin/login')
+        }
+    }
+    UNSAFE_componentWillMount() {
+        this.checkAuth()
+    }
+    UNSAFE_componentWillReceiveProps() {
+        this.checkAuth()
+    }
     render() {
         let { pathname } = this.props.location
         let isAdminPath = false
@@ -26,6 +43,12 @@ class Main extends Component {
         )
     }
 }
+let mapStateToProps = state => {
+    let { auth } = state.user
+    return {
+        auth
+    }
+}
 
-export default withRouter(Main);
+export default withRouter(connect(mapStateToProps)(Main));
 

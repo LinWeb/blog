@@ -1,5 +1,7 @@
 import state from './state'
 import { GET_USER_INFO, LOGOUT, GET_USER_LIST, DEL_USER } from '../actionTypes'
+import { getAuth } from '@/lib/checkAuth'
+
 let initState = state
 const user = (state = initState, { type, data }) => {
     switch (type) {
@@ -11,7 +13,8 @@ const user = (state = initState, { type, data }) => {
             token = token || state.token
             localStorage.setItem('userInfo', JSON.stringify({ userId, username, name }))
             localStorage.setItem('token', token)
-            return Object.assign({}, state, { userId, username, name, token })
+            let auth = getAuth(token) || state.auth
+            return Object.assign({}, state, { userId, username, name, token, auth })
         case LOGOUT:
             localStorage.removeItem('userInfo')
             localStorage.removeItem('token')
@@ -19,7 +22,8 @@ const user = (state = initState, { type, data }) => {
                 userId: 0,
                 username: '',
                 name: '',
-                token: null
+                token: null,
+                auth: 0
             })
         case GET_USER_LIST:
             return Object.assign({}, state, { userListData: data })
