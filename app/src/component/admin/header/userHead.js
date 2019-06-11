@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from 'react';
-import { Menu, Dropdown, Avatar, Button } from 'antd';
+import React, { Component } from 'react';
+import { Menu, Dropdown, Avatar } from 'antd';
 import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logout } from '@/store/user/action'

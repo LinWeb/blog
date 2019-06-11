@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import ArticleList from '@/component/admin/articleList'
 import ArticleFilter from '@/component/admin/articleFilter'
 import { getArticleList } from '@/store/article/action'

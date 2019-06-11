@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Route, Switch, } from 'react-router-dom'
-import { Row, Col, Spin, BackTop } from 'antd';
+import { Row, Col, Spin } from 'antd';
 import Header from '@/component/web/header/index';
 import Sider from '@/component/web/sider/index';
 import RouterConfig from '@/config/routerConfig';

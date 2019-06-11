@@ -6,7 +6,7 @@ const columns = [
         key: 'username',
         title: '用户名',
         dataIndex: 'username',
-        render: text => <a href="javascript:;">{text}</a>,
+        render: text => <span style={{ color: '#096dd9' }}>{text}</span>,
     },
     {
         key: 'createdAt',

@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import { Divider, Badge, Popconfirm } from 'antd';
+import React from 'react';
+import { Badge } from 'antd';
 import moment from 'moment'
 import Tags from './tags'
 import Categories from './categories'
@@ -9,7 +9,7 @@ const columns = [
         key: 'title',
         title: '标题',
         dataIndex: 'title',
-        render: text => <a href="javascript:;">{text}</a>,
+        render: text => <span style={{ color: '#096dd9' }}>{text}</span>,
     },
     {
         key: 'tags',

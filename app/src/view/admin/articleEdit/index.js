@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { Form, Input, Button, Tag, message } from 'antd';
+import { Form, Input, Button, message } from 'antd';
 import { connect } from 'react-redux'
 import { getTagList } from '@/store/tag/action'
 import { getCategoryList } from '@/store/category/action'

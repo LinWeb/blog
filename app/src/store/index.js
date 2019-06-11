@@ -7,8 +7,8 @@ import common from './common/reducer'
 import comment from './comment/reducer'
 import reply from './reply/reducer'
 import thunkMiddleware from 'redux-thunk'
-import { createLogger } from 'redux-logger'
-const loggerMiddleware = createLogger()
+// import { createLogger } from 'redux-logger'
+// const loggerMiddleware = createLogger()
 const reducers = combineReducers({
   user, article, tag, category, common, comment, reply
 })

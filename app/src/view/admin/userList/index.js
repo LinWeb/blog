@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import columns from './colums'
 import Filter from './filter'
 import { Table } from 'antd';
