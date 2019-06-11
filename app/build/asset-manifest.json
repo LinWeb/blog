@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.27fee01f.chunk.css",
+    "main.js": "/static/js/main.468477f0.chunk.js",
+    "main.js.map": "/static/js/main.468477f0.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
+    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
+    "static/css/2.d4061aad.chunk.css": "/static/css/2.d4061aad.chunk.css",
+    "static/js/2.d7348578.chunk.js": "/static/js/2.d7348578.chunk.js",
+    "static/js/2.d7348578.chunk.js.map": "/static/js/2.d7348578.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.e5769fd67ea9fcf228f63d910e2c6b9a.js": "/precache-manifest.e5769fd67ea9fcf228f63d910e2c6b9a.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.d4061aad.chunk.css.map": "/static/css/2.d4061aad.chunk.css.map",
+    "static/css/main.27fee01f.chunk.css.map": "/static/css/main.27fee01f.chunk.css.map",
+    "static/media/bloger-head.jpg": "/static/media/bloger-head.ea88ee82.jpg",
+    "static/media/index.scss": "/static/media/logo.5d5d9eef.svg"
+  }
+}
