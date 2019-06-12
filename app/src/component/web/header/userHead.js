@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Modal, Menu, Dropdown, Avatar, Button } from 'antd';
+import { Modal, Menu, Dropdown, Avatar, Button, Icon } from 'antd';
 import Register from '../register'
 import LoginForm from '@/component/common/loginForm'
 import UpdateUserInfo from '../updateUserInfo'
@@ -35,13 +35,23 @@ class UserHead extends Component {
         let { dispatchLogout } = this.props
         dispatchLogout()
     }
-    menu = () => (
+    userMenu = () => (
         <Menu>
             <Menu.Item onClick={this.changeUpdateUserInfoModalShow}>
                 修改用户信息
             </Menu.Item>
             <Menu.Item onClick={this.logout}>
                 退出登录
+            </Menu.Item>
+        </Menu>
+    )
+    loginRegisterMenu = () => (
+        <Menu>
+            <Menu.Item onClick={this.changeLoginModalShow}>
+                用户登录
+            </Menu.Item>
+            <Menu.Item onClick={this.changeRegisterModalShow}>
+                用户注册
             </Menu.Item>
         </Menu>
     )
@@ -53,10 +63,10 @@ class UserHead extends Component {
             <div className='userHead'>
                 {token ?
                     <Fragment>
-                        <Dropdown overlay={this.menu}>
+                        <Dropdown overlay={this.userMenu}>
                             {auth ?
-                                <Avatar size={43} src={headImg} />
-                                : <Avatar size={43} style={{ backgroundColor: avatarBgColor, marginLeft: '60px' }} >
+                                <Avatar size={43} src={headImg} style={{ marginLeft: '40px' }} />
+                                : <Avatar size={43} style={{ backgroundColor: avatarBgColor, marginLeft: '40px' }} >
                                     {name.substring(0, 1)}
                                 </Avatar>
                             }
@@ -65,12 +75,18 @@ class UserHead extends Component {
                     </Fragment>
                     :
                     <Fragment>
-                        <Button type="primary" ghost onClick={this.changeLoginModalShow} style={{ marginRight: '15px' }}>
+                        {/* <Button type="primary" ghost onClick={this.changeLoginModalShow} style={{ marginRight: '15px' }}>
                             登录
                         </Button>
                         <Button type="danger" ghost onClick={this.changeRegisterModalShow} >
                             注册
-                        </Button>
+                        </Button> */}
+                        <Dropdown overlay={this.loginRegisterMenu}>
+                            <Avatar size={43} style={{ marginLeft: '40px' }} >
+                                <Icon type="user" />
+                            </Avatar>
+                        </Dropdown>
+
                         <Modal
                             title="登录"
                             visible={loginShow}

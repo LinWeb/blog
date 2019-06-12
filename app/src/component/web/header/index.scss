@@ -5,6 +5,7 @@
     margin-left: 42px;
     font-size: 18px;
     padding-left: 45px;
+    min-height: 34px;
     background-image: url("../../../logo.svg");
     background-repeat: no-repeat;
     background-position: left center;
@@ -13,7 +14,8 @@
   .nav {
     .nav-ul {
       border-bottom: 1px solid transparent;
-      .item {
+      .item,
+      .ant-menu-submenu {
         padding: 12px 20px;
       }
     }

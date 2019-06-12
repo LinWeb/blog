@@ -5,6 +5,7 @@ export function getArticleList(params) {
     return async (dispatch) => {
         dispatch(emptyArticleList())
         dispatch({ type: UPDATE_LOADING, data: { loading: true } })
+        params.pageSize = 2;
         let data = await API.GET_ARTICLES(params)
         dispatch({ type: UPDATE_LOADING, data: { loading: false } })
         if (data) {

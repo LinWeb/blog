@@ -61,7 +61,12 @@ class Nav extends Component {
         let { currentKey, navData } = this.state
         return (
             <div className='nav'>
-                <Menu mode="horizontal" className='nav-ul' selectedKeys={[currentKey]} onClick={this.changeSelectNav}>
+                <Menu mode="horizontal"
+                    className='nav-ul'
+                    selectedKeys={[currentKey]}
+                    onClick={this.changeSelectNav}
+                    overflowedIndicator={<Icon type="menu" />}
+                >
                     {navData.map((nav, key) => (
                         <Menu.Item key={nav.key} className='item'>
                             <Link to={nav.pathname}>
