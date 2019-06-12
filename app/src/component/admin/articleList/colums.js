@@ -47,7 +47,7 @@ const columns = [
         sorter: (a, b) =>
             (new Date(a.createdAt)).getTime()
             - (new Date(b.createdAt)).getTime(),
-        render: text => <span>{moment(text).format('YYYY-MM-DD hh:mm:ss')}</span>,
+        render: text => <span>{moment(text).format('YYYY-MM-DD HH:mm:ss')}</span>,
     },
     {
         key: 'updatedAt',
@@ -57,7 +57,7 @@ const columns = [
         sorter: (a, b) =>
             (new Date(a.updatedAt)).getTime()
             - (new Date(b.updatedAt)).getTime(),
-        render: text => <span>{moment(text).format('YYYY-MM-DD hh:mm:ss')}</span>,
+        render: text => <span>{moment(text).format('YYYY-MM-DD HH:mm:ss')}</span>,
     },
     {
         key: 'id',
