@@ -24,7 +24,7 @@ class UserHead extends Component {
     )
     render() {
         return (
-            <Dropdown overlay={this.menu}>
+            <Dropdown overlay={this.menu} trigger={['hover', 'click']}>
                 <Avatar size={43} src={headImg} style={{ float: 'right' }} />
             </Dropdown>
         )

@@ -24,7 +24,6 @@ class UpdateUserInfo extends Component {
                     if (data) {
                         if (data.status) {
                             onCancel()
-                            message.success('修改成功');
                         }
                     }
                     this.setState(() => ({

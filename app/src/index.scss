@@ -157,10 +157,11 @@ ul {
   }
 }
 @media screen and (max-width: 548px) {
-  body {
-    font-size: 18px !important;
+  .ant-tag {
+    font-size: 15px !important;
   }
   .web-root {
+    font-size: 16px !important;
     .header-container {
       .ant-col-5 {
         text-align: center;
@@ -217,6 +218,15 @@ ul {
         }
       }
     }
+    #main-body {
+      height: calc(100vh - 60px) !important;
+    }
+    .categories-container {
+      margin: 23px 26px 0;
+      .ant-tag {
+        font-size: 16px !important;
+      }
+    }
   }
   .ant-menu-submenu-popup {
     width: 100%;
@@ -225,6 +235,14 @@ ul {
     .ant-menu {
       min-width: auto !important;
       width: 100%;
+      .ant-menu-item {
+        height: 56px;
+        line-height: 56px;
+        font-size: 16px;
+        .anticon {
+          font-size: 16px;
+        }
+      }
     }
   }
 }

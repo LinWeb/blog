@@ -34,7 +34,7 @@ class TplOne extends Component {
         })
         return (
             <Timeline className='tplOne'>
-                <Timeline.Item>Nice! {total} posts in total. Keep on posting.</Timeline.Item>
+                <Timeline.Item>很棒，总共有 <span style={{ color: '#1890ff', fontSize: 18 }}>{total}</span> 篇文章了，继续加油！</Timeline.Item>
                 {res.map((item, key) =>
                     Object.prototype.toString.call(item) === '[object Object]' ?
                         <Timeline.Item key={key}>{item.date} <Link className='title' to={'/article/' + item.id}>{item.title}</Link></Timeline.Item>

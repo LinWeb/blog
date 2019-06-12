@@ -38,7 +38,7 @@ class Home extends Component {
                     : articleList.length ?
                         <Fragment>
                             <ArticleList data={articleList}></ArticleList>
-                            <Pagination style={{ textAlign: 'right' }}
+                            <Pagination style={{ textAlign: 'right', marginBottom: 22 }}
                                 current={currentPage}
                                 pageSize={pageSize}
                                 total={total}
