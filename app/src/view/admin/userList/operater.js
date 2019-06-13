@@ -9,7 +9,7 @@ class Operater extends Component {
         return (
             <Fragment>
                 <Popconfirm onConfirm={() => { dispatchDelUser({ id }) }} title="确认删除此用户？" okText="确定" cancelText="取消">
-                    <span style={{ color: '#096dd9' }}>删除</span>
+                    <span style={{ cursor: 'pointer', color: '#1890ff' }}>删除</span>
                 </Popconfirm>
             </Fragment>
         )

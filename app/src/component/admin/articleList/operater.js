@@ -14,7 +14,7 @@ class Operater extends Component {
                 <Link to={'/admin/article/edit/' + id}>编辑</Link>
                 <Divider type="vertical" />
                 <Popconfirm onConfirm={() => { dispatchDelArticle({ id }) }} title="确认删除此文章？" okText="确定" cancelText="取消">
-                    <span style={{ color: '#096dd9' }}>删除</span>
+                    <span style={{ cursor: 'pointer', color: '#1890ff' }}>删除</span>
                 </Popconfirm>
             </Fragment>
         )
