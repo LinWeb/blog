@@ -4,6 +4,7 @@ import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logout } from '@/store/user/action'
 import headImg from '@/assets/images/bloger-head.jpg'
+
 class UserHead extends Component {
     logout = async () => {
         let { dispatchLogout, history } = this.props

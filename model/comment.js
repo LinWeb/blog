@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         content: {
             type: DataTypes.STRING,
             allowNull: false,
+            comment: '内容'
         },
     })
     commentModel.associate = (models) => {

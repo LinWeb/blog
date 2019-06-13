@@ -8,14 +8,17 @@ module.exports = (sequelize, DataTypes) => {
         title: {
             type: DataTypes.STRING,
             allowNull: false,
+            comment: '标题'
         },
         content: {
             type: DataTypes.TEXT,
             allowNull: false,
+            comment: '内容'
         },
         readCount: {
             type: DataTypes.INTEGER,
-            defaultValue: 0
+            defaultValue: 0,
+            comment: '浏览量'
         },
     })
     articleModel.associate = (models) => {

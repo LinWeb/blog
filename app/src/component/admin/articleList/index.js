@@ -15,9 +15,9 @@ class ArticleList extends Component {
             <Table rowKey="id"
                 bordered={true}
                 className='article-list'
-                columns={columns}
-                dataSource={data}
-                pagination={{
+                columns={columns}  // 表格结构配置
+                dataSource={data}  // 数据源
+                pagination={{      // 分页器
                     current: currentPage,
                     pageSize,
                     total,

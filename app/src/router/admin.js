@@ -6,7 +6,6 @@ import { Route, Switch, } from 'react-router-dom'
 import RouterConfig from '@/config/routerConfig';
 import { connect } from 'react-redux'
 import NotFound from '@/view/common/404';
-
 const { Content } = Layout;
 
 class Admin extends Component {

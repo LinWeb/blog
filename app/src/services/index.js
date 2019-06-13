@@ -5,7 +5,6 @@ import * as TAG from './tag'
 import * as CATEGORY from './category'
 import * as REPLY from './reply'
 
-
 export default {
     ...ARTICLE, ...TAG, ...CATEGORY, ...USER, ...COMMENT, ...REPLY
 }

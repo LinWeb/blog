@@ -1,4 +1,3 @@
-
 let state = {
     commentListData: {   // 文章列表数据
         commentList: [],

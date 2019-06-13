@@ -4,6 +4,7 @@ import ArticleList from '@/component/web/articleList'
 import { getArticleList } from '@/store/article/action'
 import { Pagination, Empty } from 'antd'
 import qs from 'querystring'
+
 class Home extends Component {
     onChange = (currentPage) => {
         let { history, dispatchGetArticleList } = this.props

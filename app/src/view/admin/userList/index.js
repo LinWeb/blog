@@ -4,6 +4,7 @@ import Filter from './filter'
 import { Table } from 'antd';
 import { getUserList } from '@/store/user/action'
 import { connect } from 'react-redux'
+
 class UserList extends Component {
     constructor(props) {
         super(props)

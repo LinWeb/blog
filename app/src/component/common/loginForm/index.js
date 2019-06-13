@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Form, Input, Icon } from 'antd';
 import { login } from '@/store/user/action'
 import { connect } from 'react-redux'
+
 class LoginForm extends Component {
     constructor(props) {
         super(props)

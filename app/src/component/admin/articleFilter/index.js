@@ -11,9 +11,9 @@ class ArticleFilter extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            keyword: '',
-            tagName: '',
-            categoryName: ''
+            keyword: '',  // 标题关键词
+            tagName: '',  // 标签
+            categoryName: ''  // 分类
         }
     }
     changeKeyword = (e) => {
@@ -39,8 +39,8 @@ class ArticleFilter extends Component {
     }
     UNSAFE_componentWillMount() {
         let { dispatchGetTagList, dispatchGetCategoryList } = this.props
-        dispatchGetTagList()
-        dispatchGetCategoryList()
+        dispatchGetTagList()  // 获取标签列表
+        dispatchGetCategoryList()  // 获取分类列表
     }
     render() {
         let { keyword, tagName, categoryName } = this.state

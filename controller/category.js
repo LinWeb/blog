@@ -1,6 +1,7 @@
 const { categoryModel, sequelize } = require('../model')
 
 class categoryController {
+    // 分类列表
     static async list(ctx) {
         let response = await categoryModel.findAll({
             group: 'name',

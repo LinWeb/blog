@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom'
 const { Sider: AntdSlider } = Layout;
 const { SubMenu } = Menu;
 class Sider extends Component {
-
     state = {
         menuData: [
             {

@@ -1,6 +1,7 @@
 import marked from 'marked'
 import hljs from 'highlight.js'
 
+// markdown转换器
 marked.setOptions({
     renderer: new marked.Renderer(),
     gfm: true,

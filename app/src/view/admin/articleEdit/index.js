@@ -8,6 +8,7 @@ import { addArticle, updateArticle, getArticleDetail } from '@/store/article/act
 import Categories from './categories'
 import Tags from './tags'
 import MdEditor from 'react-markdown-editor-lite'
+
 class ArticleEdit extends Component {
     constructor(props) {
         super(props)
@@ -146,10 +147,6 @@ class ArticleEdit extends Component {
     }
 }
 
-let mapStateToProps = state => {
-    return {
-    }
-}
 let mapDispatchToProps = dispatch => ({
     dispatchGetTagList: () => dispatch(getTagList()),
     dispatchGetCategoryList: () => dispatch(getCategoryList()),
@@ -158,4 +155,4 @@ let mapDispatchToProps = dispatch => ({
     dispatchGetArticleDetail: params => dispatch(getArticleDetail(params))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form.create({ name: 'article-edit' })(ArticleEdit))
+export default connect(null, mapDispatchToProps)(Form.create({ name: 'article-edit' })(ArticleEdit))

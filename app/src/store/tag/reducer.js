@@ -1,6 +1,7 @@
 import state from './state'
 import { GET_TAG_LIST } from '../actionTypes'
 let initState = state
+
 const tag = (state = initState, { type, data }) => {
     switch (type) {
         case GET_TAG_LIST:

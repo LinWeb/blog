@@ -1,6 +1,7 @@
 import state from './state'
 import { GET_COMMENTS, COMMENT_ADD, REPLY_ADD } from '../actionTypes'
 let initState = state
+
 const user = (state = initState, { type, data }) => {
     switch (type) {
         case GET_COMMENTS:
@@ -40,4 +41,5 @@ const user = (state = initState, { type, data }) => {
             return state
     }
 }
+
 export default user

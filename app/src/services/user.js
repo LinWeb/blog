@@ -20,6 +20,7 @@ let GET_USERS = async (params) => {
 let USER_DEL = async (data) => {
     return await axios.post(USER_DEL_URL, data)
 }
+
 export {
     REGISTER, LOGIN, CHECK_USERNAME, UPDATE_USER, GET_USERS, USER_DEL
 }

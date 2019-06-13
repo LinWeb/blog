@@ -17,6 +17,7 @@ let ARTICLE_UPDATE = async (data) => {
 let ARTICLE_DEL = async (data) => {
     return await axios.post(ARTICLE_DEL_URL, data)
 }
+
 export {
     GET_ARTICLES, GET_ARTICLE_DETAIL, ARTICLE_ADD, ARTICLE_UPDATE, ARTICLE_DEL
 }

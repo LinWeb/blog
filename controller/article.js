@@ -50,7 +50,6 @@ class articleController {
         let total = allResponse.length // 全部条数
         let pageCount = Math.ceil(total / pageSize)   // 页数
 
-
         let response = await articleModel.findAll({
             offset: (currentPage - 1) * pageSize,
             limit: pageSize,
@@ -94,8 +93,6 @@ class articleController {
                 message: '删除失败'
             }
         }
-
-
     }
     // 更新文章
     static async update(ctx) {
@@ -158,7 +155,6 @@ class articleController {
             message: '请求成功',
             response
         }
-
     }
     // 通过分类查询
     static async byCategory(ctx) {

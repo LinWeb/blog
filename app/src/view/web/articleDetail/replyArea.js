@@ -3,6 +3,7 @@ import { Form, Button, Input } from 'antd';
 import { replyAdd } from '@/store/reply/action'
 import { connect } from 'react-redux'
 const { TextArea } = Input;
+
 class Reply extends Component {
     constructor(props) {
         super(props)
