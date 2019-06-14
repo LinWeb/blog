@@ -12,7 +12,7 @@ class Admin extends Component {
     render() {
         let { loading, } = this.props
         return (
-            <Row className='admin-root'>
+            <Row className='admin-root' style={{ minWidth: 1130 }}>
                 <Col span={4}><Sider></Sider></Col>
                 <Col span={20}>
                     <Header></Header>
