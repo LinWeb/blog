@@ -9,7 +9,7 @@ class userController {
     // 校验用户名是否已经注册，密码加密处理
     static async register(ctx) {
         let params = ctx.request.body
-        let { username, password } = params
+        let { username, password, name } = params
         let user = await userModel.findOne({ where: { username } }) // 校验是否用户名是否已经注册
         if (user) {
             ctx.body = {
@@ -18,7 +18,7 @@ class userController {
             }
         } else {
             let bcryptPassword = await passwordHash(password)  // 密码加密
-            let response = await userModel.create({ username, name: username, password: bcryptPassword })
+            let response = await userModel.create({ username, name, password: bcryptPassword })
             if (response) {
                 ctx.body = {
                     status: 1,

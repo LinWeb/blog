@@ -46,7 +46,7 @@ class LoginForm extends Component {
                             },
                         ],
                     })(<Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                        placeholder="Username" />)}
+                        placeholder="请输入电子邮箱" />)}
                 </Form.Item>
                 <Form.Item>
                     {getFieldDecorator('password', {
@@ -58,7 +58,7 @@ class LoginForm extends Component {
                         ],
                     })(<Input.Password prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                         type="password"
-                        placeholder="Password" />)}
+                        placeholder="请输入密码" />)}
                 </Form.Item>
                 <Form.Item>
                     <Button type="primary" loading={loading} htmlType="submit" style={{ width: '100%', float: 'right' }}>

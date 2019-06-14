@@ -114,7 +114,7 @@ class ArticleEdit extends Component {
         }
         if (res.status) {
             message.success(res.message)
-            // history.push('/admin')
+            history.push('/admin')
         }
     }
     render() {

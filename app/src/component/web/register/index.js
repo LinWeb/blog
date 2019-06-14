@@ -100,6 +100,16 @@ class Register extends Component {
                             ],
                         })(<Input />)}
                     </Form.Item>
+                    <Form.Item label="用户昵称">
+                        {getFieldDecorator('name', {
+                            rules: [
+                                {
+                                    required: true,
+                                    message: '请输入用户昵称',
+                                },
+                            ],
+                        })(<Input />)}
+                    </Form.Item>
                     <Form.Item label="新密码" hasFeedback>
                         {getFieldDecorator('password', {
                             validateFirst: true,
