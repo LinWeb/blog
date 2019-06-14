@@ -86,7 +86,7 @@ class ArticleEdit extends Component {
         }
 
     }
-    handleSubmit = async (e) => {
+    handleSubmit = async (e, exit) => {
         e.preventDefault()
         let { id, title, categories, tags, content } = this.state
         let { dispatchAddArticle, dispatchUpdateArticle, history } = this.props
@@ -114,13 +114,13 @@ class ArticleEdit extends Component {
         }
         if (res.status) {
             message.success(res.message)
-            history.push('/admin')
+            exit && history.push('/admin')
         }
     }
     render() {
         let { title, categories, tags, content } = this.state
         return (
-            <Form labelCol={{ span: 2 }} wrapperCol={{ span: 20 }} onSubmit={this.handleSubmit} style={{ padding: '22px 0 45px' }}>
+            <Form labelCol={{ span: 2 }} wrapperCol={{ span: 20 }} style={{ padding: '22px 0 45px' }}>
                 <Form.Item label="标题">
                     <Input value={title} onChange={this.changeTitle} />
                 </Form.Item>
@@ -137,9 +137,12 @@ class ArticleEdit extends Component {
                         style={{ width: '100%', height: '600px' }}
                     />
                 </Form.Item>
-                <Form.Item wrapperCol={{ span: 2, offset: 1 }}>
-                    <Button type="primary" htmlType="submit">
+                <Form.Item wrapperCol={{ span: 14, offset: 1 }}>
+                    <Button type="primary" htmlType="submit" onClick={(e) => { this.handleSubmit(e, true) }}>
                         提交
+                    </Button>
+                    <Button type="primary" style={{ marginLeft: 18 }} htmlType="submit" onClick={(e) => { this.handleSubmit(e, false) }}>
+                        保存并继续编辑
                     </Button>
                 </Form.Item>
             </Form>
