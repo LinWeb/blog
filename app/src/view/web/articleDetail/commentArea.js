@@ -78,7 +78,7 @@ class CommentArea extends Component {
 let mapStateToProps = state => {
     let { userId, name, auth } = state.user
     let { categoryColors } = state.category
-    let { total } = state.comment.commentListData.pager
+    let total = state.comment.commentListData.commentList.length
     return {
         userId, name, auth, categoryColors, total
     }

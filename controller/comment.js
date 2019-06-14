@@ -41,7 +41,7 @@ class commentController {
                 { model: userModel, attributes: ['name', 'auth'] },
                 {
                     model: replyModel,
-                    attributes: ['content', 'createdAt', 'userId'],
+                    attributes: ['id', 'content', 'createdAt', 'userId', 'commentId'],
                     include: [{ model: userModel, attributes: ['name', 'auth'] }],
                     order: [['createdAt', 'DESC']]
                 }
@@ -66,13 +66,14 @@ class commentController {
     }
     // 删除评论
     static async del(ctx) {
-        let { id } = ctx.params;
+        let { id } = ctx.request.body;
         let response = await commentModel.destroy({
             where: {
                 id: id
             }
         })
         if (response === 1) {
+            await replyModel.destroy({ where: { commentId: null } }) // 删除回复
             ctx.body = {
                 status: 1,
                 message: '删除成功'

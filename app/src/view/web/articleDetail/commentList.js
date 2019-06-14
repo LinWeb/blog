@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { getComments } from '@/store/comment/action'
+import { getComments, delComment } from '@/store/comment/action'
+import { delReply } from '@/store/reply/action'
 import CommentItem from './commentItem'
 import { Spin, Icon } from 'antd'
 
@@ -28,14 +29,22 @@ class CommentList extends Component {
             }
         })
     }
+    delCommentHandler = (id) => {
+        let { dispatchDelComment } = this.props
+        dispatchDelComment({ id })
+    }
+    delReplyHandler = (id, commentId) => {
+        let { dispatchDelReply } = this.props
+        dispatchDelReply({ id, commentId })
+    }
     render() {
         let { commentList, pageCount, currentPage } = this.props
         return (
             <div className='comment-list'>
                 {commentList.map((comment, key) => (
-                    <CommentItem key={key} data={comment}>
+                    <CommentItem key={key} data={comment} action={this.delCommentHandler}>
                         {comment.replies.map((reply, key) => (
-                            <CommentItem key={key} data={reply} />
+                            <CommentItem key={key} data={reply} action={this.delReplyHandler} />
                         ))}
                     </CommentItem>
                 ))}
@@ -56,6 +65,9 @@ let mapStateToProps = state => {
     }
 }
 let mapDispatchToProps = dispatch => ({
-    dispatchGetComments: (params) => dispatch(getComments(params))
+    dispatchGetComments: (params) => dispatch(getComments(params)),
+    dispatchDelComment: (params) => dispatch(delComment(params)),
+    dispatchDelReply: (params) => dispatch(delReply(params))
+
 })
 export default connect(mapStateToProps, mapDispatchToProps)(CommentList)

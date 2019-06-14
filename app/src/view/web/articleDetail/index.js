@@ -68,9 +68,9 @@ class ArticleDetail extends Component {
     }
 }
 let mapStateToProps = state => {
-    let { total } = state.comment.commentListData.pager
+    let commentsTotal = state.comment.commentListData.commentList.length
     return {
-        commentsTotal: total
+        commentsTotal
     }
 }
 let mapDispatchToProps = dispatch => ({

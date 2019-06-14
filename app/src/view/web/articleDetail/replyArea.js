@@ -42,25 +42,19 @@ class Reply extends Component {
         }))
     }
     render() {
-        let { username } = this.props
+        let { name } = this.props
         let { loading, content } = this.state
         return (
             <div className='reply-area'>
-                <TextArea value={content} onChange={this.onChange} placeholder={`回复${username}...`} rows={2} />
+                <TextArea value={content} onChange={this.onChange} placeholder={`回复${name}...`} rows={2} />
                 <Button htmlType="submit" onClick={this.handleSubmit} className='reply-submit' loading={loading} type="primary">回复</Button>
             </div>
         );
     }
 }
-let mapStateToProps = state => {
-    let { userId, name } = state.user
-    let { categoryColors } = state.category
-    return {
-        userId, name, categoryColors
-    }
-}
+
 let mapDispatchToProps = dispatch => ({
     dispatchReplyAdd: (params) => dispatch(replyAdd(params))
 })
-export default connect(mapStateToProps, mapDispatchToProps)(Form.create({ name: 'comment' })(Reply))
+export default connect(null, mapDispatchToProps)(Form.create({ name: 'comment' })(Reply))
 

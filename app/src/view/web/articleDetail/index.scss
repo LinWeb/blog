@@ -5,6 +5,19 @@
   }
   .comment-container {
     margin-top: 30px;
+    .ant-comment-content {
+      .del {
+        color: transparent;
+        cursor: pointer;
+        margin-left: 10px;
+      }
+      &:hover {
+        .del {
+          color: red;
+        }
+      }
+    }
+
     .comment-area {
       .title {
         font-size: 14px;

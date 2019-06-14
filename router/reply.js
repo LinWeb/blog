@@ -3,6 +3,6 @@ const router = new Router()
 const replyController = require('../controller/reply')
 
 router.post('/add', replyController.add)
-router.del('/del/:id', replyController.del)
+router.post('/del', replyController.del)
 
 module.exports = router

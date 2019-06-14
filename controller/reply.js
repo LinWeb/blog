@@ -23,7 +23,7 @@ class replyController {
     }
     // 删除评论
     static async del(ctx) {
-        let { id } = ctx.params;
+        let { id } = ctx.request.body;
         let response = await replyModel.destroy({
             where: {
                 id: id

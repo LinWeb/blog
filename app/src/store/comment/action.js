@@ -1,4 +1,4 @@
-import { GET_COMMENTS, COMMENT_ADD } from '../actionTypes'
+import { GET_COMMENTS, COMMENT_ADD, COMMENT_DEL } from '../actionTypes'
 import { message } from 'antd';
 import API from '@/services/index'
 
@@ -31,5 +31,16 @@ export function getComments(params) {
             }
         }
         return res
+    }
+}
+export function delComment(params) {
+    return async (dispatch) => {
+        let res = await API.COMMENT_DEL(params)
+        if (res) {
+            if (res.status) {
+                message.success(res.message);
+                dispatch({ type: COMMENT_DEL, data: params })
+            }
+        }
     }
 }

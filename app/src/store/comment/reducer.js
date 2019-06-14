@@ -1,5 +1,6 @@
 import state from './state'
-import { GET_COMMENTS, COMMENT_ADD, REPLY_ADD } from '../actionTypes'
+import { GET_COMMENTS, COMMENT_ADD, COMMENT_DEL, REPLY_ADD, REPLY_DEL } from '../actionTypes'
+import { getAuth } from '@/lib/checkAuth'
 let initState = state
 
 const user = (state = initState, { type, data }) => {
@@ -21,10 +22,15 @@ const user = (state = initState, { type, data }) => {
                 commentList: [newCommentItem, ...commentList]
             }
             return Object.assign({}, state, { commentListData: newCommentListData })
-        case REPLY_ADD:
-            var { commentId, content, createdAt, userId, user } = data
+        case COMMENT_DEL:
+            var { id } = data
             var { pager, commentList } = state.commentListData
-            var newReplyItem = { commentId, content, createdAt, userId, user };
+            var newCommentList = commentList.filter(item => item.id !== id)
+            return Object.assign({}, state, { commentListData: { pager, commentList: newCommentList } })
+        case REPLY_ADD:
+            var { id, commentId, content, createdAt, userId, user } = data
+            var { pager, commentList } = state.commentListData
+            var newReplyItem = { id, commentId, content, createdAt, userId, user };
             var newCommentList = commentList.map(item => {
                 let obj = { ...item }
                 if (item.id === commentId) {
@@ -37,6 +43,16 @@ const user = (state = initState, { type, data }) => {
                 commentList: newCommentList
             }
             return Object.assign({}, state, { commentListData: newCommentListData })
+        case REPLY_DEL:
+            var { id, commentId } = data
+            var { pager, commentList } = state.commentListData
+            var newCommentList = commentList.map(item => {
+                if (item.id === commentId) {
+                    item.replies = item.replies.filter(reply => reply.id !== id)
+                }
+                return item
+            })
+            return Object.assign({}, state, { commentListData: { pager, commentList: newCommentList } })
         default:
             return state
     }
