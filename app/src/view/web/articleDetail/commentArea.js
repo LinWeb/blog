@@ -45,6 +45,7 @@ class CommentArea extends Component {
                 <div className='title'><span>{total}</span>条评论</div>
                 <Divider style={{ margin: '8px 0px 14px' }} />
                 <Comment
+                    className='comment-form'
                     avatar={
                         auth ?
                             <Avatar size={43} src={headImg} />

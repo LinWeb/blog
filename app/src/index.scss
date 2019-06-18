@@ -221,6 +221,38 @@ ul {
     #main-body {
       height: calc(100vh - 60px) !important;
     }
+    .content-box {
+      .article-list {
+        margin-top: 23px;
+        .item {
+          padding: 0px 20px 16px;
+          .header {
+            white-space: pre-wrap;
+            overflow: hidden;
+            display: block;
+            width: 100%;
+            min-width: auto;
+            height: auto;
+            .ant-divider-inner-text {
+              display: block;
+              .title {
+                display: block;
+                margin-bottom: 8px;
+              }
+            }
+          }
+        }
+      }
+      .article-detail-container {
+        .comment-area {
+          .comment-form {
+            .ant-comment-avatar {
+              display: none;
+            }
+          }
+        }
+      }
+    }
     .categories-container {
       margin: 23px 26px 0;
       .ant-tag {

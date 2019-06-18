@@ -7,7 +7,7 @@ class About extends Component {
         return (
             <div className='about-container'>
                 <Divider orientation="left">博客简述</Divider>
-                <p>本博客使用的技术为 react v16.8 + antd + koa2 + mysql</p>
+                <p>本博客使用的技术为 react + antd + koa2 + mysql</p>
                 <p>源码地址为{' '}
                     <a target="_blank" rel="noreferrer noopener" href="https://github.com/LinWeb/blog">
                         github
@@ -17,12 +17,12 @@ class About extends Component {
                 <Divider orientation="left">关于我</Divider>
                 <ul className="about-list">
                     <li>姓名：林晓生</li>
-                    <li>学历专业：大专 计算机信息管理</li>
+                    <li>学历专业：大专<Divider type="vertical" />计算机信息管理</li>
                     <li>
                         联系方式：
-                        <Icon type="wechat" style={{ color: '#57bb64' }} /> LXS-JAY
-                        <Divider type="vertical" />
-                        <i className="iconfont icon-email" />
+                        {/* <Icon type="wechat" style={{ color: '#57bb64' }} /> LXS-JAY */}
+                        {/* <Divider type="vertical" /> */}
+                        <Icon type="mail" style={{ color: '#57bb64', marginRight: 4 }} />
                         <a href="mailto:798738148@qq.com">798738148@qq.com</a>
                     </li>
                     <li>坐标：深圳市</li>

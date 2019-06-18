@@ -16,7 +16,10 @@ class ArticleList extends Component {
                         history.push('/article/' + item.id)
                     }
                 }>
-                    <Divider orientation="left"><span className='title'>{item.title}</span> <span className='createdAt'>{moment(item.createdAt).format('LL')}</span></Divider>
+                    <Divider orientation="left" className='header'>
+                        <span className='title'>{item.title}</span>
+                        <span className='createdAt'>{moment(item.createdAt).format('LL')}</span>
+                    </Divider>
                     <div className='content markdown-content' dangerouslySetInnerHTML={{ __html: marked(item.content || '') }}></div>
                     <ArticleInfo data={{ ...item, commentsTotal: item.comments ? item.comments.length : 0 }} />
                 </li>

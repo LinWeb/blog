@@ -51,7 +51,7 @@ class ArticleDetail extends Component {
         let { title, createdAt, readCount, tags, categories, content } = articleDetailData
         return (
             <div className='article-detail-container'>
-                <h1 className='title'>{title}</h1>
+                <h2 className='title'>{title}</h2>
                 <ArticleInfo data={{ readCount, commentsTotal, tags, categories }}>
                     <Icon type="contacts" className='icon' />
                     {moment(createdAt).format('LL')}
