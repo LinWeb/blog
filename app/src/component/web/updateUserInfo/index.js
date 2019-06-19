@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Modal, Button, Form, Input, message, Radio } from 'antd';
+import { Modal, Button, Form, Input, Radio } from 'antd';
 import { updateUser } from '@/store/user/action'
 import { connect } from 'react-redux'
 

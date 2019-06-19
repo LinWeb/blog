@@ -19,7 +19,7 @@ export function replyAdd(params) {
 }
 export function delReply(params) {
     return async (dispatch) => {
-        let { id, commentId } = params
+        let { id } = params
         let res = await API.REPLY_DEL({ id })
         if (res) {
             if (res.status) {
