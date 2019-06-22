@@ -3,7 +3,7 @@ import { Route, Switch, } from 'react-router-dom'
 import { Row, Col, Spin, BackTop } from 'antd';
 import Header from '@/component/web/header/index';
 import Sider from '@/component/web/sider/index';
-import RouterConfig from '@/config/routerConfig';
+import { webConfig } from '@/config/routerConfig';
 import { connect } from 'react-redux'
 import NotFound from '@/view/common/404';
 import '@/assets/scss/mark.scss'
@@ -20,7 +20,7 @@ class Web extends Component {
                         <Spin tip="Loading..." spinning={loading}>
                             <div id='main-body' style={{ height: 'calc(100vh - 73px)', overflowY: 'auto' }}>
                                 <Switch>
-                                    {RouterConfig.web.map((res, key) =>
+                                    {webConfig.map((res, key) =>
                                         <Route {...res} key={key} />
                                     )}
                                     <Route component={NotFound} />
