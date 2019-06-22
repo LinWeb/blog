@@ -1,8 +1,9 @@
 const hostname = window.location.hostname;
 const protocol = window.location.protocol;
-const BASE_URL = process.env.NODE_ENV === 'production' ?
-    `${protocol}//${hostname}/api` :
-    `${protocol}//${hostname}:3000/api`;
+// const BASE_URL = process.env.NODE_ENV === 'production' ?
+//     `${protocol}//${hostname}/api` :
+//     `${protocol}//${hostname}:3000/api`;
+const BASE_URL='https://www.lxsblog.cn/api'
 const GET_ARTICLES_URL = '/article/list';
 const GET_ARTICLE_DETAIL_URL = '/article/detail';
 const GET_TAGS_URL = '/tag/list';

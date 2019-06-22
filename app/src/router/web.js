@@ -6,6 +6,7 @@ import Sider from '@/component/web/sider/index';
 import RouterConfig from '@/config/routerConfig';
 import { connect } from 'react-redux'
 import NotFound from '@/view/common/404';
+import '@/assets/scss/mark.scss'
 
 class Web extends Component {
     render() {
