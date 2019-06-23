@@ -177,6 +177,7 @@ module.exports = function (webpackEnv) {
     },
     optimization: {
       minimize: isEnvProduction,
+      mergeDuplicateChunks: isEnvProduction,
       minimizer: [
         // This is only used in production mode
         new TerserPlugin({
