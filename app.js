@@ -6,7 +6,6 @@ const checkToken = require('./middlewares/checkToken')
 const checkAuth = require('./middlewares/checkAuth')
 const errorHandler = require('./middlewares/errorHandler')
 const router = require('./router/index')
-const compress = require('koa-compress')
 
 app.use(async (ctx, next) => {
     ctx.set('Access-Control-Allow-Origin', ctx.headers.origin)  // 跨域访问
@@ -14,14 +13,6 @@ app.use(async (ctx, next) => {
     ctx.set('Access-control-Allow-Headers', 'X-Requested-With,content-type,Authorization') // 设置接收携带Authorization的请求
     await next()
 })
-
-app.use(compress({
-    filter: function (content_type) {
-        return /text/i.test(content_type)
-    },
-    threshold: 2048,
-    flush: require('zlib').Z_SYNC_FLUSH
-}))
 
 app.use(logger())
 app.use(bodyparser())
