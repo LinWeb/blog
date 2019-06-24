@@ -520,7 +520,6 @@ module.exports = function (webpackEnv) {
         algorithm: 'gzip',
         threshold: 1024,  // 文件字节大于指定数值的文件才会被压缩
         minRatio: 0.8, // 压缩比小于等于0.8的都压缩
-        deleteOriginalAssets: true,// 是否删除源文件
         compressionOptions: {
           level: 9   // 压缩级别，级别越高压缩得越小，取值1~9
         }
