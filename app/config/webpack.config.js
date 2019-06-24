@@ -27,7 +27,7 @@ const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpack
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 
 const postcssNormalize = require('postcss-normalize');
-
+const CompressionWebpackPlugin = require('compression-webpack-plugin');
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 // Some apps do not need the benefits of saving a web request, so not inlining the chunk
@@ -514,6 +514,17 @@ module.exports = function (webpackEnv) {
       ],
     },
     plugins: [
+      // GZIP压缩
+      isEnvProduction && new CompressionWebpackPlugin({
+        filename: '[path].gz[query]',
+        algorithm: 'gzip',
+        threshold: 1024,  // 文件字节大于指定数值的文件才会被压缩
+        minRatio: 0.8, // 压缩比小于等于0.8的都压缩
+        deleteOriginalAssets: true,// 是否删除源文件
+        compressionOptions: {
+          level: 9   // 压缩级别，级别越高压缩得越小，取值1~9
+        }
+      }),
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
         Object.assign(
