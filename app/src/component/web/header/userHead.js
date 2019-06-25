@@ -1,11 +1,24 @@
 import React, { Component, Fragment } from 'react';
-import { Modal, Menu, Dropdown, Avatar, Icon } from 'antd';
-import Register from '../register'
-import LoginForm from '@/component/common/loginForm'
-import UpdateUserInfo from '../updateUserInfo'
+import { Menu, Dropdown, Avatar, Icon } from 'antd';
 import { connect } from 'react-redux'
 import { logout } from '@/store/user/action'
 import headImg from '@/assets/images/bloger-head.jpg'
+import Bundle from '@/lib/bundle'
+
+const RegisterModal = Bundle(() => import(
+    /* webpackChunkName: "register" */
+    '../registerModal'
+))
+
+const LoginModal = Bundle(() => import(
+    /* webpackChunkName: "login" */
+    '../LoginModal'
+))
+
+const UpdateUserInfo = Bundle(() => import(
+    /* webpackChunkName: "updateUserInfo" */
+    '../updateUserInfo'
+))
 
 class UserHead extends Component {
     constructor(props) {
@@ -71,7 +84,7 @@ class UserHead extends Component {
                                 </Avatar>
                             }
                         </Dropdown>
-                        <UpdateUserInfo isShow={updateUserInfoShow} onCancel={this.changeUpdateUserInfoModalShow} />
+                        {updateUserInfoShow && <UpdateUserInfo isShow={updateUserInfoShow} onCancel={this.changeUpdateUserInfoModalShow} />}
                     </Fragment>
                     :
                     <Fragment>
@@ -80,17 +93,8 @@ class UserHead extends Component {
                                 <Icon type="user" />
                             </Avatar>
                         </Dropdown>
-
-                        <Modal
-                            title="登录"
-                            visible={loginShow}
-                            onCancel={this.changeLoginModalShow}
-                            width={334}
-                            footer={null}
-                        >
-                            <LoginForm succeedCallback={this.changeLoginModalShow} />
-                        </Modal>
-                        <Register isShow={registerShow} onCancel={this.changeRegisterModalShow} />
+                        {loginShow && <LoginModal isShow={loginShow} onCancel={this.changeLoginModalShow} />}
+                        {registerShow && <RegisterModal isShow={registerShow} onCancel={this.changeRegisterModalShow} />}
                     </Fragment>
                 }
             </div >

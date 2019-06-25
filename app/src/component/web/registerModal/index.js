@@ -3,7 +3,7 @@ import { Modal, Button, Form, Input, message } from 'antd';
 import { register, checkUsername } from '@/store/user/action'
 import { connect } from 'react-redux'
 
-class Register extends Component {
+class RegisterModal extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -155,4 +155,4 @@ let mapDispatchToProps = dispatch => ({
     dispatchRegister: params => dispatch(register(params)),
     dispatchCheckUsername: params => dispatch(checkUsername(params))
 })
-export default connect(null, mapDispatchToProps)(Form.create({ name: 'register' })(Register))
+export default connect(null, mapDispatchToProps)(Form.create({ name: 'register' })(RegisterModal))
