@@ -1,9 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import { withRouter, Route } from 'react-router-dom'
-import Web from './web'
-import Admin from './admin'
-import AdminLogin from '@/view/admin/login';
+import Bundle from '@/lib/bundle'
 import { connect } from 'react-redux'
+
+const Web = Bundle(() => import('./web'))
+const Admin = Bundle(() => import('./admin'))
+const AdminLogin = Bundle(() => import('@/view/admin/login'))
+
 class Main extends Component {
     checkAuth() {
         let { history, auth } = this.props
@@ -32,6 +35,7 @@ class Main extends Component {
                 isAdminLoginPath = true
             }
         }
+
         return (
             <Fragment>
                 {isAdminPath ?
