@@ -247,34 +247,33 @@ module.exports = function (webpackEnv) {
       splitChunks: {
         cacheGroups: {
           commons: {
-            name: 'commons',
-            chunks: 'initial',
-            minChunks: 2
+            chunks: 'all',
+            minChunks: 2,
+            priority: 1,
           },
           react: {
             name: 'react',
-            test: module => /react|redux/.test(module.context),
+            test: /react/,
             chunks: 'initial',
-            priority: 11,
+            priority: 4,
             enforce: true,
+            reuseExistingChunk: true
           },
           antd: {
             name: 'antd',
-            test: (module) => {
-              return /ant/.test(module.context);
-            },
+            test: /antd/,
             chunks: 'initial',
-            priority: 11,
+            priority: 3,
             enforce: true,
+            reuseExistingChunk: true
           },
           moment: {
             name: 'moment',
-            test: (module) => {
-              return /moment/.test(module.context);
-            },
+            test: /moment/,
             chunks: 'initial',
-            priority: 13,
+            priority: 2,
             enforce: true,
+            reuseExistingChunk: true
           }
         }
       },
