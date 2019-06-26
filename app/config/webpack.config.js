@@ -246,12 +246,10 @@ module.exports = function (webpackEnv) {
       // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
       splitChunks: {
         cacheGroups: {
-          vendor: {
-            name: 'vendor',
-            test: /[\\/]node_modules[\\/]/,
-            chunks: 'all',
-            priority: 10,
-            enforce: true,
+          commons: {
+            name: 'commons',
+            chunks: 'initial',
+            minChunks: 2
           },
           react: {
             name: 'react',
