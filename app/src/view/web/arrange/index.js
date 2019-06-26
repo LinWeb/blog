@@ -3,8 +3,17 @@ import { Pagination, Empty } from 'antd';
 import { connect } from 'react-redux'
 import { getArticleList, } from '@/store/article/action'
 import './index.scss'
-import TplOne from './tplOne'
-import TplTwo from './tplTwo'
+import Bundle from '@/lib/bundle'
+
+const TplOne = Bundle(() => import(
+    /* webpackChunkName: "tplOne" */
+    './tplOne'
+))
+
+const TplTwo = Bundle(() => import(
+    /* webpackChunkName: "tplTwo" */
+    './tplTwo'
+))
 
 class Arrange extends Component {
     getArticles(params) {

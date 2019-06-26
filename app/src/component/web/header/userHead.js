@@ -15,9 +15,9 @@ const LoginModal = Bundle(() => import(
     '../LoginModal'
 ))
 
-const UpdateUserInfo = Bundle(() => import(
-    /* webpackChunkName: "updateUserInfo" */
-    '../updateUserInfo'
+const UpdateUserModal = Bundle(() => import(
+    /* webpackChunkName: "updateUserModal" */
+    '../updateUserModal'
 ))
 
 class UserHead extends Component {
@@ -84,7 +84,7 @@ class UserHead extends Component {
                                 </Avatar>
                             }
                         </Dropdown>
-                        {updateUserInfoShow && <UpdateUserInfo isShow={updateUserInfoShow} onCancel={this.changeUpdateUserInfoModalShow} />}
+                        {updateUserInfoShow && <UpdateUserModal isShow={updateUserInfoShow} onCancel={this.changeUpdateUserInfoModalShow} />}
                     </Fragment>
                     :
                     <Fragment>

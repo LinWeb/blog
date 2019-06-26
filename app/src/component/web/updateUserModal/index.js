@@ -3,7 +3,7 @@ import { Modal, Button, Form, Input, Radio } from 'antd';
 import { updateUser } from '@/store/user/action'
 import { connect } from 'react-redux'
 
-class UpdateUserInfo extends Component {
+class UpdateUserModal extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -177,4 +177,4 @@ let mapStateToProps = state => {
 let mapDispatchToProps = dispatch => ({
     dispatchUpdateUser: params => dispatch(updateUser(params)),
 })
-export default connect(mapStateToProps, mapDispatchToProps)(Form.create({ name: 'updateUserInfo' })(UpdateUserInfo))
+export default connect(mapStateToProps, mapDispatchToProps)(Form.create({ name: 'updateUserModal' })(UpdateUserModal))

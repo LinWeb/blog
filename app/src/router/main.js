@@ -3,9 +3,18 @@ import { withRouter, Route } from 'react-router-dom'
 import Bundle from '@/lib/bundle'
 import { connect } from 'react-redux'
 
-const Web = Bundle(() => import('./web'))
-const Admin = Bundle(() => import('./admin'))
-const AdminLogin = Bundle(() => import('@/view/admin/login'))
+const Web = Bundle(() => import(
+    /* webpackChunkName: "web" */
+    './web'
+))
+const Admin = Bundle(() => import(
+    /* webpackChunkName: "admin" */
+    './admin'
+))
+const AdminLogin = Bundle(() => import(
+    /* webpackChunkName: "admin-login" */
+    '@/view/admin/login'
+))
 
 class Main extends Component {
     checkAuth() {
