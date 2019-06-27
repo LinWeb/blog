@@ -21,4 +21,4 @@ app.use(checkToken) // 校验登录中间件
 app.use(checkAuth) // 校验权限中间件
 app.use(router.routes()).use(router.allowedMethods())  // 路由配置
 
-app.listen(3000)
+app.listen(3666)

@@ -1,5 +1,5 @@
 
-const database = 'blog'  // 数据库名称
+const database = 'test_blog'  // 数据库名称
 const username = 'root'  // 数据库用户名
 const password = 'root'  // 数据库密码
 const options = {
