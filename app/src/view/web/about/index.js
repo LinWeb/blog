@@ -17,12 +17,13 @@ class About extends Component {
                 <Divider orientation="left">关于我</Divider>
                 <ul className="about-list">
                     <li>姓名：林晓生</li>
+                    <li>毕业院校：深圳职业技术学院</li>
                     <li>学历专业：大专<Divider type="vertical" />计算机信息管理</li>
                     <li>
                         联系方式：
                         {/* <Icon type="wechat" style={{ color: '#57bb64' }} /> LXS-JAY */}
                         {/* <Divider type="vertical" /> */}
-                        <Icon type="mail" style={{ color: '#57bb64', marginRight: 4 }} />
+                        <Icon type="mail" style={{ color: 'rgb(176, 177, 181)', marginRight: 4 }} />
                         <a href="mailto:798738148@qq.com">798738148@qq.com</a>
                     </li>
                     <li>坐标：深圳市</li>
@@ -62,8 +63,8 @@ class About extends Component {
                     <li>
                         个人
                         <ul>
-                            <li>喜欢玩摄影，旅行和打羽毛球</li>
-                            <li>慢热型、平常比较好说话。联系方式在上面，欢迎交流！</li>
+                            <li>喜欢玩摄影，旅行自驾游和打羽毛球</li>
+                            <li>联系方式在上面，欢迎交流！</li>
                         </ul>
                     </li>
                 </ul>
