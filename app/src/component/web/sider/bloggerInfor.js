@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Avatar, Row, Col, Icon } from 'antd';
-import img from '../../../assets/images/bloger-head.jpg'
+import img from '@/assets/images/bloger-head.jpg'
 class BloggerInfor extends Component {
     render() {
         return (

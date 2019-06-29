@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Icon, Comment, Avatar, Form, Button, Divider, Input } from 'antd';
 import { commentAdd } from '@/store/comment/action'
 import { connect } from 'react-redux'
-import headImg from '@//assets/images/bloger-head.jpg'
+import headImg from '@/assets/images/bloger-head.jpg'
 const { TextArea } = Input;
 
 class CommentArea extends Component {
