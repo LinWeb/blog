@@ -100,6 +100,9 @@ ul {
       height: calc(100vh - 60px) !important;
     }
     .content-box {
+      .home-container{
+        margin: 0px 16px!important;
+      }
       .article-list {
         margin-top: 23px;
         .item {
@@ -116,6 +119,7 @@ ul {
               .title {
                 display: block;
                 margin-bottom: 8px;
+                font-size: 20px;
               }
             }
           }
@@ -129,6 +133,15 @@ ul {
             }
           }
         }
+      }
+    }
+    .article-detail-container{
+      padding: 34px 18px 0px;
+      .title{
+        font-size: 21px;
+      }
+      .ant-divider-horizontal{
+         margin:4px 0 34px!important;
       }
     }
     .categories-container {
